@@ -1,8 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model SubmissionModel
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div id="url">
+        <div id="label">@Html.DisplayNameFor(Model => Model.Url)</div>
+        @Html.TextBoxFor(Model => Model.Url, new { id = "txtUrl" })
+    </div>
 </div>
