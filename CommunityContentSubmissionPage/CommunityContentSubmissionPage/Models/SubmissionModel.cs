@@ -10,5 +10,8 @@ namespace CommunityContentSubmissionPage.Models
     {
         [DisplayName("Url to Content")]
         public string Url { get; set; }
+
+        [DisplayName("Type of Content")]
+        public string Type { get; set; }
     }
 }

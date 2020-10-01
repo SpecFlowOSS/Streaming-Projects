@@ -15,13 +15,8 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
             this.webDriverDriver = webDriverDriver;
         }
 
-        private IWebElement UrlElement
-        {
-            get
-            {
-                return webDriverDriver.WebDriver.FindElement(By.Id("url"));
-            }
-        }
+        private IWebElement UrlElement => webDriverDriver.WebDriver.FindElement(By.Id("url"));
+        private IWebElement TypeElement => webDriverDriver.WebDriver.FindElement(By.Id("type"));
 
         public IWebElement UrlWebElement
         {
@@ -37,11 +32,7 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
                 }
             }
         }
-        public string Url
-        {
-            get { return UrlWebElement.Text; }
-        }
-
+        
         public IWebElement UrlLabelWebElement
         {
             get
@@ -57,12 +48,41 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
             }
         }
 
-        public string UrlLabel
+        public IWebElement TypeWebElement
         {
             get
             {
-                return UrlLabelWebElement.Text;
+                try
+                {
+                    return TypeElement.FindElement(By.Id("txtType"));
+                }
+                catch (NoSuchElementException)
+                {
+                    return null;
+                }
             }
         }
+
+        public IWebElement TypeLabelWebElement
+        {
+            get
+            {
+                try
+                {
+                    return TypeElement.FindElement(By.Id("label"));
+                }
+                catch (NoSuchElementException)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public string Url => UrlWebElement.Text;
+        public string UrlLabel => UrlLabelWebElement.Text;
+
+        public string TypeLabel => TypeLabelWebElement.Text;
+
+
     }
 }

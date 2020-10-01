@@ -24,6 +24,10 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
                     submissionPageObject.UrlWebElement.Should().NotBeNull();
                     submissionPageObject.UrlLabel.Should().Be(expectedLabel);
                     break;
+                case "TYPE":
+                    submissionPageObject.TypeWebElement.Should().NotBeNull();
+                    submissionPageObject.TypeLabel.Should().Be(expectedLabel);
+                    break;
                 default:
                     throw new NotImplementedException($"{inputType} not implemented");
             }

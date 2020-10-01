@@ -106,12 +106,13 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Url box for submission is available", SourceLine=8)]
-        public virtual void UrlBoxForSubmissionIsAvailable()
+        public virtual void InputForSubmissionIsAvailable(string inputType, string label, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Url box for submission is available", null, tagsOfScenario, argumentsOfScenario);
+            argumentsOfScenario.Add("Input type", inputType);
+            argumentsOfScenario.Add("Label", label);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Input for submission is available", null, tagsOfScenario, argumentsOfScenario);
 #line 9
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -136,10 +137,42 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("the submission page is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 12
- testRunner.Then("it is possible to enter a \'URL\' with label \'Url to Content\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("it is possible to enter a \'{0}\' with label \'{1}\'", inputType, label), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Input for submission is available, Url", SourceLine=15)]
+        public virtual void InputForSubmissionIsAvailable_Url()
+        {
+#line 9
+this.InputForSubmissionIsAvailable("Url", "Url to Content", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Input for submission is available, Type", SourceLine=15)]
+        public virtual void InputForSubmissionIsAvailable_Type()
+        {
+#line 9
+this.InputForSubmissionIsAvailable("Type", "Type of Content", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Input for submission is available, Email", SourceLine=15)]
+        public virtual void InputForSubmissionIsAvailable_Email()
+        {
+#line 9
+this.InputForSubmissionIsAvailable("Email", "Your EMail address", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Input for submission is available, Description", SourceLine=15)]
+        public virtual void InputForSubmissionIsAvailable_Description()
+        {
+#line 9
+this.InputForSubmissionIsAvailable("Description", "Description", ((string[])(null)));
+#line hidden
         }
     }
 }
