@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CommunityContentSubmissionPage.Specs.Drivers;
 using OpenQA.Selenium;
@@ -15,74 +16,36 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
             this.webDriverDriver = webDriverDriver;
         }
 
-        private IWebElement UrlElement => webDriverDriver.WebDriver.FindElement(By.Id("url"));
-        private IWebElement TypeElement => webDriverDriver.WebDriver.FindElement(By.Id("type"));
+        public IWebElement Form => webDriverDriver.WebDriver.FindElement(By.TagName("form"));
 
-        public IWebElement UrlWebElement
-        {
-            get
-            {
-                try
-                {
-                    return UrlElement.FindElement(By.Id("txtUrl"));
-                }
-                catch (NoSuchElementException)
-                {
-                    return null;
-                }
-            }
-        }
-        
-        public IWebElement UrlLabelWebElement
-        {
-            get
-            {
-                try
-                {
-                    return UrlElement.FindElement(By.Id("label"));
-                }
-                catch (NoSuchElementException)
-                {
-                    return null;
-                }
-            }
-        }
+        public IEnumerable<InputEntryPageObject> InputEntries => Form.FindElements(By.ClassName("form-group")).Select(i => new InputEntryPageObject(i));
 
-        public IWebElement TypeWebElement
-        {
-            get
-            {
-                try
-                {
-                    return TypeElement.FindElement(By.Id("txtType"));
-                }
-                catch (NoSuchElementException)
-                {
-                    return null;
-                }
-            }
-        }
+        public InputEntryPageObject UrlInputEntry => TryGetInputEntry("url");
 
-        public IWebElement TypeLabelWebElement
-        {
-            get
-            {
-                try
-                {
-                    return TypeElement.FindElement(By.Id("label"));
-                }
-                catch (NoSuchElementException)
-                {
-                    return null;
-                }
-            }
-        }
+        public InputEntryPageObject TypeInputEntry => TryGetInputEntry("type");
 
-        public string Url => UrlWebElement.Text;
+        public IWebElement UrlWebElement => UrlInputEntry.ValueWebElement;
+
+        public IWebElement UrlLabelWebElement => UrlInputEntry.LabelWebElement;
+
+        public IWebElement TypeWebElement => TypeInputEntry.ValueWebElement;
+
+        public IWebElement TypeLabelWebElement => TypeInputEntry.LabelWebElement;
+
         public string UrlLabel => UrlLabelWebElement.Text;
 
         public string TypeLabel => TypeLabelWebElement.Text;
 
+        private InputEntryPageObject TryGetInputEntry(string id)
+        {
+            var inputEntryPageObject = InputEntries.Where(i => i.Id == id).SingleOrDefault();
 
+            if (inputEntryPageObject is null)
+            {
+                throw new NotFoundException($"Input Entry for '{id}' was not found");
+            }
+
+            return inputEntryPageObject;
+        }
     }
 }

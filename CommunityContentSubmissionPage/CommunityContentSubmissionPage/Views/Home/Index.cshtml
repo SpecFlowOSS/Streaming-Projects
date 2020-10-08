@@ -2,12 +2,12 @@
 
 <form>
     <div class="form-group" id="url">
-        <label id="label" for="txtUrl">@Html.DisplayNameFor(Model => Model.Url)</label>
+        <label for="txtUrl">@Html.DisplayNameFor(Model => Model.Url)</label>
         @Html.TextBoxFor(Model => Model.Url, new { id = "txtUrl", @class="form-control" })
     </div>
 
     <div class="form-group" id="type">
-        <label id="label" for="txtType">@Html.DisplayNameFor(Model => Model.Type)</label>
+        <label for="txtType">@Html.DisplayNameFor(Model => Model.Type)</label>
         @Html.TextBoxFor(Model => Model.Type, new { id = "txtType", @class="form-control" })
     </div>
     @*<button type="submit" class="btn btn-primary">Submit</button>*@
