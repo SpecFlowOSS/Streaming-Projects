@@ -1,13 +1,14 @@
 ﻿@model SubmissionModel
 
-<div class="text-center">
-    <div id="url">
-        <div id="label">@Html.DisplayNameFor(Model => Model.Url)</div>
-        @Html.TextBoxFor(Model => Model.Url, new { id = "txtUrl" })
+<form>
+    <div class="form-group" id="url">
+        <label id="label" for="txtUrl">@Html.DisplayNameFor(Model => Model.Url)</label>
+        @Html.TextBoxFor(Model => Model.Url, new { id = "txtUrl", @class="form-control" })
     </div>
 
-    <div id="type">
-        <div id="label">@Html.DisplayNameFor(Model => Model.Type)</div>
-        @Html.TextBoxFor(Model => Model.Url, new { id = "txtType" })
+    <div class="form-group" id="type">
+        <label id="label" for="txtType">@Html.DisplayNameFor(Model => Model.Type)</label>
+        @Html.TextBoxFor(Model => Model.Type, new { id = "txtType", @class="form-control" })
     </div>
-</div>
+    @*<button type="submit" class="btn btn-primary">Submit</button>*@
+</form>
