@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30517.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunityContentSubmissionPage.Specs", "CommunityContentSubmissionPage.Specs\CommunityContentSubmissionPage.Specs.csproj", "{D78B75DF-3A7F-4866-9125-C12B7249F8E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunityContentSubmissionPage.Specs", "CommunityContentSubmissionPage.Specs\CommunityContentSubmissionPage.Specs.csproj", "{D78B75DF-3A7F-4866-9125-C12B7249F8E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommunityContentSubmissionPage", "CommunityContentSubmissionPage\CommunityContentSubmissionPage.csproj", "{698A5225-9AB7-4959-827F-7BDD0499658C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunityContentSubmissionPage", "CommunityContentSubmissionPage\CommunityContentSubmissionPage.csproj", "{698A5225-9AB7-4959-827F-7BDD0499658C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{5D04F219-2152-4448-A071-0C4D73B49A8D}"
+	ProjectSection(SolutionItems) = preProject
+		..\communitycontributionsubmission-ci.yml = ..\communitycontributionsubmission-ci.yml
+		..\communitycontributionsubmission-livingdoc.yml = ..\communitycontributionsubmission-livingdoc.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
