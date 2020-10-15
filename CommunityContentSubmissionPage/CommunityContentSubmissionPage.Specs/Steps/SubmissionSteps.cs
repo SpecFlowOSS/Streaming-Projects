@@ -48,5 +48,12 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         {
             _submissionDriver.AssertOneSubmissionEntryExists();
         }
+
+        [Then(@"there is '(.*)' submission entry stored")]
+        public void ThenThereIsSubmissionEntryStored(int expectedCountOfStoredEntries)
+        {
+            _submissionDriver.AssertNumberOfEntriesStored(expectedCountOfStoredEntries);
+        }
+
     }
 }

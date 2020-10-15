@@ -21,5 +21,10 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
         {
             _databaseContext.SubmissionEntries.Count().Should().BeGreaterThan(0);
         }
+
+        public void AssertNumberOfEntriesStored(int expectedCountOfStoredEntries)
+        {
+            _databaseContext.SubmissionEntries.Count().Should().Be(expectedCountOfStoredEntries);
+        }
     }
 }

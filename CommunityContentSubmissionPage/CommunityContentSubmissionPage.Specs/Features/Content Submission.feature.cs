@@ -220,7 +220,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("the submission entry form is submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 33
- testRunner.Then("there is one submission entry stored", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("there is \'one\' submission entry stored", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

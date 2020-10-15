@@ -30,4 +30,4 @@ Scenario: Input from submission page is saved
 		| Type  | Website                  |
 
 	When the submission entry form is submitted
-	Then there is one submission entry stored
+	Then there is 'one' submission entry stored
