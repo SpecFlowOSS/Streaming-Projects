@@ -18,6 +18,7 @@ namespace CommunityContentSubmissionPage.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View(new SubmissionModel());

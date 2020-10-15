@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using CommunityContentSubmissionPage.Specs.PageObject;
+using CommunityContentSubmissionPage.Specs.Steps;
+using CommunityContentSubmissionPage.Specs.Support;
 using FluentAssertions;
 
 namespace CommunityContentSubmissionPage.Specs.Drivers
@@ -31,6 +33,32 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
                 default:
                     throw new NotImplementedException($"{inputType} not implemented");
             }
+        }
+
+        public void InputForm(IEnumerable<SubmissionEntryFormRowObject> rows)
+        {
+            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+
+            foreach (var row in rows)
+            {
+                switch (row.Label.ToUpper())
+                {
+                    case "URL":
+                        submissionPageObject.Url = row.Value;
+                        break;
+                    case "TYPE":
+                        submissionPageObject.Type = row.Value;
+                        break;
+                    default:
+                        throw new NotImplementedException($"{row.Label} not implemented");
+                }
+            }
+        }
+
+        public void SubmitForm()
+        {
+            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            submissionPageObject.SubmitButton.Click();
         }
     }
 }

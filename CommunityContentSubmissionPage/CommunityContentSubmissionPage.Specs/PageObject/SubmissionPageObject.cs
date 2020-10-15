@@ -18,6 +18,8 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
 
         public IWebElement Form => webDriverDriver.WebDriver.FindElement(By.TagName("form"));
 
+        public IWebElement SubmitButton => Form.FindElement(By.ClassName("btn-primary"));
+
         public IEnumerable<InputEntryPageObject> InputEntries => Form.FindElements(By.ClassName("form-group")).Select(i => new InputEntryPageObject(i));
 
         public InputEntryPageObject UrlInputEntry => TryGetInputEntry("url");
@@ -35,6 +37,32 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
         public string UrlLabel => UrlLabelWebElement.Text;
 
         public string TypeLabel => TypeLabelWebElement.Text;
+
+        public string Url
+        {
+            get
+            {
+                return UrlInputEntry.ValueWebElement.Text;
+            }
+            set
+            {
+                UrlInputEntry.ValueWebElement.Clear();
+                UrlInputEntry.ValueWebElement.SendKeys(value);
+            }
+        }
+
+        public string Type
+        {
+            get
+            {
+                return TypeInputEntry.ValueWebElement.Text;
+            }
+            set
+            {
+                TypeInputEntry.ValueWebElement.Clear();
+                TypeInputEntry.ValueWebElement.SendKeys(value);
+            }
+        }
 
         private InputEntryPageObject TryGetInputEntry(string id)
         {

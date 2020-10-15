@@ -21,6 +21,7 @@ namespace CommunityContentSubmissionPage.Specs.Steps
             this.browserDriver = browserDriver;
         }
         
+        [Given(@"the submission page is open")]
         [When(@"the submission page is open")]
         public void WhenTheSubmissionPageIsOpen()
         {

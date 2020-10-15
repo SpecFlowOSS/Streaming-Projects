@@ -17,3 +17,17 @@ Scenario Outline: Input for submission is available
 		| Type        | Type of Content    |
 		| Email       | Your EMail address |
 		| Description | Description        |
+
+
+Scenario: Input from submission page is saved
+
+	Assumption: There are no entries in the database
+
+	Given the submission page is open
+	And the filled out submission entry form
+		| Label | Value                    |
+		| Url   | https://www.specflow.org |
+		| Type  | Website                  |
+
+	When the submission entry form is submitted
+	Then there is a new submission entry stored
