@@ -17,7 +17,7 @@ namespace CommunityContentSubmissionPage.Specs.Hooks
             this.webServerDriver = webServerDriver;
         }
 
-        [BeforeScenario]
+        [BeforeScenario(Order = 1000)]
         public void StartWebserver()
         {
             this.webServerDriver.Start();

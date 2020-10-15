@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CommunityContentSubmissionPage.Business.Infrastructure;
+using CommunityContentSubmissionPage.Business.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -16,6 +18,9 @@ namespace CommunityContentSubmissionPage
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
+            var databaseContext = new DatabaseContext();
+            databaseContext.Database.EnsureCreated();
         }
 
         public IConfiguration Configuration { get; }
@@ -24,6 +29,9 @@ namespace CommunityContentSubmissionPage
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<IDatabaseContext, DatabaseContext>();
+            services.AddScoped<ISubmissionSaver, SubmissionSaver>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

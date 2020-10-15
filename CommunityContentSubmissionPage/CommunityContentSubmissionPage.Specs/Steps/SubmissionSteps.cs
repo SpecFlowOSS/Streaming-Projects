@@ -15,10 +15,12 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     public class SubmissionSteps
     {
         private readonly SubmissionPageDriver submissionPageDriver;
+        private readonly SubmissionDriver _submissionDriver;
 
-        public SubmissionSteps(SubmissionPageDriver submissionPageDriver)
+        public SubmissionSteps(SubmissionPageDriver submissionPageDriver, SubmissionDriver submissionDriver)
         {
             this.submissionPageDriver = submissionPageDriver;
+            _submissionDriver = submissionDriver;
         }
 
         [Then(@"it is possible to enter a '(.*)' with label '(.*)'")]
@@ -44,7 +46,7 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [Then(@"there is a new submission entry stored")]
         public void ThenThereIsANewSubmissionEntryStored()
         {
-            
+            _submissionDriver.AssertNewSubmissionEntryExists();
         }
     }
 }
