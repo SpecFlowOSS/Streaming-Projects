@@ -9,7 +9,7 @@ namespace CommunityContentSubmissionPage.Business.Logic
 {
     public interface ISubmissionSaver
     {
-        void Save(SubmissionEntry submissionEntry);
+        Task Save(SubmissionEntry submissionEntry);
     }
 
     public class SubmissionSaver : ISubmissionSaver
@@ -21,10 +21,10 @@ namespace CommunityContentSubmissionPage.Business.Logic
             _databaseContext = databaseContext;
         }
 
-        public void Save(SubmissionEntry submissionEntry)
+        public async Task Save(SubmissionEntry submissionEntry)
         {
-            _databaseContext.SubmissionEntries.Add(submissionEntry);
-            _databaseContext.SaveChanges();
+            await _databaseContext.SubmissionEntries.AddAsync(submissionEntry);
+            await _databaseContext.SaveChangesAsync();
         }
     }
 }

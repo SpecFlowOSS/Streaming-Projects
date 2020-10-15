@@ -11,7 +11,7 @@ namespace CommunityContentSubmissionPage.Business.Infrastructure
     {
         DbSet<SubmissionEntry> SubmissionEntries { get; set; }
 
-        int SaveChanges();
+        Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken = default);
     }
 
     public class DatabaseContext : DbContext, IDatabaseContext
