@@ -16,11 +16,11 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
             this.webDriverDriver = webDriverDriver;
         }
 
-        public IWebElement Form => webDriverDriver.WebDriver.FindElement(By.TagName("form"));
+        protected IWebElement Form => webDriverDriver.WebDriver.FindElement(By.TagName("form"));
 
-        public IWebElement SubmitButton => Form.FindElement(By.ClassName("btn-primary"));
+        protected IWebElement SubmitButton => Form.FindElement(By.ClassName("btn-primary"));
 
-        public IEnumerable<InputEntryPageObject> InputEntries => Form.FindElements(By.ClassName("form-group")).Select(i => new InputEntryPageObject(i));
+        protected IEnumerable<InputEntryPageObject> InputEntries => Form.FindElements(By.ClassName("form-group")).Select(i => new InputEntryPageObject(i));
 
         public InputEntryPageObject UrlInputEntry => TryGetInputEntry("url");
 
@@ -74,6 +74,11 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
             }
 
             return inputEntryPageObject;
+        }
+
+        public void ClickSubmitButton()
+        {
+            SubmitButton.Click();
         }
     }
 }

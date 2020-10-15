@@ -58,7 +58,7 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
         public void SubmitForm()
         {
             var submissionPageObject = new SubmissionPageObject(webDriverDriver);
-            submissionPageObject.SubmitButton.Click();
+            submissionPageObject.ClickSubmitButton();
         }
     }
 }

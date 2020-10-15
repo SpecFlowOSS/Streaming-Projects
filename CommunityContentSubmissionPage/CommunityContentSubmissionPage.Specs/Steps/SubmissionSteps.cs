@@ -43,10 +43,10 @@ namespace CommunityContentSubmissionPage.Specs.Steps
             submissionPageDriver.SubmitForm();
         }
 
-        [Then(@"there is a new submission entry stored")]
-        public void ThenThereIsANewSubmissionEntryStored()
+        [Then(@"there is one submission entry stored")]
+        public void ThenThereIsOneSubmissionEntryStored()
         {
-            _submissionDriver.AssertNewSubmissionEntryExists();
+            _submissionDriver.AssertOneSubmissionEntryExists();
         }
     }
 }

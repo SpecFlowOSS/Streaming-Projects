@@ -17,7 +17,7 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
             _databaseContext = databaseContext;
         }
 
-        public void AssertNewSubmissionEntryExists()
+        public void AssertOneSubmissionEntryExists()
         {
             _databaseContext.SubmissionEntries.Count().Should().BeGreaterThan(0);
         }
