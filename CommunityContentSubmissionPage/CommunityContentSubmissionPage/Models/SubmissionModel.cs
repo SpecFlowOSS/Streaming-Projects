@@ -19,5 +19,8 @@ namespace CommunityContentSubmissionPage.Models
 
         [DisplayName("Description")]
         public string Description { get; set; }
+
+        [DisplayName("You need to accept our privacy policy to be able to submit an entry")]
+        public bool AcceptPrivacyPolicy { get; set; }
     }
 }

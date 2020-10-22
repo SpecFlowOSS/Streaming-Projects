@@ -55,6 +55,20 @@ namespace CommunityContentSubmissionPage.Specs.Steps
             _submissionDriver.AssertNumberOfEntriesStored(expectedCountOfStoredEntries);
         }
 
+        [Then(@"the submitting of data was possible")]
+        public void ThenTheSubmittingOfDataWasPossible()
+        {
+            _submissionDriver.AssertNumberOfEntriesStored(1);
+        }
+
+        [Then(@"the submitting of data was not possible")]
+        public void ThenTheSubmittingOfDataWasNotPossible()
+        {
+            _submissionDriver.AssertNumberOfEntriesStored(0);
+        }
+
+
+
         [Then(@"there is a submission entry stored with the following data:")]
         public void ThenThereIsASubmissionEntryStoredWithTheFollowingData(Table table)
         {
@@ -68,6 +82,30 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         {
             var expectedTypenameEntries = table.CreateSet<TypenameEntry>();
             _submissionPageDriver.CheckTypeEntries(expectedTypenameEntries);
+        }
+
+        [Given(@"the submission entry form is filled")]
+        public void GivenTheSubmissionEntryFormIsFilled()
+        {
+            _submissionPageDriver.InputForm(new List<SubmissionEntryFormRowObject>()
+            {
+                new SubmissionEntryFormRowObject(){ Label = "Url", Value = "https://example.org"},
+                new SubmissionEntryFormRowObject(){ Label = "Type", Value = "Blog Posts"},
+                new SubmissionEntryFormRowObject(){ Label = "Email", Value = "someone@example.org"},
+                new SubmissionEntryFormRowObject(){ Label = "Description", Value = "something really cool"},
+            });
+        }
+
+        [Given(@"the privacy policy is not accepted")]
+        public void GivenThePrivacyPolicyIsNotAccepted()
+        {
+            _submissionPageDriver.DoNotAcceptPrivacyPolicy();
+        }
+
+        [Given(@"the privacy policy is accepted")]
+        public void GivenThePrivacyPolicyIsAccepted()
+        {
+            _submissionPageDriver.AcceptPrivacyPolicy();
         }
 
 

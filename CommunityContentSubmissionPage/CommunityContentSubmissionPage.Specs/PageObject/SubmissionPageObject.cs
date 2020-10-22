@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using CommunityContentSubmissionPage.Specs.Drivers;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 
 namespace CommunityContentSubmissionPage.Specs.PageObject
 {
@@ -28,6 +29,8 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
 
         public InputEntryPageObject EmailInputEntry => TryGetInputEntry("email");
         public InputEntryPageObject DescriptionInputEntry => TryGetInputEntry("description");
+
+        public InputEntryPageObject PrivacyPolicyInputEntry => TryGetInputEntry("privacypolicy");
 
         public IWebElement UrlWebElement => UrlInputEntry.ValueWebElement;
 
@@ -61,12 +64,14 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
         {
             get
             {
-                return TypeSelectEntry.ValueWebElement.Text;
+                var selectElement = new SelectElement(TypeSelectEntry.ValueWebElement);
+
+                return selectElement.SelectedOption.Text;
             }
             set
             {
-                TypeSelectEntry.ValueWebElement.Clear();
-                TypeSelectEntry.ValueWebElement.SendKeys(value);
+                var selectElement = new SelectElement(TypeSelectEntry.ValueWebElement);
+                selectElement.SelectByText(value);
             }
         }
 

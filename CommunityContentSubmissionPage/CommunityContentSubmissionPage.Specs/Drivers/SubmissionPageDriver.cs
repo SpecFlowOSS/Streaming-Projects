@@ -87,5 +87,22 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
 
             actualTypenameEntries.Should().BeEquivalentTo(expectedTypenameEntries);
         }
+
+        public void AcceptPrivacyPolicy()
+        {
+            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+
+            submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Click();
+        }
+
+        public void DoNotAcceptPrivacyPolicy()
+        {
+            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+
+            if (submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Selected)
+            {
+                submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Click();
+            }
+        }
     }
 }
