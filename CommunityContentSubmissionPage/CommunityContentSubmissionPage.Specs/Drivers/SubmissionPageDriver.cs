@@ -30,6 +30,14 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
                     submissionPageObject.TypeWebElement.Should().NotBeNull();
                     submissionPageObject.TypeLabel.Should().Be(expectedLabel);
                     break;
+                case "EMAIL":
+                    submissionPageObject.EmailWebElement.Should().NotBeNull();
+                    submissionPageObject.EmailLabel.Should().Be(expectedLabel);
+                    break;
+                case "DESCRIPTION":
+                    submissionPageObject.DescriptionWebElement.Should().NotBeNull();
+                    submissionPageObject.DescriptionLabel.Should().Be(expectedLabel);
+                    break;
                 default:
                     throw new NotImplementedException($"{inputType} not implemented");
             }

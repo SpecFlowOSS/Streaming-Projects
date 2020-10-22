@@ -13,5 +13,11 @@ namespace CommunityContentSubmissionPage.Models
 
         [DisplayName("Type of Content")]
         public string Type { get; set; }
+
+        [DisplayName("Your Email address")]
+        public string Email { get; set; }
+
+        [DisplayName("Description")]
+        public string Description { get; set; }
     }
 }

@@ -163,7 +163,7 @@ this.InputForSubmissionIsAvailable("Type", "Type of Content", ((string[])(null))
         public virtual void InputForSubmissionIsAvailable_Email()
         {
 #line 9
-this.InputForSubmissionIsAvailable("Email", "Your EMail address", ((string[])(null)));
+this.InputForSubmissionIsAvailable("Email", "Your Email address", ((string[])(null)));
 #line hidden
         }
         

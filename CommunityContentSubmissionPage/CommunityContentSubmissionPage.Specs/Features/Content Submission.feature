@@ -15,7 +15,7 @@ Scenario Outline: Input for submission is available
 		| Input type  | Label              |
 		| Url         | Url to Content     |
 		| Type        | Type of Content    |
-		| Email       | Your EMail address |
+		| Email       | Your Email address |
 		| Description | Description        |
 
 
