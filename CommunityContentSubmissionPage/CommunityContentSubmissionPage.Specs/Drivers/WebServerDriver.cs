@@ -9,15 +9,24 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
 {
     public class WebServerDriver
     {
-        private IHost _host;
+        private IHost? _host;
         public string Hostname { get; private set; }
+
+        public WebServerDriver()
+        {
+            Hostname = $"http://localhost:{GeneratePort()}";
+        }
 
         public void Start()
         {
-            Hostname = $"http://localhost:{GeneratePort()}";
-
             string location = typeof(KestrelHostBuilder).Assembly.Location;
-            string applicationAssemblyPath = Path.GetDirectoryName(location);
+            string? applicationAssemblyPath = Path.GetDirectoryName(location);
+
+            if (applicationAssemblyPath is null)
+            {
+                throw new Exception("Location of application assembly could not be found");
+            }
+
             string webRoot = Path.Combine(applicationAssemblyPath, "..", "..", "..", "..", "CommunityContentSubmissionPage", "wwwroot");
 
             var hostBuilder = new KestrelHostBuilder();

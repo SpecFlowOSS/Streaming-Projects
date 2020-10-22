@@ -6,7 +6,7 @@ namespace CommunityContentSubmissionPage.Specs.Support
 {
     public class SubmissionEntryFormRowObject
     {
-        public string Label { get; set; }
-        public string Value { get; set; }
+        public string Label { get; set; } = String.Empty;
+        public string Value { get; set; } = String.Empty;
     }
 }

@@ -9,14 +9,14 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
 {
     public class SubmissionPageObject
     {
-        private WebDriverDriver webDriverDriver;
+        private readonly WebDriverDriver _webDriverDriver;
 
         public SubmissionPageObject(WebDriverDriver webDriverDriver)
         {
-            this.webDriverDriver = webDriverDriver;
+            _webDriverDriver = webDriverDriver;
         }
 
-        protected IWebElement Form => webDriverDriver.WebDriver.FindElement(By.TagName("form"));
+        protected IWebElement Form => _webDriverDriver.WebDriver.FindElement(By.TagName("form"));
 
         protected IWebElement SubmitButton => Form.FindElement(By.ClassName("btn-primary"));
 
