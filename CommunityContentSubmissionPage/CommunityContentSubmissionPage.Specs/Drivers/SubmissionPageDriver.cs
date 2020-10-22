@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using CommunityContentSubmissionPage.Specs.PageObject;
 using CommunityContentSubmissionPage.Specs.Steps;
 using CommunityContentSubmissionPage.Specs.Support;
 using FluentAssertions;
+using OpenQA.Selenium.Support.UI;
 
 namespace CommunityContentSubmissionPage.Specs.Drivers
 {
@@ -73,6 +75,17 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
         {
             var submissionPageObject = new SubmissionPageObject(webDriverDriver);
             submissionPageObject.ClickSubmitButton();
+        }
+
+        public void CheckTypeEntries(IEnumerable<TypenameEntry> expectedTypenameEntries)
+        {
+            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+
+            var typeSelectElement = new SelectElement(submissionPageObject.TypeWebElement);
+            var webElements = typeSelectElement.Options.ToList();
+            var actualTypenameEntries = webElements.Select(i => new TypenameEntry() {Typename = i.Text}).ToList();
+
+            actualTypenameEntries.Should().BeEquivalentTo(expectedTypenameEntries);
         }
     }
 }

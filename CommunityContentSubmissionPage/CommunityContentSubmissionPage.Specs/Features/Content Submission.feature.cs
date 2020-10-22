@@ -175,13 +175,13 @@ this.InputForSubmissionIsAvailable("Description", "Description", ((string[])(nul
 #line hidden
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Input from submission page is saved", Description="\tAssumption: There are no entries in the database", SourceLine=21)]
-        public virtual void InputFromSubmissionPageIsSaved()
+        [TechTalk.SpecRun.ScenarioAttribute("Type should offer a list of unique entries", SourceLine=20)]
+        public virtual void TypeShouldOfferAListOfUniqueEntries()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Input from submission page is saved", "\tAssumption: There are no entries in the database", tagsOfScenario, argumentsOfScenario);
-#line 22
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Type should offer a list of unique entries", null, tagsOfScenario, argumentsOfScenario);
+#line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -201,38 +201,37 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 26
- testRunner.Given("the submission page is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 23
+ testRunner.When("the submission page is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Label",
-                            "Value"});
+                            "Typename"});
                 table1.AddRow(new string[] {
-                            "Url",
-                            "https://www.specflow.org"});
+                            "Blog Posts"});
                 table1.AddRow(new string[] {
-                            "Type",
-                            "Website"});
-#line 27
- testRunner.And("the filled out submission entry form", ((string)(null)), table1, "And ");
-#line hidden
-#line 32
- testRunner.When("the submission entry form is submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 33
- testRunner.Then("there is \'one\' submission entry stored", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+                            "Books"});
+                table1.AddRow(new string[] {
+                            "Presentations"});
+                table1.AddRow(new string[] {
+                            "Videos"});
+                table1.AddRow(new string[] {
+                            "Podcasts"});
+                table1.AddRow(new string[] {
+                            "Examplessss"});
+#line 24
+ testRunner.Then("you can choose from the following Types:", ((string)(null)), table1, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Entered values from submission page is saved", SourceLine=34)]
-        public virtual void EnteredValuesFromSubmissionPageIsSaved()
+        [TechTalk.SpecRun.ScenarioAttribute("Input from submission page is saved", Description="\tAssumption: There are no entries in the database", SourceLine=32)]
+        public virtual void InputFromSubmissionPageIsSaved()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Entered values from submission page is saved", null, tagsOfScenario, argumentsOfScenario);
-#line 35
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Input from submission page is saved", "\tAssumption: There are no entries in the database", tagsOfScenario, argumentsOfScenario);
+#line 33
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -264,30 +263,81 @@ this.ScenarioInitialize(scenarioInfo);
                 table2.AddRow(new string[] {
                             "Type",
                             "Website"});
-                table2.AddRow(new string[] {
-                            "Email",
-                            "youremail@example.org"});
-                table2.AddRow(new string[] {
-                            "Description",
-                            "Test Input"});
 #line 38
  testRunner.And("the filled out submission entry form", ((string)(null)), table2, "And ");
 #line hidden
-#line 45
+#line 43
  testRunner.When("the submission entry form is submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
+#line 44
+ testRunner.Then("there is \'one\' submission entry stored", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Entered values from submission page is saved", SourceLine=45)]
+        public virtual void EnteredValuesFromSubmissionPageIsSaved()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Entered values from submission page is saved", null, tagsOfScenario, argumentsOfScenario);
+#line 46
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 48
+ testRunner.Given("the submission page is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
                 TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Label",
+                            "Value"});
+                table3.AddRow(new string[] {
+                            "Url",
+                            "https://www.specflow.org"});
+                table3.AddRow(new string[] {
+                            "Type",
+                            "Website"});
+                table3.AddRow(new string[] {
+                            "Email",
+                            "youremail@example.org"});
+                table3.AddRow(new string[] {
+                            "Description",
+                            "Test Input"});
+#line 49
+ testRunner.And("the filled out submission entry form", ((string)(null)), table3, "And ");
+#line hidden
+#line 56
+ testRunner.When("the submission entry form is submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Url",
                             "Type",
                             "Email",
                             "Description"});
-                table3.AddRow(new string[] {
+                table4.AddRow(new string[] {
                             "https://www.specflow.org",
                             "Website",
                             "youremail@example.org",
                             "Test Input"});
-#line 46
- testRunner.Then("there is a submission entry stored with the following data:", ((string)(null)), table3, "Then ");
+#line 57
+ testRunner.Then("there is a submission entry stored with the following data:", ((string)(null)), table4, "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

@@ -18,6 +18,17 @@ Scenario Outline: Input for submission is available
 		| Email       | Your Email address |
 		| Description | Description        |
 
+Scenario: Type should offer a list of unique entries
+
+	When the submission page is open
+	Then you can choose from the following Types:
+		| Typename      |
+		| Blog Posts    |
+		| Books         |
+		| Presentations |
+		| Videos        |
+		| Podcasts      |
+		| Examples      |
 
 Scenario: Input from submission page is saved
 

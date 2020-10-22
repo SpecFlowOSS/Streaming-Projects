@@ -11,7 +11,14 @@
 
     <div class="form-group" id="type">
         <label for="txtType">@Html.DisplayNameFor(Model => Model.Type)</label>
-        @Html.TextBoxFor(Model => Model.Type, new { id = "txtType", @class = "form-control" })
+        <select id="txtType" name="Type" class="form-control">
+            <option selected="selected">Blog Posts</option>
+            <option>Books</option>
+            <option>Presentations</option>
+            <option>Videos</option>
+            <option>Podcasts</option>
+            <option>Examples</option>
+        </select>
     </div>
 
     <div class="form-group" id="email">

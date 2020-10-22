@@ -17,6 +17,6 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
         public string Id => parentDiv.GetAttribute("id");
 
         public IWebElement LabelWebElement => parentDiv.FindElement(By.TagName("label"));
-        public IWebElement ValueWebElement => parentDiv.FindElement(By.TagName("input"));
+        public IWebElement ValueWebElement => parentDiv.FindElement(By.ClassName("form-control"));
     }
 }

@@ -14,19 +14,19 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     [Binding]
     public class SubmissionSteps
     {
-        private readonly SubmissionPageDriver submissionPageDriver;
+        private readonly SubmissionPageDriver _submissionPageDriver;
         private readonly SubmissionDriver _submissionDriver;
 
         public SubmissionSteps(SubmissionPageDriver submissionPageDriver, SubmissionDriver submissionDriver)
         {
-            this.submissionPageDriver = submissionPageDriver;
+            _submissionPageDriver = submissionPageDriver;
             _submissionDriver = submissionDriver;
         }
 
         [Then(@"it is possible to enter a '(.*)' with label '(.*)'")]
         public void ThenItIsPossibleToEnterAWithLabel(string inputType, string expectedLabel)
         {
-            submissionPageDriver.CheckExistenceOfInputElement(inputType, expectedLabel);
+            _submissionPageDriver.CheckExistenceOfInputElement(inputType, expectedLabel);
         }
 
         [Given(@"the filled out submission entry form")]
@@ -34,13 +34,13 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         {
             var rows = table.CreateSet<SubmissionEntryFormRowObject>();
 
-            submissionPageDriver.InputForm(rows);
+            _submissionPageDriver.InputForm(rows);
         }
 
         [When(@"the submission entry form is submitted")]
         public void WhenTheSubmissionEntryFormIsSubmitted()
         {
-            submissionPageDriver.SubmitForm();
+            _submissionPageDriver.SubmitForm();
         }
 
         [Then(@"there is one submission entry stored")]
@@ -63,6 +63,19 @@ namespace CommunityContentSubmissionPage.Specs.Steps
             _submissionDriver.AssertSubmissionEntryData(expectedSubmissionContentEntry);
         }
 
+        [Then(@"you can choose from the following Types:")]
+        public void ThenYouCanChooseFromTheFollowingTypes(Table table)
+        {
+            var expectedTypenameEntries = table.CreateSet<TypenameEntry>();
+            _submissionPageDriver.CheckTypeEntries(expectedTypenameEntries);
+        }
+
+
+    }
+
+    public class TypenameEntry
+    {
+        public string Typename { get; set; } = String.Empty;
     }
 
     public class ExpectedSubmissionContentEntry 

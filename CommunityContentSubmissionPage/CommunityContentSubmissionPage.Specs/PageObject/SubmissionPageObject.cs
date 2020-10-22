@@ -24,14 +24,14 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
 
         public InputEntryPageObject UrlInputEntry => TryGetInputEntry("url");
 
-        public InputEntryPageObject TypeInputEntry => TryGetInputEntry("type");
+        public InputEntryPageObject TypeSelectEntry => TryGetInputEntry("type");
 
         public InputEntryPageObject EmailInputEntry => TryGetInputEntry("email");
         public InputEntryPageObject DescriptionInputEntry => TryGetInputEntry("description");
 
         public IWebElement UrlWebElement => UrlInputEntry.ValueWebElement;
 
-        public IWebElement TypeWebElement => TypeInputEntry.ValueWebElement;
+        public IWebElement TypeWebElement => TypeSelectEntry.ValueWebElement;
 
         public IWebElement EmailWebElement => EmailInputEntry.ValueWebElement;
 
@@ -41,7 +41,7 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
 
         public string UrlLabel => UrlInputEntry.LabelWebElement.Text;
 
-        public string TypeLabel => TypeInputEntry.LabelWebElement.Text;
+        public string TypeLabel => TypeSelectEntry.LabelWebElement.Text;
         public string DescriptionLabel => DescriptionInputEntry.LabelWebElement.Text;
 
         public string Url
@@ -61,12 +61,12 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
         {
             get
             {
-                return TypeInputEntry.ValueWebElement.Text;
+                return TypeSelectEntry.ValueWebElement.Text;
             }
             set
             {
-                TypeInputEntry.ValueWebElement.Clear();
-                TypeInputEntry.ValueWebElement.SendKeys(value);
+                TypeSelectEntry.ValueWebElement.Clear();
+                TypeSelectEntry.ValueWebElement.SendKeys(value);
             }
         }
 
