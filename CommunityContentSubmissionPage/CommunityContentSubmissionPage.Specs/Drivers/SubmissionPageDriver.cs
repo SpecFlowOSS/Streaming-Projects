@@ -16,7 +16,7 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
         {
             this.webDriverDriver = webDriverDriver;
         }
-        public void CheckExistanceOfInput(string inputType, string expectedLabel)
+        public void CheckExistenceOfInputElement(string inputType, string expectedLabel)
         {
             var submissionPageObject = new SubmissionPageObject(webDriverDriver);
 

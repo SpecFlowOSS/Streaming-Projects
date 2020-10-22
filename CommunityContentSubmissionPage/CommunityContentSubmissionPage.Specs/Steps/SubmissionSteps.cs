@@ -26,7 +26,7 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [Then(@"it is possible to enter a '(.*)' with label '(.*)'")]
         public void ThenItIsPossibleToEnterAWithLabel(string inputType, string expectedLabel)
         {
-            submissionPageDriver.CheckExistanceOfInput(inputType, expectedLabel);
+            submissionPageDriver.CheckExistenceOfInputElement(inputType, expectedLabel);
         }
 
         [Given(@"the filled out submission entry form")]
