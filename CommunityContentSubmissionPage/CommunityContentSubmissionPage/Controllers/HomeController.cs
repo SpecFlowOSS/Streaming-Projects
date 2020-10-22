@@ -35,7 +35,9 @@ namespace CommunityContentSubmissionPage.Controllers
             var submission = new SubmissionEntry()
             {
                 Url = submissionModel.Url,
-                Type = submissionModel.Type
+                Type = submissionModel.Type,
+                Email = submissionModel.Email,
+                Description = submissionModel.Description
             };
 
             await _submissionSaver.Save(submission);

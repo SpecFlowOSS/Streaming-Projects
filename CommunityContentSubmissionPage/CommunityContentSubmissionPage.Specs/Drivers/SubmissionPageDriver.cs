@@ -57,6 +57,12 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
                     case "TYPE":
                         submissionPageObject.Type = row.Value;
                         break;
+                    case "EMAIL":
+                        submissionPageObject.Email = row.Value;
+                        break;
+                    case "DESCRIPTION":
+                        submissionPageObject.Description = row.Value;
+                        break;
                     default:
                         throw new NotImplementedException($"{row.Label} not implemented");
                 }

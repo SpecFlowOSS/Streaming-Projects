@@ -70,7 +70,31 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
             }
         }
 
-        
+        public string Email {
+            get
+            {
+                return EmailInputEntry.ValueWebElement.Text;
+            }
+            set
+            {
+                EmailInputEntry.ValueWebElement.Clear();
+                EmailInputEntry.ValueWebElement.SendKeys(value);
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                return DescriptionInputEntry.ValueWebElement.Text;
+            }
+            set
+            {
+                DescriptionInputEntry.ValueWebElement.Clear();
+                DescriptionInputEntry.ValueWebElement.SendKeys(value);
+            }
+        }
+
 
         private InputEntryPageObject TryGetInputEntry(string id)
         {
