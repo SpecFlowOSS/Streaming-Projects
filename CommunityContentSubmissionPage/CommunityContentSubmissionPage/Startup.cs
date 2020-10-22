@@ -18,9 +18,6 @@ namespace CommunityContentSubmissionPage
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            var databaseContext = new DatabaseContext();
-            databaseContext.Database.EnsureCreated();
         }
 
         public IConfiguration Configuration { get; }
@@ -30,6 +27,7 @@ namespace CommunityContentSubmissionPage
         {
             services.AddControllersWithViews();
 
+            services.AddScoped<IDatabaseNameProvider, DatabaseNameProvider>();
             services.AddScoped<IDatabaseContext, DatabaseContext>();
             services.AddScoped<ISubmissionSaver, SubmissionSaver>();
         }

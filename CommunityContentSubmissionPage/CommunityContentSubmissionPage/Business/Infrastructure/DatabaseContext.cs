@@ -19,12 +19,34 @@ namespace CommunityContentSubmissionPage.Business.Infrastructure
 
     public class DatabaseContext : DbContext, IDatabaseContext
     {
+        private readonly IDatabaseNameProvider _databaseNameProvider;
+
+        public DatabaseContext(IDatabaseNameProvider databaseNameProvider)
+        {
+            _databaseNameProvider = databaseNameProvider;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("CommunitySubmissions");
+            optionsBuilder.UseInMemoryDatabase(_databaseNameProvider.GetDatabaseName());
+
+            Database.EnsureCreated();
         }
 
         public DbSet<SubmissionEntry> SubmissionEntries { get; set; }
         
+    }
+
+    public interface IDatabaseNameProvider
+    {
+        string GetDatabaseName();
+    }
+
+    class DatabaseNameProvider : IDatabaseNameProvider
+    {
+        public string GetDatabaseName()
+        {
+            return "CommunitySubmissions";
+        }
     }
 }
