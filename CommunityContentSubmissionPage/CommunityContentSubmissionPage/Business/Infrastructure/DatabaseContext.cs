@@ -4,12 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommunityContentSubmissionPage.Business.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace CommunityContentSubmissionPage.Business.Infrastructure
 {
     public interface IDatabaseContext
     {
         DbSet<SubmissionEntry> SubmissionEntries { get; set; }
+
+        DatabaseFacade Database { get; }
 
         Task<int> SaveChangesAsync(System.Threading.CancellationToken cancellationToken = default);
     }

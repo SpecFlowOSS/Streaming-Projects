@@ -20,6 +20,15 @@ namespace CommunityContentSubmissionPage.Specs.Hooks
         public void RegisterDI()
         {
             _scenarioContext.ScenarioContainer.RegisterTypeAs<DatabaseContext, IDatabaseContext>();
+
+            
+        }
+
+        [AfterScenario()]
+        public void Cleanup()
+        {
+            var databaseContext = _scenarioContext.ScenarioContainer.Resolve<IDatabaseContext>();
+            databaseContext.Database.EnsureDeleted();
         }
     }
 }
