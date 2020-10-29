@@ -36,9 +36,12 @@ Scenario: Input from submission page is saved
 
 	Given the submission page is open
 	And the filled out submission entry form
-		| Label | Value                    |
-		| Url   | https://www.specflow.org |
-		| Type  | Blog Posts               |
+		| Label       | Value                    |
+		| Url         | https://www.specflow.org |
+		| Type        | Blog Posts               |
+		| Email       | example@example.org      |
+		| Description | foo                      |
+	And the privacy policy is accepted
 
 	When the submission entry form is submitted
 	Then there is 'one' submission entry stored
@@ -52,6 +55,7 @@ Scenario: Entered values from submission page is saved
 		| Type        | Blog Posts               |
 		| Email       | youremail@example.org    |
 		| Description | Test Input               |
+	And the privacy policy is accepted
 
 	When the submission entry form is submitted
 	Then there is a submission entry stored with the following data:

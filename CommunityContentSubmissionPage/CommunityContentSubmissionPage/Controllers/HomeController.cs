@@ -29,6 +29,11 @@ namespace CommunityContentSubmissionPage.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(SubmissionModel submissionModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(submissionModel);
+            }
+
             var submission = new SubmissionEntry()
             {
                 Url = submissionModel.Url,
