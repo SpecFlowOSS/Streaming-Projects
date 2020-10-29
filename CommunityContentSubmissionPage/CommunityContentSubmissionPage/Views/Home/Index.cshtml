@@ -1,16 +1,15 @@
 ﻿@model SubmissionModel
 
 
-@using (Html.BeginForm(FormMethod.Post))
-{
+<form method="post" asp-controller="Home" asp-action="Index">
 
     <div class="form-group" id="url">
-        <label for="txtUrl">@Html.DisplayNameFor(Model => Model.Url)</label>
-        @Html.TextBoxFor(Model => Model.Url, new { id = "txtUrl", @class = "form-control" })
+        <label asp-for="Url"></label>
+        <input type="text" asp-for="Url" id="txtUrl" class="form-control" />
     </div>
 
     <div class="form-group" id="type">
-        <label for="txtType">@Html.DisplayNameFor(Model => Model.Type)</label>
+        <label asp-for="Type"></label>
         <select id="txtType" name="Type" class="form-control">
             <option selected="selected">Blog Posts</option>
             <option>Books</option>
@@ -22,19 +21,19 @@
     </div>
 
     <div class="form-group" id="email">
-        <label for="txtEmail">@Html.DisplayNameFor(Model => Model.Email)</label>
-        @Html.TextBoxFor(Model => Model.Email, new { id = "txtEmail", @class = "form-control" })
+        <label asp-for="Email"></label>
+        <input type="email" asp-for="Email" class="form-control" />
     </div>
 
     <div class="form-group" id="description">
-        <label for="txtDescription">@Html.DisplayNameFor(Model => Model.Description)</label>
-        @Html.TextBoxFor(Model => Model.Description, new { id = "txtDescription", @class = "form-control" })
+        <label asp-for="Description"></label>
+        <input type="text" asp-for="Description" class="form-control" />
     </div>
 
     <div class="form-group form-check" id="privacypolicy">
-        @Html.CheckBoxFor(Model => Model.AcceptPrivacyPolicy, new { id = "chkPrivacyPolicy", @class = "form-check-input" })
-        <label for="chkPrivacyPolicy">@Html.DisplayNameFor(Model => Model.AcceptPrivacyPolicy)</label>
+        <input type="checkbox" asp-for="AcceptPrivacyPolicy" class="form-check-input" id="chkPrivacyPolicy" />
+        <label asp-for="AcceptPrivacyPolicy"></label>
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
-}
+</form>
