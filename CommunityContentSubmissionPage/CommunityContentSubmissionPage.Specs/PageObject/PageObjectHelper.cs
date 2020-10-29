@@ -18,12 +18,5 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
 
             return inputEntryPageObject;
         }
-
-        public static void SetTextInput(InputEntryPageObject inputEntryPageObject, string value)
-        {
-            inputEntryPageObject.ValueWebElement.Clear();
-            inputEntryPageObject.ValueWebElement.SendKeys(value);
-        }
-
     }
 }

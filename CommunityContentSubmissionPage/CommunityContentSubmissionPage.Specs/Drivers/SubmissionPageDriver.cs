@@ -25,20 +25,20 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
             switch (inputType.ToUpper())
             {
                 case "URL":
-                    submissionPageObject.UrlWebElement.Should().NotBeNull();
-                    submissionPageObject.UrlLabel.Should().Be(expectedLabel);
+                    submissionPageObject.UrlInputEntry.ValueWebElement.Should().NotBeNull();
+                    submissionPageObject.UrlInputEntry.Label.Should().Be(expectedLabel);
                     break;
                 case "TYPE":
-                    submissionPageObject.TypeWebElement.Should().NotBeNull();
-                    submissionPageObject.TypeLabel.Should().Be(expectedLabel);
+                    submissionPageObject.TypeSelectEntry.ValueWebElement.Should().NotBeNull();
+                    submissionPageObject.TypeSelectEntry.Label.Should().Be(expectedLabel);
                     break;
                 case "EMAIL":
-                    submissionPageObject.EmailWebElement.Should().NotBeNull();
-                    submissionPageObject.EmailLabel.Should().Be(expectedLabel);
+                    submissionPageObject.EmailInputEntry.ValueWebElement.Should().NotBeNull();
+                    submissionPageObject.EmailInputEntry.Label.Should().Be(expectedLabel);
                     break;
                 case "DESCRIPTION":
-                    submissionPageObject.DescriptionWebElement.Should().NotBeNull();
-                    submissionPageObject.DescriptionLabel.Should().Be(expectedLabel);
+                    submissionPageObject.DescriptionInputEntry.ValueWebElement.Should().NotBeNull();
+                    submissionPageObject.DescriptionInputEntry.Label.Should().Be(expectedLabel);
                     break;
                 default:
                     throw new NotImplementedException($"{inputType} not implemented");
@@ -53,16 +53,16 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
                 switch (row.Label.ToUpper())
                 {
                     case "URL":
-                        submissionPageObject.Url = row.Value;
+                        submissionPageObject.UrlInputEntry.Value = row.Value;
                         break;
                     case "TYPE":
-                        submissionPageObject.Type = row.Value;
+                        submissionPageObject.TypeSelectEntry.Value = row.Value;
                         break;
                     case "EMAIL":
-                        submissionPageObject.Email = row.Value;
+                        submissionPageObject.EmailInputEntry.Value = row.Value;
                         break;
                     case "DESCRIPTION":
-                        submissionPageObject.Description = row.Value;
+                        submissionPageObject.DescriptionInputEntry.Value = row.Value;
                         break;
                     default:
                         throw new NotImplementedException($"{row.Label} not implemented");
@@ -79,7 +79,7 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
         {
             var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
 
-            var typeSelectElement = new SelectElement(submissionPageObject.TypeWebElement);
+            var typeSelectElement = new SelectElement(submissionPageObject.TypeSelectEntry.ValueWebElement);
             var webElements = typeSelectElement.Options.ToList();
             var actualTypenameEntries = webElements.Select(i => new TypenameEntry {Typename = i.Text}).ToList();
 
@@ -90,12 +90,22 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
         {
             var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
 
+            if (submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement is null)
+            {
+                throw new Exception("Can't accept privacy policy, because the checkbox is missing");
+            }
+
             submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Click();
         }
 
         public void DoNotAcceptPrivacyPolicy()
         {
             var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
+
+            if (submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement is null)
+            {
+                throw new Exception("Can't decline privacy policy, because the checkbox is missing");
+            }
 
             if (submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Selected)
                 submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Click();
@@ -111,10 +121,16 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
         {
             var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
 
-            submissionPageObject.Url.Should().BeEmpty();
-            submissionPageObject.Type.Should().Be("Blog Posts");
-            submissionPageObject.Email.Should().BeEmpty();
-            submissionPageObject.Description.Should().BeEmpty();
+            submissionPageObject.UrlInputEntry.Value.Should().BeEmpty();
+            submissionPageObject.TypeSelectEntry.Value.Should().Be("Blog Posts");
+            submissionPageObject.EmailInputEntry.Value.Should().BeEmpty();
+            submissionPageObject.DescriptionInputEntry.Value.Should().BeEmpty();
+            
+            if (submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement is null)
+            {
+                throw new Exception("Can't accept privacy policy, because the checkbox is missing");
+            }
+
             submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Selected.Should().BeFalse();
         }
     }
