@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using CommunityContentSubmissionPage.Specs.Drivers;
 using TechTalk.SpecFlow;
 
@@ -10,23 +7,23 @@ namespace CommunityContentSubmissionPage.Specs.Hooks
     [Binding]
     public class WebServerHooks
     {
-        private readonly WebServerDriver webServerDriver;
+        private readonly WebServerDriver _webServerDriver;
 
         public WebServerHooks(WebServerDriver webServerDriver)
         {
-            this.webServerDriver = webServerDriver;
+            _webServerDriver = webServerDriver;
         }
 
         [BeforeScenario(Order = 1000)]
         public void StartWebserver()
         {
-            this.webServerDriver.Start();
+            _webServerDriver.Start();
         }
 
         [AfterScenario]
         public async Task StopWebserver()
         {
-            await webServerDriver.Stop();
+            await _webServerDriver.Stop();
         }
     }
 }

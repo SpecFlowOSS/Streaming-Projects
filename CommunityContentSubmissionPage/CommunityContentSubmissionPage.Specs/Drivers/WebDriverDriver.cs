@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
@@ -8,31 +6,23 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
 {
     public class WebDriverDriver : IDisposable
     {
-        private Lazy<IWebDriver> webDriver;
+        private readonly Lazy<IWebDriver> _webDriver;
 
         public WebDriverDriver()
         {
-            webDriver = new Lazy<IWebDriver>(() => CreateWebDriver());
+            _webDriver = new Lazy<IWebDriver>(() => CreateWebDriver());
+        }
+
+        public IWebDriver WebDriver => _webDriver.Value;
+
+        public void Dispose()
+        {
+            _webDriver.Value.Quit();
         }
 
         private IWebDriver CreateWebDriver()
         {
-            return new ChromeDriver()
-            {
-            };
-        }
-
-        public void Dispose()
-        {
-            webDriver.Value.Quit();
-        }
-
-        public IWebDriver WebDriver
-        {
-            get
-            {
-                return webDriver.Value;
-            }
+            return new ChromeDriver();
         }
     }
 }

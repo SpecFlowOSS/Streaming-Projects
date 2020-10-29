@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using CommunityContentSubmissionPage.Specs.Drivers;
-using CommunityContentSubmissionPage.Specs.PageObject;
 using CommunityContentSubmissionPage.Specs.Support;
 using FluentAssertions;
-using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -14,11 +10,12 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     [Binding]
     public class SubmissionSteps
     {
-        private readonly SubmissionPageDriver _submissionPageDriver;
-        private readonly SubmissionDriver _submissionDriver;
         private readonly BrowserDriver _browserDriver;
+        private readonly SubmissionDriver _submissionDriver;
+        private readonly SubmissionPageDriver _submissionPageDriver;
 
-        public SubmissionSteps(SubmissionPageDriver submissionPageDriver, SubmissionDriver submissionDriver, BrowserDriver browserDriver)
+        public SubmissionSteps(SubmissionPageDriver submissionPageDriver, SubmissionDriver submissionDriver,
+            BrowserDriver browserDriver)
         {
             _submissionPageDriver = submissionPageDriver;
             _submissionDriver = submissionDriver;
@@ -70,7 +67,6 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         }
 
 
-
         [Then(@"there is a submission entry stored with the following data:")]
         public void ThenThereIsASubmissionEntryStoredWithTheFollowingData(Table table)
         {
@@ -89,12 +85,12 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [Given(@"the submission entry form is filled")]
         public void GivenTheSubmissionEntryFormIsFilled()
         {
-            _submissionPageDriver.InputForm(new List<SubmissionEntryFormRowObject>()
+            _submissionPageDriver.InputForm(new List<SubmissionEntryFormRowObject>
             {
-                new SubmissionEntryFormRowObject(){ Label = "Url", Value = "https://example.org"},
-                new SubmissionEntryFormRowObject(){ Label = "Type", Value = "Blog Posts"},
-                new SubmissionEntryFormRowObject(){ Label = "Email", Value = "someone@example.org"},
-                new SubmissionEntryFormRowObject(){ Label = "Description", Value = "something really cool"},
+                new SubmissionEntryFormRowObject {Label = "Url", Value = "https://example.org"},
+                new SubmissionEntryFormRowObject {Label = "Type", Value = "Blog Posts"},
+                new SubmissionEntryFormRowObject {Label = "Email", Value = "someone@example.org"},
+                new SubmissionEntryFormRowObject {Label = "Description", Value = "something really cool"}
             });
         }
 
@@ -121,19 +117,5 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         {
             _submissionPageDriver.CheckDefaultValues();
         }
-
-    }
-
-    public class TypenameEntry
-    {
-        public string Typename { get; set; } = String.Empty;
-    }
-
-    public class ExpectedSubmissionContentEntry 
-    {
-        public string? Type { get; set; }
-        public string? Url { get; set; }
-        public string? Email { get; set; }
-        public string? Description { get; set; }
     }
 }

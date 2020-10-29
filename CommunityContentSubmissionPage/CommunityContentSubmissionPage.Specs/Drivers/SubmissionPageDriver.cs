@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using CommunityContentSubmissionPage.Specs.PageObject;
 using CommunityContentSubmissionPage.Specs.Steps;
 using CommunityContentSubmissionPage.Specs.Support;
@@ -12,15 +11,16 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
 {
     public class SubmissionPageDriver
     {
-        private readonly WebDriverDriver webDriverDriver;
+        private readonly WebDriverDriver _webDriverDriver;
 
         public SubmissionPageDriver(WebDriverDriver webDriverDriver)
         {
-            this.webDriverDriver = webDriverDriver;
+            _webDriverDriver = webDriverDriver;
         }
+
         public void CheckExistenceOfInputElement(string inputType, string expectedLabel)
         {
-            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
 
             switch (inputType.ToUpper())
             {
@@ -47,10 +47,9 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
 
         public void InputForm(IEnumerable<SubmissionEntryFormRowObject> rows)
         {
-            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
 
             foreach (var row in rows)
-            {
                 switch (row.Label.ToUpper())
                 {
                     case "URL":
@@ -68,52 +67,49 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
                     default:
                         throw new NotImplementedException($"{row.Label} not implemented");
                 }
-            }
         }
 
         public void SubmitForm()
         {
-            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
             submissionPageObject.ClickSubmitButton();
         }
 
         public void CheckTypeEntries(IEnumerable<TypenameEntry> expectedTypenameEntries)
         {
-            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
 
             var typeSelectElement = new SelectElement(submissionPageObject.TypeWebElement);
             var webElements = typeSelectElement.Options.ToList();
-            var actualTypenameEntries = webElements.Select(i => new TypenameEntry() {Typename = i.Text}).ToList();
+            var actualTypenameEntries = webElements.Select(i => new TypenameEntry {Typename = i.Text}).ToList();
 
             actualTypenameEntries.Should().BeEquivalentTo(expectedTypenameEntries);
         }
 
         public void AcceptPrivacyPolicy()
         {
-            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
 
             submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Click();
         }
 
         public void DoNotAcceptPrivacyPolicy()
         {
-            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
 
             if (submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Selected)
-            {
                 submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Click();
-            }
         }
 
         public void ResetForm()
         {
-            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
             submissionPageObject.ClickResetButton();
         }
 
         public void CheckDefaultValues()
         {
-            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            var submissionPageObject = new SubmissionPageObject(_webDriverDriver);
 
             submissionPageObject.Url.Should().BeEmpty();
             submissionPageObject.Type.Should().Be("Blog Posts");

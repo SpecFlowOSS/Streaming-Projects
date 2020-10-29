@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
+﻿using FluentAssertions;
 
 namespace CommunityContentSubmissionPage.Specs.Drivers
 {
     public class BrowserDriver
     {
-        private readonly WebDriverDriver webDriverDriver;
+        private readonly WebDriverDriver _webDriverDriver;
 
         public BrowserDriver(WebDriverDriver webDriverDriver)
         {
-            this.webDriverDriver = webDriverDriver;
+            _webDriverDriver = webDriverDriver;
         }
 
-        public string Title => webDriverDriver.WebDriver.Title;
+        public string Title => _webDriverDriver.WebDriver.Title;
 
-        public string Url => webDriverDriver.WebDriver.Url;
-        
+        public string Url => _webDriverDriver.WebDriver.Url;
+
         public void AssertTitle(string expectedTitle)
         {
             Title.Should().Be(expectedTitle);
@@ -25,7 +22,7 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
 
         internal void GoToUrl(string url)
         {
-            webDriverDriver.WebDriver.Url = url;
+            _webDriverDriver.WebDriver.Url = url;
         }
     }
 }
