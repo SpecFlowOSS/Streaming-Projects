@@ -24,14 +24,14 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
 
         protected IEnumerable<InputEntryPageObject> InputEntries => Form.FindElements(By.ClassName("form-group")).Select(i => new InputEntryPageObject(i));
 
-        public InputEntryPageObject UrlInputEntry => TryGetInputEntry("url");
+        public InputEntryPageObject UrlInputEntry => PageObjectHelper.TryGetInputEntry(InputEntries, "url");
 
-        public InputEntryPageObject TypeSelectEntry => TryGetInputEntry("type");
+        public InputEntryPageObject TypeSelectEntry => PageObjectHelper.TryGetInputEntry(InputEntries, "type");
 
-        public InputEntryPageObject EmailInputEntry => TryGetInputEntry("email");
-        public InputEntryPageObject DescriptionInputEntry => TryGetInputEntry("description");
+        public InputEntryPageObject EmailInputEntry => PageObjectHelper.TryGetInputEntry(InputEntries, "email");
+        public InputEntryPageObject DescriptionInputEntry => PageObjectHelper.TryGetInputEntry(InputEntries, "description");
 
-        public InputEntryPageObject PrivacyPolicyInputEntry => TryGetInputEntry("privacypolicy");
+        public InputEntryPageObject PrivacyPolicyInputEntry => PageObjectHelper.TryGetInputEntry(InputEntries, "privacypolicy");
 
         public IWebElement UrlWebElement => UrlInputEntry.ValueWebElement;
 
@@ -50,15 +50,8 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
 
         public string Url
         {
-            get
-            {
-                return UrlInputEntry.ValueWebElement.Text;
-            }
-            set
-            {
-                UrlInputEntry.ValueWebElement.Clear();
-                UrlInputEntry.ValueWebElement.SendKeys(value);
-            }
+            get => UrlInputEntry.ValueWebElement.Text;
+            set => PageObjectHelper.SetTextInput(UrlInputEntry, value);
         }
 
         public string Type
@@ -77,42 +70,17 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
         }
 
         public string Email {
-            get
-            {
-                return EmailInputEntry.ValueWebElement.Text;
-            }
-            set
-            {
-                EmailInputEntry.ValueWebElement.Clear();
-                EmailInputEntry.ValueWebElement.SendKeys(value);
-            }
+            get => EmailInputEntry.ValueWebElement.Text;
+            set => PageObjectHelper.SetTextInput(EmailInputEntry, value);
         }
 
+        
         public string Description
         {
-            get
-            {
-                return DescriptionInputEntry.ValueWebElement.Text;
-            }
-            set
-            {
-                DescriptionInputEntry.ValueWebElement.Clear();
-                DescriptionInputEntry.ValueWebElement.SendKeys(value);
-            }
+            get => DescriptionInputEntry.ValueWebElement.Text;
+            set => PageObjectHelper.SetTextInput(DescriptionInputEntry, value);
         }
 
-
-        private InputEntryPageObject TryGetInputEntry(string id)
-        {
-            var inputEntryPageObject = InputEntries.Where(i => i.Id == id).SingleOrDefault();
-
-            if (inputEntryPageObject is null)
-            {
-                throw new NotFoundException($"Input Entry for '{id}' was not found");
-            }
-
-            return inputEntryPageObject;
-        }
 
         public void ClickSubmitButton()
         {
