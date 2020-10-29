@@ -14,11 +14,10 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
             this.webDriverDriver = webDriverDriver;
         }
 
-        public string Title
-        {
-            get { return webDriverDriver.WebDriver.Title; }
-        }
+        public string Title => webDriverDriver.WebDriver.Title;
 
+        public string Url => webDriverDriver.WebDriver.Url;
+        
         public void AssertTitle(string expectedTitle)
         {
             Title.Should().Be(expectedTitle);

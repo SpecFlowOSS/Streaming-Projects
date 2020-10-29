@@ -16,11 +16,13 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     {
         private readonly SubmissionPageDriver _submissionPageDriver;
         private readonly SubmissionDriver _submissionDriver;
+        private readonly BrowserDriver _browserDriver;
 
-        public SubmissionSteps(SubmissionPageDriver submissionPageDriver, SubmissionDriver submissionDriver)
+        public SubmissionSteps(SubmissionPageDriver submissionPageDriver, SubmissionDriver submissionDriver, BrowserDriver browserDriver)
         {
             _submissionPageDriver = submissionPageDriver;
             _submissionDriver = submissionDriver;
+            _browserDriver = browserDriver;
         }
 
         [Then(@"it is possible to enter a '(.*)' with label '(.*)'")]
@@ -58,13 +60,13 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [Then(@"the submitting of data was possible")]
         public void ThenTheSubmittingOfDataWasPossible()
         {
-            _submissionDriver.AssertNumberOfEntriesStored(1);
+            _browserDriver.Url.Should().EndWith("Success", "because the success page should be displayed");
         }
 
         [Then(@"the submitting of data was not possible")]
         public void ThenTheSubmittingOfDataWasNotPossible()
         {
-            _submissionDriver.AssertNumberOfEntriesStored(0);
+            _browserDriver.Url.Should().NotEndWith("Success", "the input form page should be displayed again");
         }
 
 

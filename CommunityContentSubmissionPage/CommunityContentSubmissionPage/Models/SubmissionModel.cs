@@ -28,7 +28,6 @@ namespace CommunityContentSubmissionPage.Models
         [Required]
         public string Description { get; set; }
 
-        [Required]
         [BoolHasToBeTrue("You must accept the privacy policy!")]
         public bool AcceptPrivacyPolicy { get; set; }
     }

@@ -44,7 +44,7 @@ namespace CommunityContentSubmissionPage.Controllers
 
             await _submissionSaver.Save(submission);
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Success");
         }
 
 
@@ -52,6 +52,12 @@ namespace CommunityContentSubmissionPage.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [HttpGet]
+        public IActionResult Success()
+        {
+            return View();
         }
     }
 }
