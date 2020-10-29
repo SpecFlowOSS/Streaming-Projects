@@ -30,4 +30,13 @@ Scenario: Type should offer a list of unique entries
 		| Podcasts      |
 		| Examples      |
 
+Scenario: Form should be reset after clicking reset button
+
+	Given the submission page is open
+	And the submission entry form is filled
+	And the privacy policy is accepted
+
+	When the form is reset
+
+	Then every input is set to its default values
 

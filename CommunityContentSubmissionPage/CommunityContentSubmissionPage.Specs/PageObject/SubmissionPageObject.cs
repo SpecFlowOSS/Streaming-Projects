@@ -20,6 +20,7 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
         protected IWebElement Form => _webDriverDriver.WebDriver.FindElement(By.TagName("form"));
 
         protected IWebElement SubmitButton => Form.FindElement(By.ClassName("btn-primary"));
+        protected IWebElement ResetButton => Form.FindElement(By.ClassName("btn-secondary"));
 
         protected IEnumerable<InputEntryPageObject> InputEntries => Form.FindElements(By.ClassName("form-group")).Select(i => new InputEntryPageObject(i));
 
@@ -116,6 +117,11 @@ namespace CommunityContentSubmissionPage.Specs.PageObject
         public void ClickSubmitButton()
         {
             SubmitButton.Click();
+        }
+
+        public void ClickResetButton()
+        {
+            ResetButton.Click();
         }
     }
 }

@@ -110,6 +110,17 @@ namespace CommunityContentSubmissionPage.Specs.Steps
             _submissionPageDriver.AcceptPrivacyPolicy();
         }
 
+        [When(@"the form is reset")]
+        public void WhenTheFormIsReset()
+        {
+            _submissionPageDriver.ResetForm();
+        }
+
+        [Then(@"every input is set to its default values")]
+        public void ThenEveryInputIsSetToItsDefaultValues()
+        {
+            _submissionPageDriver.CheckDefaultValues();
+        }
 
     }
 

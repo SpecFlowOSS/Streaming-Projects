@@ -104,5 +104,22 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
                 submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Click();
             }
         }
+
+        public void ResetForm()
+        {
+            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+            submissionPageObject.ClickResetButton();
+        }
+
+        public void CheckDefaultValues()
+        {
+            var submissionPageObject = new SubmissionPageObject(webDriverDriver);
+
+            submissionPageObject.Url.Should().BeEmpty();
+            submissionPageObject.Type.Should().Be("Blog Posts");
+            submissionPageObject.Email.Should().BeEmpty();
+            submissionPageObject.Description.Should().BeEmpty();
+            submissionPageObject.PrivacyPolicyInputEntry.ValueWebElement.Selected.Should().BeFalse();
+        }
     }
 }
