@@ -1,4 +1,7 @@
-﻿using CommunityContentSubmissionPage.Specs.Drivers;
+﻿using Boa.Constrictor.Screenplay;
+using Boa.Constrictor.WebDriver;
+using CommunityContentSubmissionPage.Specs.Drivers;
+using FluentAssertions;
 using TechTalk.SpecFlow;
 
 namespace CommunityContentSubmissionPage.Specs.Steps
@@ -6,26 +9,26 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     [Binding]
     public class WebPageSteps
     {
-        private readonly BrowserDriver _browserDriver;
+        private readonly Actor _actor;
         private readonly WebServerDriver _webServerDriver;
 
-        public WebPageSteps(WebServerDriver webServerDriver, BrowserDriver browserDriver)
+        public WebPageSteps(WebServerDriver webServerDriver, Actor actor)
         {
             _webServerDriver = webServerDriver;
-            _browserDriver = browserDriver;
+            _actor = actor;
         }
 
         [Given(@"the submission page is open")]
         [When(@"the submission page is open")]
         public void WhenTheSubmissionPageIsOpen()
         {
-            _browserDriver.GoToUrl(_webServerDriver.Hostname);
+            _actor.AttemptsTo(Navigate.ToUrl(_webServerDriver.Hostname));
         }
 
         [Then(@"the title of the page is '(.*)'")]
         public void ThenTheTitleOfThePageIs(string expectedPageTitle)
         {
-            _browserDriver.AssertTitle(expectedPageTitle);
+            _actor.AskingFor(Title.OfPage()).Should().Be(expectedPageTitle);
         }
     }
 }

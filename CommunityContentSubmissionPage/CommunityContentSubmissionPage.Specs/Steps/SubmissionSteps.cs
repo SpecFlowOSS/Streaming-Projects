@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using Boa.Constrictor.Screenplay;
+using Boa.Constrictor.WebDriver;
 using CommunityContentSubmissionPage.Specs.Drivers;
+using CommunityContentSubmissionPage.Specs.Pages;
 using CommunityContentSubmissionPage.Specs.Support;
 using FluentAssertions;
+using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -11,21 +16,37 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     public class SubmissionSteps
     {
         private readonly BrowserDriver _browserDriver;
+        private readonly Actor _actor;
         private readonly SubmissionDriver _submissionDriver;
         private readonly SubmissionPageDriver _submissionPageDriver;
 
         public SubmissionSteps(SubmissionPageDriver submissionPageDriver, SubmissionDriver submissionDriver,
-            BrowserDriver browserDriver)
+            BrowserDriver browserDriver, Actor actor)
         {
             _submissionPageDriver = submissionPageDriver;
             _submissionDriver = submissionDriver;
             _browserDriver = browserDriver;
+            _actor = actor;
         }
 
         [Then(@"it is possible to enter a '(.*)' with label '(.*)'")]
         public void ThenItIsPossibleToEnterAWithLabel(string inputType, string expectedLabel)
         {
-            _submissionPageDriver.CheckExistenceOfInputElement(inputType, expectedLabel);
+            IWebLocator inputFieldLocator;
+            IWebLocator labelLocator;
+
+            switch (inputType.ToUpper())
+            {
+                case "URL":
+                    inputFieldLocator = SubmissionPage.UrlInputField;
+                    labelLocator = SubmissionPage.UrlLabel;
+                    break;
+                default: 
+                    throw new NotImplementedException();
+            }
+
+            _actor.AttemptsTo(Wait.Until(Appearance.Of(inputFieldLocator), IsEqualTo.True()));
+            _actor.AskingFor(Text.Of(labelLocator)).Should().Be(expectedLabel);
         }
 
         [Given(@"the filled out submission entry form")]
