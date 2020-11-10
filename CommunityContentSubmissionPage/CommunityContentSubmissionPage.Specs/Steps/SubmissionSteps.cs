@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Boa.Constrictor.Screenplay;
 using Boa.Constrictor.WebDriver;
 using CommunityContentSubmissionPage.Specs.Drivers;
@@ -16,17 +17,12 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     [Binding]
     public class SubmissionSteps
     {
-        private readonly BrowserDriver _browserDriver;
         private readonly Actor _actor;
         private readonly SubmissionDriver _submissionDriver;
-        private readonly SubmissionPageDriver _submissionPageDriver;
-
-        public SubmissionSteps(SubmissionPageDriver submissionPageDriver, SubmissionDriver submissionDriver,
-            BrowserDriver browserDriver, Actor actor)
+        
+        public SubmissionSteps(SubmissionDriver submissionDriver, Actor actor)
         {
-            _submissionPageDriver = submissionPageDriver;
             _submissionDriver = submissionDriver;
-            _browserDriver = browserDriver;
             _actor = actor;
         }
 
@@ -41,6 +37,18 @@ namespace CommunityContentSubmissionPage.Specs.Steps
                 case "URL":
                     inputFieldLocator = SubmissionPage.UrlInputField;
                     labelLocator = SubmissionPage.UrlLabel;
+                    break;
+                case "TYPE":
+                    inputFieldLocator = SubmissionPage.TypeSelect;
+                    labelLocator = SubmissionPage.TypeLabel;
+                    break;
+                case "EMAIL":
+                    inputFieldLocator = SubmissionPage.EmailInputField;
+                    labelLocator = SubmissionPage.EmailLabel;
+                    break;
+                case "DESCRIPTION":
+                    inputFieldLocator = SubmissionPage.DescriptionInputField;
+                    labelLocator = SubmissionPage.DescriptionLabel;
                     break;
                 default: 
                     throw new NotImplementedException();
@@ -79,13 +87,14 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [Then(@"the submitting of data was possible")]
         public void ThenTheSubmittingOfDataWasPossible()
         {
-            _browserDriver.Url.Should().EndWith("Success", "because the success page should be displayed");
+            
+            _actor.AsksFor(CurrentUrl.FromBrowser()).Should().EndWith("Success", "because the success page should be displayed");
         }
 
         [Then(@"the submitting of data was not possible")]
         public void ThenTheSubmittingOfDataWasNotPossible()
         {
-            _browserDriver.Url.Should().NotEndWith("Success", "the input form page should be displayed again");
+            _actor.AsksFor(CurrentUrl.FromBrowser()).Should().NotEndWith("Success", "the input form page should be displayed again");
         }
 
 
@@ -101,7 +110,10 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         public void ThenYouCanChooseFromTheFollowingTypes(Table table)
         {
             var expectedTypenameEntries = table.CreateSet<TypenameEntry>();
-            _submissionPageDriver.CheckTypeEntries(expectedTypenameEntries);
+            var actualTypes = _actor.AsksFor(SelectOptionsAvailable.For(SubmissionPage.TypeSelect)).Select(i => new TypenameEntry(){Typename = i});
+
+            actualTypes.Should().BeEquivalentTo(expectedTypenameEntries);
+
         }
 
         [Given(@"the submission entry form is filled")]
@@ -137,13 +149,17 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [When(@"the form is reset")]
         public void WhenTheFormIsReset()
         {
-            _submissionPageDriver.ResetForm();
+            _actor.AttemptsTo(Click.On(SubmissionPage.CancelButton));
         }
 
         [Then(@"every input is set to its default values")]
         public void ThenEveryInputIsSetToItsDefaultValues()
         {
-            _submissionPageDriver.CheckDefaultValues();
+            _actor.AsksFor(Text.Of(SubmissionPage.UrlInputField)).Should().BeEmpty();
+            _actor.AsksFor(SelectedOptionText.Of(SubmissionPage.TypeSelect)).Should().Be("Blog Posts");
+            _actor.AsksFor(Text.Of(SubmissionPage.EmailInputField)).Should().BeEmpty();
+            _actor.AsksFor(Text.Of(SubmissionPage.DescriptionInputField)).Should().BeEmpty();
+            _actor.AsksFor(SelectedState.Of(SubmissionPage.PrivacyPolicy)).Should().BeFalse();
         }
     }
 }

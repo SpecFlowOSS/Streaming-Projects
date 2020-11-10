@@ -14,5 +14,8 @@ namespace CommunityContentSubmissionPage.Specs.Pages
         public static IWebLocator PrivacyPolicy => L("privacy policy checkbox", By.Id("chkPrivacyPolicy"));
         public static IWebLocator SubmitButton => L("submit button", By.ClassName("btn-primary"));
         public static IWebLocator CancelButton => L("cancel button", By.ClassName("btn-secondary"));
+        public static IWebLocator TypeLabel => L("Type Label", By.CssSelector("#type label"));
+        public static IWebLocator DescriptionLabel => L("Description Label", By.CssSelector("#description label"));
+        public static IWebLocator EmailLabel => L("Email Label", By.CssSelector("#email label"));
     }
 }
