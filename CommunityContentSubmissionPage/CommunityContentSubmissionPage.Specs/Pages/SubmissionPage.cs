@@ -8,5 +8,11 @@ namespace CommunityContentSubmissionPage.Specs.Pages
     {
         public static IWebLocator UrlInputField => L("URL Input field", By.Id("txtUrl"));
         public static IWebLocator UrlLabel => L("URL Label", By.CssSelector("#url label"));
+        public static IWebLocator EmailInputField => L("Email Input", By.CssSelector("#email input"));
+        public static IWebLocator DescriptionInputField => L("Description input", By.CssSelector("#description input"));
+        public static IWebLocator TypeSelect => L("Type select", By.CssSelector("#type select"));
+        public static IWebLocator PrivacyPolicy => L("privacy policy checkbox", By.Id("chkPrivacyPolicy"));
+        public static IWebLocator SubmitButton => L("submit button", By.ClassName("btn-primary"));
+        public static IWebLocator CancelButton => L("cancel button", By.ClassName("btn-secondary"));
     }
 }

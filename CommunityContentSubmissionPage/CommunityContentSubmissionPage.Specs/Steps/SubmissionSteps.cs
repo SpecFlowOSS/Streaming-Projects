@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Boa.Constrictor.Screenplay;
 using Boa.Constrictor.WebDriver;
 using CommunityContentSubmissionPage.Specs.Drivers;
+using CommunityContentSubmissionPage.Specs.Interactions;
 using CommunityContentSubmissionPage.Specs.Pages;
 using CommunityContentSubmissionPage.Specs.Support;
 using FluentAssertions;
@@ -53,14 +54,14 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         public void GivenTheFilledOutSubmissionEntryForm(Table table)
         {
             var rows = table.CreateSet<SubmissionEntryFormRowObject>();
-
-            _submissionPageDriver.InputForm(rows);
+            
+            _actor.AttemptsTo(FillOutSubmissionForm.With(rows));
         }
 
         [When(@"the submission entry form is submitted")]
         public void WhenTheSubmissionEntryFormIsSubmitted()
         {
-            _submissionPageDriver.SubmitForm();
+            _actor.AttemptsTo(Click.On(SubmissionPage.SubmitButton));
         }
 
         [Then(@"there is one submission entry stored")]
@@ -106,25 +107,31 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [Given(@"the submission entry form is filled")]
         public void GivenTheSubmissionEntryFormIsFilled()
         {
-            _submissionPageDriver.InputForm(new List<SubmissionEntryFormRowObject>
+            var submissionEntryFormRowObjects = new List<SubmissionEntryFormRowObject>
             {
                 new SubmissionEntryFormRowObject {Label = "Url", Value = "https://example.org"},
                 new SubmissionEntryFormRowObject {Label = "Type", Value = "Blog Posts"},
                 new SubmissionEntryFormRowObject {Label = "Email", Value = "someone@example.org"},
                 new SubmissionEntryFormRowObject {Label = "Description", Value = "something really cool"}
-            });
+            };
+            
+            _actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));
         }
 
         [Given(@"the privacy policy is not accepted")]
         public void GivenThePrivacyPolicyIsNotAccepted()
         {
-            _submissionPageDriver.DoNotAcceptPrivacyPolicy();
+            var privacyPolicyIsChecked = _actor.AskingFor(SelectedState.Of(SubmissionPage.PrivacyPolicy));
+            if (privacyPolicyIsChecked)
+            {
+                _actor.AttemptsTo(Click.On(SubmissionPage.PrivacyPolicy));
+            }
         }
 
         [Given(@"the privacy policy is accepted")]
         public void GivenThePrivacyPolicyIsAccepted()
         {
-            _submissionPageDriver.AcceptPrivacyPolicy();
+            _actor.AttemptsTo(Click.On(SubmissionPage.PrivacyPolicy));
         }
 
         [When(@"the form is reset")]
