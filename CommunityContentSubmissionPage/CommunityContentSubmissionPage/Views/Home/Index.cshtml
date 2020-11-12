@@ -1,13 +1,6 @@
 ﻿@using CommunityContentSubmissionPage.Controllers.API
 @model SubmissionModel
 
-@section Scripts
-{
-    <script>
-       
-    </script>
-}
-
 <form method="post" asp-controller="Home" asp-action="Index">
 
     <div class="form-group" id="url">
@@ -19,8 +12,6 @@
     <div class="form-group" id="type">
         <label asp-for="Type"></label>
         <select id="txtType" name="Type" class="form-control">
-            @*<option selected="selected">Blog Posts</option>
-            <option>Books</option>*@
         </select>
     </div>
 
