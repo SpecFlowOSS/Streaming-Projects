@@ -28,7 +28,9 @@ namespace CommunityContentSubmissionPage
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
             services.AddControllersWithViews();
+            
 
             services.AddScoped<IDatabaseContext, DatabaseContext>();
             services.AddScoped<ISubmissionSaver, SubmissionSaver>();
@@ -56,9 +58,10 @@ namespace CommunityContentSubmissionPage
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
