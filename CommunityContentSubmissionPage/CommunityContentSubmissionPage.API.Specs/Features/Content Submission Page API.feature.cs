@@ -19,22 +19,22 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.4.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Content Submission Page", SourceFile="Features\\Content Submission Page.feature", SourceLine=0)]
-    public partial class ContentSubmissionPageFeature
+    [TechTalk.SpecRun.FeatureAttribute("Content Submission Page API", SourceFile="Features\\Content Submission Page API.feature", SourceLine=0)]
+    public partial class ContentSubmissionPageAPIFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
         
-#line 1 "Content Submission Page.feature"
+#line 1 "Content Submission Page API.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Content Submission Page", null, ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Content Submission Page API", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -96,9 +96,6 @@ this.ScenarioInitialize(scenarioInfo);
             else
             {
                 this.ScenarioStart();
-#line 5
- testRunner.When("the submission page is open", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
                 TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                             "Typename"});
                 table1.AddRow(new string[] {
@@ -113,7 +110,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Podcasts"});
                 table1.AddRow(new string[] {
                             "Examples"});
-#line 6
+#line 5
  testRunner.Then("you can choose from the following Types:", ((string)(null)), table1, "Then ");
 #line hidden
             }
