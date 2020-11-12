@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using CommunityContentSubmissionPage.Models.API;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CommunityContentSubmissionPage.Controllers.API
@@ -12,7 +8,7 @@ namespace CommunityContentSubmissionPage.Controllers.API
     [ApiController]
     public class AvailableTypesController : ControllerBase
     {
-        private List<string> _types = new List<string>()
+        private readonly List<string> _types = new List<string>()
         {
             "Blog Posts",
             "Books",

@@ -40,8 +40,8 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
 
         public class AvailableTypesResponse
         {
-            public List<string> Types { get; set; }
-            public string SelectedType { get; set; }
+            public List<string> Types { get; set; } = new List<string>();
+            public string SelectedType { get; set; } = String.Empty;
         }
     }
 }
