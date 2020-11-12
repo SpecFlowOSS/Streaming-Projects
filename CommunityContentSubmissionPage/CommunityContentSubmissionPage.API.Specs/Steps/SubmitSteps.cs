@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using CommunityContentSubmissionPage.API.Specs.Drivers;
 using CommunityContentSubmissionPage.API.Specs.Support;
@@ -12,34 +11,16 @@ using TechTalk.SpecFlow.Assist;
 namespace CommunityContentSubmissionPage.API.Specs.Steps
 {
     [Binding]
-    public class APISteps
+    public class SubmitSteps
     {
         private readonly WebServerDriver _webServerDriver;
+        private readonly SubmissionRequest _submissionRequest = new SubmissionRequest();
+        private IRestResponse _submitFormResponse;
 
-        public APISteps(WebServerDriver webServerDriver)
+        public SubmitSteps(WebServerDriver webServerDriver)
         {
             _webServerDriver = webServerDriver;
         }
-
-        [Then(@"you can choose from the following Types:")]
-        public void ThenYouCanChooseFromTheFollowingTypes(Table table)
-        {
-            var typenameEntries = table.CreateSet<TypenameEntry>();
-
-            var restClient = new RestClient(_webServerDriver.Hostname);
-            var restRequest = new RestRequest("api/AvailableTypes", DataFormat.Json);
-            var restResponse = restClient.Get<AvailableTypesResponse>(restRequest);
-
-            restResponse.IsSuccessful.Should().BeTrue();
-
-            var actualTypes = restResponse.Data.Types;
-            var expectedTypes = typenameEntries.Select(i => i.Typename);
-
-            actualTypes.Should().BeEquivalentTo(expectedTypes);
-        }
-
-        private readonly SubmissionRequest _submissionRequest = new SubmissionRequest();
-        private IRestResponse _submitFormResponse;
 
         [Given(@"the following submission entry")]
         public void GivenTheFollowingSubmissionEntry(Table table)
@@ -81,6 +62,15 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
         }
 
 
+        [Given(@"the submission entry is complete")]
+        public void GivenTheSubmissionEntryIsComplete()
+        {
+            _submissionRequest.Url = "https://www.example.org";
+            _submissionRequest.Type = "Blog Posts";
+            _submissionRequest.Email = "someone@example.org";
+            _submissionRequest.Description = "a description";
+        }
+
         [When(@"the submission entry is submitted")]
         public void WhenTheSubmissionEntryIsSubmitted()
         {
@@ -100,36 +90,6 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
         public void ThenTheSubmittingOfDataWasNotPossible()
         {
             _submitFormResponse.IsSuccessful.Should().BeFalse();
-        }
-
-        [Given(@"the submission entry is complete")]
-        public void GivenTheSubmissionEntryIsComplete()
-        {
-            _submissionRequest.Url = "https://www.example.org";
-            _submissionRequest.Type = "Blog Posts";
-            _submissionRequest.Email = "someone@example.org";
-            _submissionRequest.Description = "a description";
-        }
-
-
-
-        public class AvailableTypesResponse
-        {
-            public List<string> Types { get; set; } = new List<string>();
-            public string SelectedType { get; set; } = String.Empty;
-        }
-
-        public class SubmissionRequest
-        {
-            public string Url { get; set; }
-
-            public string Type { get; set; }
-
-            public string Email { get; set; }
-
-            public string Description { get; set; }
-
-            public bool AcceptPrivacyPolicy { get; set; }
         }
     }
 }
