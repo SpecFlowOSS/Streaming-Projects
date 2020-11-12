@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{5D04F219
 		..\communitycontributionsubmission-livingdoc.yml = ..\communitycontributionsubmission-livingdoc.yml
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CommunityContentSubmissionPage.API.Specs", "CommunityContentSubmissionPage.API.Specs\CommunityContentSubmissionPage.API.Specs.csproj", "{2516610D-6636-4896-9EF0-3A1B3F18FE9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{698A5225-9AB7-4959-827F-7BDD0499658C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{698A5225-9AB7-4959-827F-7BDD0499658C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{698A5225-9AB7-4959-827F-7BDD0499658C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2516610D-6636-4896-9EF0-3A1B3F18FE9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2516610D-6636-4896-9EF0-3A1B3F18FE9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2516610D-6636-4896-9EF0-3A1B3F18FE9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2516610D-6636-4896-9EF0-3A1B3F18FE9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
