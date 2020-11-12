@@ -70,12 +70,12 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Input from submission page is saved", Description="\tAssumption: There are no entries in the database", SourceLine=2)]
-        public virtual void InputFromSubmissionPageIsSaved()
+        [TechTalk.SpecRun.ScenarioAttribute("Input from submission is saved", Description="\tAssumption: There are no entries in the database", SourceLine=2)]
+        public virtual void InputFromSubmissionIsSaved()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Input from submission page is saved", "\tAssumption: There are no entries in the database", tagsOfScenario, argumentsOfScenario);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Input from submission is saved", "\tAssumption: There are no entries in the database", tagsOfScenario, argumentsOfScenario);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -112,13 +112,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "Description",
                             "foo"});
 #line 7
- testRunner.Given("the filled out submission entry form", ((string)(null)), table2, "Given ");
+ testRunner.Given("the following submission entry", ((string)(null)), table2, "Given ");
 #line hidden
 #line 13
  testRunner.And("the privacy policy is accepted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 15
- testRunner.When("the submission entry form is submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("the submission entry is submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 16
  testRunner.Then("there is \'one\' submission entry stored", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -169,13 +169,13 @@ this.ScenarioInitialize(scenarioInfo);
                             "Description",
                             "Test Input"});
 #line 20
- testRunner.Given("the filled out submission entry form", ((string)(null)), table3, "Given ");
+ testRunner.Given("the following submission entry", ((string)(null)), table3, "Given ");
 #line hidden
 #line 26
  testRunner.And("the privacy policy is accepted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
 #line 28
- testRunner.When("the submission entry form is submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("the submission entry is submitted", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
                 TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
                             "Url",
