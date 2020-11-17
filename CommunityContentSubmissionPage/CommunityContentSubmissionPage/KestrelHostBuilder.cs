@@ -17,12 +17,12 @@ namespace CommunityContentSubmissionPage
                 {
                     webBuilder.UseStartup<Startup>();
 
-                    if (hostname != null)
+                    if (hostname is not null)
                     {
                         webBuilder.UseUrls(hostname);
                     }
 
-                    if (webRoot != null)
+                    if (webRoot is not null)
                     {
                         webBuilder.UseWebRoot(webRoot);
                     }

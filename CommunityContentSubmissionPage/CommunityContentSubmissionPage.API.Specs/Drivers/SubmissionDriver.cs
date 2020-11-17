@@ -28,16 +28,16 @@ namespace CommunityContentSubmissionPage.API.Specs.Drivers
         {
             var actualEntry = _databaseContext.SubmissionEntries.Single();
 
-            if (expectedSubmissionContentEntry.Url != null)
+            if (expectedSubmissionContentEntry.Url is not null)
                 actualEntry.Url.Should().Be(expectedSubmissionContentEntry.Url);
 
-            if (expectedSubmissionContentEntry.Type != null)
+            if (expectedSubmissionContentEntry.Type is not null)
                 actualEntry.Type.Should().Be(expectedSubmissionContentEntry.Type);
 
-            if (expectedSubmissionContentEntry.Email != null)
+            if (expectedSubmissionContentEntry.Email is not null)
                 actualEntry.Email.Should().Be(expectedSubmissionContentEntry.Email);
 
-            if (expectedSubmissionContentEntry.Description != null)
+            if (expectedSubmissionContentEntry.Description is not null)
                 actualEntry.Description.Should().Be(expectedSubmissionContentEntry.Description);
         }
     }
