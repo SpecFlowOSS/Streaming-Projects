@@ -5,6 +5,7 @@ using Boa.Constrictor.Screenplay;
 using Boa.Constrictor.WebDriver;
 using CommunityContentSubmissionPage.Specs.Pages;
 using CommunityContentSubmissionPage.Specs.Support;
+using CommunityContentSubmissionPage.Specs.Steps;
 
 namespace CommunityContentSubmissionPage.Specs.Interactions
 {

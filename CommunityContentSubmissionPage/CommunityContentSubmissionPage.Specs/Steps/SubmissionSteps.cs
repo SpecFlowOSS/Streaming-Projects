@@ -110,7 +110,7 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         public void ThenYouCanChooseFromTheFollowingTypes(Table table)
         {
             var expectedTypenameEntries = table.CreateSet<TypenameEntry>();
-            var actualTypes = _actor.AsksFor(SelectOptionsAvailable.For(SubmissionPage.TypeSelect)).Select(i => new TypenameEntry(){Typename = i});
+            var actualTypes = _actor.AsksFor(SelectOptionsAvailable.For(SubmissionPage.TypeSelect)).Select(i => new TypenameEntry(i));
 
             actualTypes.Should().BeEquivalentTo(expectedTypenameEntries);
 
@@ -121,10 +121,10 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         {
             var submissionEntryFormRowObjects = new List<SubmissionEntryFormRowObject>
             {
-                new SubmissionEntryFormRowObject {Label = "Url", Value = "https://example.org"},
-                new SubmissionEntryFormRowObject {Label = "Type", Value = "Blog Posts"},
-                new SubmissionEntryFormRowObject {Label = "Email", Value = "someone@example.org"},
-                new SubmissionEntryFormRowObject {Label = "Description", Value = "something really cool"}
+                new SubmissionEntryFormRowObject("Url", "https://example.org"),
+                new SubmissionEntryFormRowObject("Type", "Blog Posts"),
+                new SubmissionEntryFormRowObject("Email", "someone@example.org"),
+                new SubmissionEntryFormRowObject("Description", "something really cool")
             };
             
             _actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));
