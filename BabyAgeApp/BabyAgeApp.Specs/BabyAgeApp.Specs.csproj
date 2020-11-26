@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Appium.WebDriver" Version="4.2.1" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.4.243" />
 
@@ -18,10 +19,6 @@
     
 
     
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Drivers\" />
   </ItemGroup>
 
 </Project>

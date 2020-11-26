@@ -5,7 +5,7 @@
 
     <StackLayout>
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Baby Age" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
+            <Label AutomationId="appTitle" Text="Baby Age" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
         <StackLayout Orientation="Horizontal" Padding="30,10,30,10" HorizontalOptions="FillAndExpand">
             <Label Text="Age in Days" FontSize="Title" HorizontalOptions="FillAndExpand"/>
