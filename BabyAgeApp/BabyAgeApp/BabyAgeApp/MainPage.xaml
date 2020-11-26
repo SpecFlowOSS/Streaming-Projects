@@ -9,15 +9,15 @@
         </Frame>
         <StackLayout Orientation="Horizontal" Padding="30,10,30,10" HorizontalOptions="FillAndExpand">
             <Label Text="Age in Days" FontSize="Title" HorizontalOptions="FillAndExpand"/>
-            <Label Text="{Binding Path=DaysOld}" FontSize="Title" TextColor="#2196F3" />
+            <Label Text="{Binding Path=DaysOld}" AutomationId="ageInDays" FontSize="Title" TextColor="#2196F3" />
         </StackLayout>
         <StackLayout Orientation="Horizontal" Padding="30,10,30,10" HorizontalOptions="FillAndExpand">
             <Label Text="Age in Weeks" FontSize="Title" HorizontalOptions="FillAndExpand"/>
-            <Label Text="{Binding Path=WeeksOld}" FontSize="Title" TextColor="#2196F3" />
+            <Label Text="{Binding Path=WeeksOld}" AutomationId="ageInWeeks" FontSize="Title" TextColor="#2196F3" />
         </StackLayout>
         <StackLayout Orientation="Horizontal" Padding="30,10,30,10" HorizontalOptions="FillAndExpand">
             <Label Text="Age in Months" FontSize="Title" HorizontalOptions="FillAndExpand"/>
-            <Label Text="{Binding Path=MonthsOld}" FontSize="Title" TextColor="#2196F3" />
+            <Label Text="{Binding Path=MonthsOld}" AutomationId="ageInMonths" FontSize="Title" TextColor="#2196F3" />
         </StackLayout>
     </StackLayout>
 
