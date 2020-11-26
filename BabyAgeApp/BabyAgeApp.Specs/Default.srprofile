@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestProfile xmlns="http://www.specflow.org/schemas/plus/TestProfile/1.5">
+  <Settings projectName="BabyAgeApp.Specs" />
+  <Execution stopAfterFailures="0" testThreadCount="1" testSchedulingMode="Sequential" retryCount="0"/>
+  <Environment testThreadIsolation="SharedAppDomain" />
+  <TestAssemblyPaths>
+    <TestAssemblyPath>BabyAgeApp.Specs.dll</TestAssemblyPath>
+  </TestAssemblyPaths>
+ 
+</TestProfile>

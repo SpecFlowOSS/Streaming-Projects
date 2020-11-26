@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabyAgeApp.Android", "BabyA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabyAgeApp", "BabyAgeApp\BabyAgeApp\BabyAgeApp.csproj", "{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabyAgeApp.Specs", "BabyAgeApp.Specs\BabyAgeApp.Specs.csproj", "{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
