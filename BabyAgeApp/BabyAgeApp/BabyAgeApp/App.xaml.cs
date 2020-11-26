@@ -10,7 +10,7 @@ namespace BabyAgeApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new MainPage {BindingContext = new MainViewModel()};
         }
 
         protected override void OnStart()
