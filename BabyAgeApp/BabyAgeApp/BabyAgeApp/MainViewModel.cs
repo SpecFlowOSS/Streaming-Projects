@@ -17,10 +17,10 @@ namespace BabyAgeApp
             OnPropertyChanged(nameof(MonthsOld));
         }
 
-        public string DaysOld => TimespanSinceBirth().TotalDays.ToString("#");
+        public string DaysOld => TimespanSinceBirth().TotalDays.ToString("0");
 
-        public string WeeksOld => (TimespanSinceBirth().TotalDays / 7d).ToString("#");
-        public string MonthsOld => (TimespanSinceBirth().TotalDays / 30).ToString("#");
+        public string WeeksOld => (TimespanSinceBirth().TotalDays / 7d).ToString("0");
+        public string MonthsOld => (TimespanSinceBirth().TotalDays / 30).ToString("0");
 
         private TimeSpan TimespanSinceBirth()
         {

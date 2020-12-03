@@ -70,12 +70,15 @@ namespace BabyAgeApp.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Age in Month Calculation", SourceLine=2)]
-        public virtual void AgeInMonthCalculation()
+        public virtual void AgeInDaysCalculation(string name, string birthday, string now, string days, string[] exampleTags)
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Age in Month Calculation", null, tagsOfScenario, argumentsOfScenario);
+            argumentsOfScenario.Add("Name", name);
+            argumentsOfScenario.Add("Birthday", birthday);
+            argumentsOfScenario.Add("Now", now);
+            argumentsOfScenario.Add("Days", days);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Age in Days Calculation", null, tagsOfScenario, argumentsOfScenario);
 #line 3
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -97,16 +100,40 @@ this.ScenarioInitialize(scenarioInfo);
             {
                 this.ScenarioStart();
 #line 5
- testRunner.Given("the baby is born on \'2020-08-18 12:56:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+ testRunner.Given(string.Format("the baby is born on \'{0}\'", birthday), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 6
- testRunner.When("it is currently \'2020-11-26 14:41\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("it is currently \'{0}\'", now), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
- testRunner.Then("the baby is \'100\' days old", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then(string.Format("the baby is \'{0}\' days old", days), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Days Calculation, One Second after Birth", SourceLine=10)]
+        public virtual void AgeInDaysCalculation_OneSecondAfterBirth()
+        {
+#line 3
+this.AgeInDaysCalculation("One Second after Birth", "2020-01-01 00:00:01", "2020-01-01 00:00:02", "0", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Days Calculation, One Day after Birth", SourceLine=10)]
+        public virtual void AgeInDaysCalculation_OneDayAfterBirth()
+        {
+#line 3
+this.AgeInDaysCalculation("One Day after Birth", "2020-01-01 00:00:01", "2020-01-02 00:00:01", "1", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Days Calculation, One Month after Birth", SourceLine=10)]
+        public virtual void AgeInDaysCalculation_OneMonthAfterBirth()
+        {
+#line 3
+this.AgeInDaysCalculation("One Month after Birth", "2020-01-01 00:00:01", "2020-02-01 00:00:01", "31", ((string[])(null)));
+#line hidden
         }
     }
 }
