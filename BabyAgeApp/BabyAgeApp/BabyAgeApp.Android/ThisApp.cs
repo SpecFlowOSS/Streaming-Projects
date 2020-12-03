@@ -18,15 +18,8 @@ namespace BabyAgeApp.Droid
     [Application]
     public class ThisApp : Application
     {
-
         protected ThisApp(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
         {
-        }
-
-        [Export("RaiseToast")]
-        public void RaiseToast(Java.Lang.String message)
-        {
-            Toast.MakeText(this, message, ToastLength.Long).Show();
         }
 
         [Export("SetBirthday")]

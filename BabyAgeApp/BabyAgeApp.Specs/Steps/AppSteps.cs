@@ -20,33 +20,6 @@ namespace BabyAgeApp.Specs.Steps
         {
             var titleElement = _appiumDriver.Driver.FindElementByAccessibilityId("appTitle");
             titleElement.Text.Should().Be("Baby Age");
-
-            var args = new Dictionary<string, object>
-            {
-                {"target", "application"},
-                {
-                    "methods", new List<Dictionary<string, object>>
-                    {
-                        new Dictionary<string, object>
-                        {
-                            {"name", "RaiseToast"},
-                            {
-                                "args", new List<Dictionary<string, object>>
-                                {
-                                    new Dictionary<string, object>
-                                    {
-                                        {"value", "Hello from the test script!"},
-                                        {"type", "String"}
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            };
-
-
-            _appiumDriver.Driver.ExecuteScript("mobile: backdoor", args);
         }
     }
 }
