@@ -4,7 +4,7 @@ namespace BabyAgeApp
 {
     public class MainViewModel
     {
-        private readonly DateTime _birthdayOfBaby = new DateTime(2020, 08, 18, 12, 56, 0);
+        
 
         public string DaysOld => TimespanSinceBirth().TotalDays.ToString("#");
 
@@ -13,7 +13,7 @@ namespace BabyAgeApp
 
         private TimeSpan TimespanSinceBirth()
         {
-            return DateTime.Now - _birthdayOfBaby;
+            return DateTimeProvider.Now - BirthdayProvider.Date;
         }
     }
 }

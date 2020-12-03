@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using BabyAgeApp.Specs.Drivers;
 using FluentAssertions;
-using OpenQA.Selenium;
 using TechTalk.SpecFlow;
 
 namespace BabyAgeApp.Specs.Steps
@@ -25,7 +20,33 @@ namespace BabyAgeApp.Specs.Steps
         {
             var titleElement = _appiumDriver.Driver.FindElementByAccessibilityId("appTitle");
             titleElement.Text.Should().Be("Baby Age");
-        }
 
+            var args = new Dictionary<string, object>
+            {
+                {"target", "application"},
+                {
+                    "methods", new List<Dictionary<string, object>>
+                    {
+                        new Dictionary<string, object>
+                        {
+                            {"name", "RaiseToast"},
+                            {
+                                "args", new List<Dictionary<string, object>>
+                                {
+                                    new Dictionary<string, object>
+                                    {
+                                        {"value", "Hello from the test script!"},
+                                        {"type", "String"}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+
+            _appiumDriver.Driver.ExecuteScript("mobile: backdoor", args);
+        }
     }
 }
