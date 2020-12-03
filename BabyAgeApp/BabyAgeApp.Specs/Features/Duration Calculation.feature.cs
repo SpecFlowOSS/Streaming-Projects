@@ -103,7 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.When("today is \'2020-11-26 14:41\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
- testRunner.Then("the baby is \'101\' days old", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the baby is \'100\' days old", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

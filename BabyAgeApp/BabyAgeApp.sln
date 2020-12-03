@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30711.63
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabyAgeApp.Android", "BabyAgeApp\BabyAgeApp.Android\BabyAgeApp.Android.csproj", "{DFEBFF03-EE47-4B09-8A38-5E2D9FB42B8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabyAgeApp", "BabyAgeApp\BabyAgeApp\BabyAgeApp.csproj", "{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BabyAgeApp", "BabyAgeApp\BabyAgeApp\BabyAgeApp.csproj", "{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabyAgeApp.Specs", "BabyAgeApp.Specs\BabyAgeApp.Specs.csproj", "{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BabyAgeApp.Specs", "BabyAgeApp.Specs\BabyAgeApp.Specs.csproj", "{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{857E83E5-A5C1-45A4-88ED-659EEF8A6299}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,6 +18,7 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		Working-On-TestAutomation|Any CPU = Working-On-TestAutomation|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{DFEBFF03-EE47-4B09-8A38-5E2D9FB42B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -26,16 +27,24 @@ Global
 		{DFEBFF03-EE47-4B09-8A38-5E2D9FB42B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DFEBFF03-EE47-4B09-8A38-5E2D9FB42B8C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DFEBFF03-EE47-4B09-8A38-5E2D9FB42B8C}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DFEBFF03-EE47-4B09-8A38-5E2D9FB42B8C}.Working-On-TestAutomation|Any CPU.ActiveCfg = Release|Any CPU
+		{DFEBFF03-EE47-4B09-8A38-5E2D9FB42B8C}.Working-On-TestAutomation|Any CPU.Build.0 = Release|Any CPU
+		{DFEBFF03-EE47-4B09-8A38-5E2D9FB42B8C}.Working-On-TestAutomation|Any CPU.Deploy.0 = Release|Any CPU
 		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Working-On-TestAutomation|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Working-On-TestAutomation|Any CPU.Build.0 = Debug|Any CPU
+		{DF721AE8-6FE2-4915-8793-0F88F05E0DA6}.Working-On-TestAutomation|Any CPU.Deploy.0 = Debug|Any CPU
 		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Working-On-TestAutomation|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}.Working-On-TestAutomation|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
