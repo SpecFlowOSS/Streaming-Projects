@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using BabyAgeApp.Specs.Drivers;
 using FluentAssertions;
@@ -13,23 +14,26 @@ namespace BabyAgeApp.Specs.Steps
     public class BabySteps
     {
         private readonly AppiumDriver _appiumDriver;
+        private readonly BackdoorDriver _backdoorDriver;
 
-        public BabySteps(AppiumDriver appiumDriver)
+        public BabySteps(AppiumDriver appiumDriver, BackdoorDriver backdoorDriver)
         {
             _appiumDriver = appiumDriver;
+            _backdoorDriver = backdoorDriver;
         }
 
         [Given(@"the baby is born on '(.*)'")]
-        public void GivenTheBabyIsBornOn(string babyBirthday)
+        public void GivenTheBabyIsBornOn(DateTime babyBirthday)
         {
-            
+            _backdoorDriver.SetBirthday(babyBirthday);
         }
 
-        [When(@"today is '(.*)'")]
-        public void WhenTodayIs(string today)
+        [When(@"it is currently '(.*)'")]
+        public void WhenItIsCurrently(DateTime now)
         {
-            
+            _backdoorDriver.SetNow(now);
         }
+
 
         [Then(@"the baby is '(.*)' days old")]
         public void ThenTheBabyIsDaysOld(int daysOld)

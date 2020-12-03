@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -26,6 +27,22 @@ namespace BabyAgeApp.Droid
         public void RaiseToast(Java.Lang.String message)
         {
             Toast.MakeText(this, message, ToastLength.Long).Show();
+        }
+
+        [Export("SetBirthday")]
+        public void SetBirthday(string birthdayString)
+        {
+            var birthday = DateTime.ParseExact(birthdayString, "O", CultureInfo.CurrentCulture);
+
+            BirthdayProvider.Date = birthday;
+        }
+
+        [Export("SetNow")]
+        public void SetNow(string nowString)
+        {
+            var now = DateTime.ParseExact(nowString, "O", CultureInfo.CurrentCulture);
+
+            DateTimeProvider.Now = now;
         }
     }
 }

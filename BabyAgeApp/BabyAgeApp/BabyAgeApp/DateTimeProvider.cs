@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BabyAgeApp
 {
-    public class DateTimeProvider
+    public class DateTimeProvider : StaticNotifyPropertyChanged
     {
         private static TimeSpan _difference = TimeSpan.Zero;
         
@@ -13,11 +13,12 @@ namespace BabyAgeApp
         {
             get
             {
-                return DateTime.Now + _difference;
+                return DateTime.Now - _difference;
             }
             set
             {
                 _difference = DateTime.Now - value;
+                OnPropertyChanged();
             }
         }
     }

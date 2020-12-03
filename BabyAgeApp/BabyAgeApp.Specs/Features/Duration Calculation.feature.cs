@@ -100,7 +100,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("the baby is born on \'2020-08-18 12:56:00\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 6
- testRunner.When("today is \'2020-11-26 14:41\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("it is currently \'2020-11-26 14:41\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
 #line 7
  testRunner.Then("the baby is \'100\' days old", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
