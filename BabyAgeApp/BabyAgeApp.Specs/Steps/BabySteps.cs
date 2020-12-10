@@ -1,25 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using BabyAgeApp.Specs.Drivers;
 using FluentAssertions;
 using TechTalk.SpecFlow;
 
 namespace BabyAgeApp.Specs.Steps
 {
+    
+
     [Binding]
     public class BabySteps
     {
-        private readonly AppiumDriver _appiumDriver;
         private readonly BackdoorDriver _backdoorDriver;
+        private readonly UIStateDriver _uiStateDriver;
+        private readonly RefreshDriver _refreshDriver;
 
-        public BabySteps(AppiumDriver appiumDriver, BackdoorDriver backdoorDriver)
+        public BabySteps(BackdoorDriver backdoorDriver, UIStateDriver uiStateDriver, RefreshDriver refreshDriver)
         {
-            _appiumDriver = appiumDriver;
             _backdoorDriver = backdoorDriver;
+            _uiStateDriver = uiStateDriver;
+            _refreshDriver = refreshDriver;
         }
 
         [Given(@"the baby is born on '(.*)'")]
@@ -28,38 +27,38 @@ namespace BabyAgeApp.Specs.Steps
             _backdoorDriver.SetBirthday(babyBirthday);
         }
 
+        [Given(@"it is currently '(.*)'")]
         [When(@"it is currently '(.*)'")]
         public void WhenItIsCurrently(DateTime now)
         {
             _backdoorDriver.SetNow(now);
         }
 
-
         [Then(@"the baby is '(.*)' days old")]
         public void ThenTheBabyIsDaysOld(int daysOld)
         {
-            ShouldBeNumberOf_Old("ageInDays", daysOld);
+            _refreshDriver.PressRefreshUIButton();
+            
+            _uiStateDriver.Update();
+            _uiStateDriver.Current.Days.Should().Be(daysOld);
         }
 
         [Then(@"the baby is '(.*)' weeks old")]
         public void ThenTheBabyIsWeeksOld(int weeksOld)
         {
-            ShouldBeNumberOf_Old("ageInWeeks", weeksOld);
+            _refreshDriver.PressRefreshUIButton();
+            
+            _uiStateDriver.Update();
+            _uiStateDriver.Current.Weeks.Should().Be(weeksOld);
         }
 
         [Then(@"the baby is '(.*)' months old")]
         public void ThenTheBabyIsMonthsOld(int monthsOld)
         {
-            ShouldBeNumberOf_Old("ageInMonths", monthsOld);
-        }
+            _refreshDriver.PressRefreshUIButton();
 
-
-        private void ShouldBeNumberOf_Old(string accessibilityId, int expectedValue)
-        {
-            var textElement = _appiumDriver.Driver.FindElementByAccessibilityId(accessibilityId);
-
-            var actualValue = int.Parse(textElement.Text);
-            actualValue.Should().Be(expectedValue);
+            _uiStateDriver.Update();
+            _uiStateDriver.Current.Months.Should().Be(monthsOld);
         }
     }
 }

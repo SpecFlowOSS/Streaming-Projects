@@ -1,12 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BabyAgeApp.MainPage">
+             xmlns:babyAgeApp="clr-namespace:BabyAgeApp;assembly=BabyAgeApp"
+             x:Class="BabyAgeApp.MainPage" x:DataType="babyAgeApp:MainViewModel">
 
     <StackLayout>
         <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
             <Label AutomationId="appTitle" Text="Baby Age" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
         </Frame>
+        <StackLayout Orientation="Horizontal" Padding="30,10,30,10" HorizontalOptions="FillAndExpand">
+            <Label Text="Age in Seconds" FontSize="Title" HorizontalOptions="FillAndExpand"/>
+            <Label Text="{Binding Path=.SecondsOld}" AutomationId="ageInSeconds" FontSize="Title" TextColor="#2196F3" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" Padding="30,10,30,10" HorizontalOptions="FillAndExpand">
+            <Label Text="Age in Minutes" FontSize="Title" HorizontalOptions="FillAndExpand"/>
+            <Label Text="{Binding Path=.MinutesOld}" AutomationId="ageInMinutes" FontSize="Title" TextColor="#2196F3" />
+        </StackLayout>
+        <StackLayout Orientation="Horizontal" Padding="30,10,30,10" HorizontalOptions="FillAndExpand">
+            <Label Text="Age in Hours" FontSize="Title" HorizontalOptions="FillAndExpand"/>
+            <Label Text="{Binding Path=.HoursOld}" AutomationId="ageInHours" FontSize="Title" TextColor="#2196F3" />
+        </StackLayout>
         <StackLayout Orientation="Horizontal" Padding="30,10,30,10" HorizontalOptions="FillAndExpand">
             <Label Text="Age in Days" FontSize="Title" HorizontalOptions="FillAndExpand"/>
             <Label Text="{Binding Path=DaysOld}" AutomationId="ageInDays" FontSize="Title" TextColor="#2196F3" />
@@ -19,6 +32,7 @@
             <Label Text="Age in Months" FontSize="Title" HorizontalOptions="FillAndExpand"/>
             <Label Text="{Binding Path=MonthsOld}" AutomationId="ageInMonths" FontSize="Title" TextColor="#2196F3" />
         </StackLayout>
+        <Button Command="{Binding Path=RefreshCommand}" Text="Refresh" AutomationId="refresh" />
     </StackLayout>
 
 </ContentPage>
