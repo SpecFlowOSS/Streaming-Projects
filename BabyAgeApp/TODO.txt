@@ -1,4 +1,0 @@
--) be able to automate a debug version
--) use apk from debug folder and don't deploy everytime manually
--) manipulate state within app
--) scenarios for week and month calculation

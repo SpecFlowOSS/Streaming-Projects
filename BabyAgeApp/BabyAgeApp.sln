@@ -10,9 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BabyAgeApp.Specs", "BabyAgeApp.Specs\BabyAgeApp.Specs.csproj", "{C2C57492-1A95-4B6C-AA4C-1C4C3517B17F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{857E83E5-A5C1-45A4-88ED-659EEF8A6299}"
-	ProjectSection(SolutionItems) = preProject
-		TODO.txt = TODO.txt
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
