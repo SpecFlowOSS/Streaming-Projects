@@ -135,6 +135,154 @@ this.AgeInDaysCalculation("One Day after Birth", "2020-01-01 00:00:01", "2020-01
 this.AgeInDaysCalculation("One Month after Birth", "2020-01-01 00:00:01", "2020-02-01 00:00:01", "31", ((string[])(null)));
 #line hidden
         }
+        
+        public virtual void AgeInWeeksCalculation(string name, string birthday, string now, string weeks, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Name", name);
+            argumentsOfScenario.Add("Birthday", birthday);
+            argumentsOfScenario.Add("Now", now);
+            argumentsOfScenario.Add("Weeks", weeks);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Age in Weeks Calculation", null, tagsOfScenario, argumentsOfScenario);
+#line 15
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 17
+ testRunner.Given(string.Format("the baby is born on \'{0}\'", birthday), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 18
+ testRunner.When(string.Format("it is currently \'{0}\'", now), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 19
+ testRunner.Then(string.Format("the baby is \'{0}\' weeks old", weeks), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Weeks Calculation, One Second after Birth", SourceLine=22)]
+        public virtual void AgeInWeeksCalculation_OneSecondAfterBirth()
+        {
+#line 15
+this.AgeInWeeksCalculation("One Second after Birth", "2020-01-01 00:00:01", "2020-01-01 00:00:02", "0", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Weeks Calculation, One Day after Birth", SourceLine=22)]
+        public virtual void AgeInWeeksCalculation_OneDayAfterBirth()
+        {
+#line 15
+this.AgeInWeeksCalculation("One Day after Birth", "2020-01-01 00:00:01", "2020-01-02 00:00:01", "0", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Weeks Calculation, Seven Days after Birth", SourceLine=22)]
+        public virtual void AgeInWeeksCalculation_SevenDaysAfterBirth()
+        {
+#line 15
+this.AgeInWeeksCalculation("Seven Days after Birth", "2020-01-01 00:00:01", "2020-01-08 00:00:01", "1", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Weeks Calculation, One Month after Birth", SourceLine=22)]
+        public virtual void AgeInWeeksCalculation_OneMonthAfterBirth()
+        {
+#line 15
+this.AgeInWeeksCalculation("One Month after Birth", "2020-01-01 00:00:01", "2020-02-01 00:00:01", "4", ((string[])(null)));
+#line hidden
+        }
+        
+        public virtual void AgeInMonthCalculation(string name, string birthday, string now, string months, string[] exampleTags)
+        {
+            string[] tagsOfScenario = exampleTags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("Name", name);
+            argumentsOfScenario.Add("Birthday", birthday);
+            argumentsOfScenario.Add("Now", now);
+            argumentsOfScenario.Add("Months", months);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Age in Month Calculation", null, tagsOfScenario, argumentsOfScenario);
+#line 28
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 30
+ testRunner.Given(string.Format("the baby is born on \'{0}\'", birthday), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 31
+ testRunner.When(string.Format("it is currently \'{0}\'", now), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 32
+ testRunner.Then(string.Format("the baby is \'{0}\' months old", months), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Month Calculation, One Second after Birth", SourceLine=35)]
+        public virtual void AgeInMonthCalculation_OneSecondAfterBirth()
+        {
+#line 28
+this.AgeInMonthCalculation("One Second after Birth", "2020-01-01 00:00:01", "2020-01-01 00:00:02", "0", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Month Calculation, One Day after Birth", SourceLine=35)]
+        public virtual void AgeInMonthCalculation_OneDayAfterBirth()
+        {
+#line 28
+this.AgeInMonthCalculation("One Day after Birth", "2020-01-01 00:00:01", "2020-01-02 00:00:01", "0", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Month Calculation, One Month after Birth", SourceLine=35)]
+        public virtual void AgeInMonthCalculation_OneMonthAfterBirth()
+        {
+#line 28
+this.AgeInMonthCalculation("One Month after Birth", "2020-01-01 00:00:01", "2020-02-01 00:00:01", "1", ((string[])(null)));
+#line hidden
+        }
+        
+        [TechTalk.SpecRun.ScenarioAttribute("Age in Month Calculation, One Year after Birth", SourceLine=35)]
+        public virtual void AgeInMonthCalculation_OneYearAfterBirth()
+        {
+#line 28
+this.AgeInMonthCalculation("One Year after Birth", "2020-01-01 00:00:01", "2021-01-01 00:00:01", "12", ((string[])(null)));
+#line hidden
+        }
     }
 }
 #pragma warning restore

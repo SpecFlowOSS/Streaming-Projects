@@ -38,11 +38,28 @@ namespace BabyAgeApp.Specs.Steps
         [Then(@"the baby is '(.*)' days old")]
         public void ThenTheBabyIsDaysOld(int daysOld)
         {
-            var ageInDaysElement = _appiumDriver.Driver.FindElementByAccessibilityId("ageInDays");
-
-            var actualDaysOld = int.Parse(ageInDaysElement.Text);
-            actualDaysOld.Should().Be(daysOld);
+            ShouldBeNumberOf_Old("ageInDays", daysOld);
         }
 
+        [Then(@"the baby is '(.*)' weeks old")]
+        public void ThenTheBabyIsWeeksOld(int weeksOld)
+        {
+            ShouldBeNumberOf_Old("ageInWeeks", weeksOld);
+        }
+
+        [Then(@"the baby is '(.*)' months old")]
+        public void ThenTheBabyIsMonthsOld(int monthsOld)
+        {
+            ShouldBeNumberOf_Old("ageInMonths", monthsOld);
+        }
+
+
+        private void ShouldBeNumberOf_Old(string accessibilityId, int expectedValue)
+        {
+            var textElement = _appiumDriver.Driver.FindElementByAccessibilityId(accessibilityId);
+
+            var actualValue = int.Parse(textElement.Text);
+            actualValue.Should().Be(expectedValue);
+        }
     }
 }
