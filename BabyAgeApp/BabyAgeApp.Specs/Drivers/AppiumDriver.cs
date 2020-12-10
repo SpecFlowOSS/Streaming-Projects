@@ -27,7 +27,7 @@ namespace BabyAgeApp.Specs.Drivers
             driverOptions.AddAdditionalCapability(MobileCapabilityType.AutomationName, "Espresso");
             driverOptions.AddAdditionalCapability("enforceAppInstall", "true");
 
-            driverOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, "9.0");
+            driverOptions.AddAdditionalCapability(MobileCapabilityType.PlatformVersion, "10.0");
             var apkPath = Path.Combine(_testRunContext.TestDirectory, "..\\..\\..\\..\\BabyAgeApp\\BabyAgeApp.Android\\bin\\Release\\com.companyname.babyageapp.apk");
             driverOptions.AddAdditionalCapability(MobileCapabilityType.App, apkPath);
 
