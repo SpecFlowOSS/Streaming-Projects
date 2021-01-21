@@ -22,7 +22,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\StreamingGeneratorPlugin.SpecFlowPlugin\StreamingGeneratorPlugin.SpecFlowPlugin.csproj">
+		  <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		</ProjectReference>
 		<ProjectReference Include="..\StreamingRuntimePlugin.SpecFlowPlugin\StreamingRuntimePlugin.SpecFlowPlugin.csproj" />
+	</ItemGroup>
+
+	<PropertyGroup>
+		<_GeneratorTFM Condition=" '$(MSBuildRuntimeType)' == 'Core'">netcoreapp2.1</_GeneratorTFM>
+		<_GeneratorTFM Condition=" '$(MSBuildRuntimeType)' != 'Core'">net461</_GeneratorTFM>
+
+		<_PathToOurGeneratorPlugin>..\StreamingGeneratorPlugin.SpecFlowPlugin\bin\$(Configuration)\$(_GeneratorTFM)\StreamingGeneratorPlugin.SpecFlowPlugin.dll</_PathToOurGeneratorPlugin>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<SpecFlowGeneratorPlugins Include="$(_PathToOurGeneratorPlugin)" />
 	</ItemGroup>
 
 </Project>

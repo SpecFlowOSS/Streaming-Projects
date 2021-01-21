@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingRuntimePlugin.Spec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingPlugin.TestProject", "StreamingPlugin.TestProject\StreamingPlugin.TestProject.csproj", "{17724016-6A29-46FD-A519-120EC26880D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamingGeneratorPlugin.SpecFlowPlugin", "StreamingGeneratorPlugin.SpecFlowPlugin\StreamingGeneratorPlugin.SpecFlowPlugin.csproj", "{A3385FC6-207D-4295-9AA9-1D0D2D1991E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{17724016-6A29-46FD-A519-120EC26880D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17724016-6A29-46FD-A519-120EC26880D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{17724016-6A29-46FD-A519-120EC26880D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3385FC6-207D-4295-9AA9-1D0D2D1991E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3385FC6-207D-4295-9AA9-1D0D2D1991E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3385FC6-207D-4295-9AA9-1D0D2D1991E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3385FC6-207D-4295-9AA9-1D0D2D1991E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
