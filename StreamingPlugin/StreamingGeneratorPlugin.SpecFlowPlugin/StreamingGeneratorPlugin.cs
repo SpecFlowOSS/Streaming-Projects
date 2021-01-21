@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow.Generator.Plugins;
+using TechTalk.SpecFlow.Generator.UnitTestConverter;
 using TechTalk.SpecFlow.Infrastructure;
 using TechTalk.SpecFlow.UnitTestProvider;
 
@@ -17,7 +18,12 @@ namespace StreamingGeneratorPlugin.SpecFlowPlugin
         public void Initialize(GeneratorPluginEvents generatorPluginEvents, GeneratorPluginParameters generatorPluginParameters,
             UnitTestProviderConfiguration unitTestProviderConfiguration)
         {
-            
+            generatorPluginEvents.RegisterDependencies += RegisterDependencies;
+        }
+
+        private void RegisterDependencies(object sender, RegisterDependenciesEventArgs e)
+        {
+            e.ObjectContainer.RegisterTypeAs<StreamingDecorator, ITestMethodDecorator>("StreamingDecorator");
         }
     }
 }

@@ -89,11 +89,10 @@ Link to a feature: [Calculator](StreamingPlugin.TestProject/Features/Calculator.
         [Xunit.SkippableFactAttribute(DisplayName="Add two numbers")]
         [Xunit.TraitAttribute("FeatureTitle", "Calculator")]
         [Xunit.TraitAttribute("Description", "Add two numbers")]
-        [Xunit.TraitAttribute("Category", "mytag")]
+        [Xunit.TraitAttribute("Category", "Streaming")]
         public virtual void AddTwoNumbers()
         {
-            string[] tagsOfScenario = new string[] {
-                    "mytag"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add two numbers", null, tagsOfScenario, argumentsOfScenario);
 #line 11
