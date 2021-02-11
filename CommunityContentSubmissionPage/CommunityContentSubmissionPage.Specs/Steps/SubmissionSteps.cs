@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using CommunityContentSubmissionPage.Specs.Drivers;
 using CommunityContentSubmissionPage.Specs.Pages;
 using CommunityContentSubmissionPage.Specs.Support;
 using FluentAssertions;
-
+using PlaywrightSharp;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -15,43 +16,66 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     public class SubmissionSteps
     {
         private readonly SubmissionDriver _submissionDriver;
-        
-        public SubmissionSteps(SubmissionDriver submissionDriver)
+        private readonly IPage _page;
+
+        public SubmissionSteps(SubmissionDriver submissionDriver, IPage page)
         {
             _submissionDriver = submissionDriver;
-            
+            _page = page;
         }
 
         [Then(@"it is possible to enter a '(.*)' with label '(.*)'")]
-        public void ThenItIsPossibleToEnterAWithLabel(string inputType, string expectedLabel)
+        public async Task ThenItIsPossibleToEnterAWithLabel(string inputType, string expectedLabel)
         {
-            //IWebLocator inputFieldLocator;
-            //IWebLocator labelLocator;
+            string inputFieldLocator;
+            string labelLocator;
 
-            //switch (inputType.ToUpper())
-            //{
-            //    case "URL":
-            //        inputFieldLocator = SubmissionPage.UrlInputField;
-            //        labelLocator = SubmissionPage.UrlLabel;
-            //        break;
-            //    case "TYPE":
-            //        inputFieldLocator = SubmissionPage.TypeSelect;
-            //        labelLocator = SubmissionPage.TypeLabel;
-            //        break;
-            //    case "EMAIL":
-            //        inputFieldLocator = SubmissionPage.EmailInputField;
-            //        labelLocator = SubmissionPage.EmailLabel;
-            //        break;
-            //    case "DESCRIPTION":
-            //        inputFieldLocator = SubmissionPage.DescriptionInputField;
-            //        labelLocator = SubmissionPage.DescriptionLabel;
-            //        break;
-            //    default: 
-            //        throw new NotImplementedException();
-            //}
+            switch (inputType.ToUpper())
+            {
+                case "URL":
+                    inputFieldLocator = SubmissionPage.UrlInputField;
+                    labelLocator = SubmissionPage.UrlLabel;
+                    break;
+                case "TYPE":
+                    inputFieldLocator = SubmissionPage.TypeSelect;
+                    labelLocator = SubmissionPage.TypeLabel;
+                    break;
+                case "EMAIL":
+                    inputFieldLocator = SubmissionPage.EmailInputField;
+                    labelLocator = SubmissionPage.EmailLabel;
+                    break;
+                case "DESCRIPTION":
+                    inputFieldLocator = SubmissionPage.DescriptionInputField;
+                    labelLocator = SubmissionPage.DescriptionLabel;
+                    break;
+                default:
+                    throw new NotImplementedException();
+            }
+
+            if (await _page.IsVisibleAsync(inputFieldLocator))
+            {
+                var element = await _page.QuerySelectorAsync(labelLocator);
+
+                if (element != null)
+                {
+                    var actualLabel = await element.GetTextContentAsync();
+                    actualLabel.Should().Be(expectedLabel);
+                }
+                else
+                {
+                    throw new Exception($"Element {labelLocator} wasn't found");
+                }
+            }
+            else
+            {
+                throw new Exception($"Element {inputFieldLocator} wasn't found");
+            }
+
 
             //_actor.AttemptsTo(Wait.Until(Appearance.Of(inputFieldLocator), IsEqualTo.True()));
             //_actor.AskingFor(Text.Of(labelLocator)).Should().Be(expectedLabel);
+
+            
         }
 
         [Given(@"the filled out submission entry form")]
