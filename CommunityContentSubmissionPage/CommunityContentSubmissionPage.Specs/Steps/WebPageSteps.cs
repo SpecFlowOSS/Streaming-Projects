@@ -1,5 +1,7 @@
-﻿using CommunityContentSubmissionPage.Specs.Drivers;
+﻿using System.Threading.Tasks;
+using CommunityContentSubmissionPage.Specs.Drivers;
 using FluentAssertions;
+using PlaywrightSharp;
 using TechTalk.SpecFlow;
 
 namespace CommunityContentSubmissionPage.Specs.Steps
@@ -8,23 +10,26 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     public class WebPageSteps
     {
         private readonly WebServerDriver _webServerDriver;
+        private readonly IPage _page;
 
-        public WebPageSteps(WebServerDriver webServerDriver)
+        public WebPageSteps(WebServerDriver webServerDriver, IPage page)
         {
             _webServerDriver = webServerDriver;
+            _page = page;
         }
 
         [Given(@"the submission page is open")]
         [When(@"the submission page is open")]
-        public void WhenTheSubmissionPageIsOpen()
+        public async Task WhenTheSubmissionPageIsOpen()
         {
-            //_actor.AttemptsTo(Navigate.ToUrl(_webServerDriver.Hostname));
+            await _page.GoToAsync(_webServerDriver.Hostname);
         }
 
         [Then(@"the title of the page is '(.*)'")]
-        public void ThenTheTitleOfThePageIs(string expectedPageTitle)
+        public async Task ThenTheTitleOfThePageIs(string expectedPageTitle)
         {
-            //_actor.AskingFor(Title.OfPage()).Should().Be(expectedPageTitle);
+            var title = await _page.GetTitleAsync();
+            title.Should().Be(expectedPageTitle);
         }
     }
 }

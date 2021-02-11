@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="5.10.3" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="PlaywrightSharp" Version="0.180.0" />
     <PackageReference Include="SpecFlow.Plus.LivingDocPlugin" Version="3.6.6" />
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.6.23" />
 
