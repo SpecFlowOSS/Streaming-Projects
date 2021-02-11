@@ -1,7 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using CommunityContentSubmissionPage.Specs.Drivers;
+using CommunityContentSubmissionPage.Specs.PageObject;
 using CommunityContentSubmissionPage.Specs.Support;
 using FluentAssertions;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -11,15 +15,17 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     public class SubmissionSteps
     {
         private readonly BrowserDriver _browserDriver;
+        private readonly WebDriverDriver _webDriverDriver;
         private readonly SubmissionDriver _submissionDriver;
         private readonly SubmissionPageDriver _submissionPageDriver;
 
         public SubmissionSteps(SubmissionPageDriver submissionPageDriver, SubmissionDriver submissionDriver,
-            BrowserDriver browserDriver)
+            BrowserDriver browserDriver, WebDriverDriver webDriverDriver)
         {
             _submissionPageDriver = submissionPageDriver;
             _submissionDriver = submissionDriver;
             _browserDriver = browserDriver;
+            _webDriverDriver = webDriverDriver;
         }
 
         [Then(@"it is possible to enter a '(.*)' with label '(.*)'")]
@@ -79,7 +85,13 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         public void ThenYouCanChooseFromTheFollowingTypes(Table table)
         {
             var expectedTypenameEntries = table.CreateSet<TypenameEntry>();
-            _submissionPageDriver.CheckTypeEntries(expectedTypenameEntries);
+
+            var typeSelectEntry = _webDriverDriver.WebDriver.FindElement(By.Id("txtType"));
+
+            var webElements = new SelectElement(typeSelectEntry).Options.ToList();
+            var actualTypenameEntries = webElements.Select(i => new TypenameEntry {Typename = i.Text}).ToList();
+
+            actualTypenameEntries.Should().BeEquivalentTo(expectedTypenameEntries);
         }
 
         [Given(@"the submission entry form is filled")]

@@ -7,19 +7,21 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     public class WebPageSteps
     {
         private readonly BrowserDriver _browserDriver;
+        private readonly WebDriverDriver _webDriverDriver;
         private readonly WebServerDriver _webServerDriver;
 
-        public WebPageSteps(WebServerDriver webServerDriver, BrowserDriver browserDriver)
+        public WebPageSteps(WebServerDriver webServerDriver, BrowserDriver browserDriver, WebDriverDriver webDriverDriver)
         {
             _webServerDriver = webServerDriver;
             _browserDriver = browserDriver;
+            _webDriverDriver = webDriverDriver;
         }
 
         [Given(@"the submission page is open")]
         [When(@"the submission page is open")]
         public void WhenTheSubmissionPageIsOpen()
         {
-            _browserDriver.GoToUrl(_webServerDriver.Hostname);
+            _webDriverDriver.WebDriver.Url = _webServerDriver.Hostname;
         }
 
         [Then(@"the title of the page is '(.*)'")]
