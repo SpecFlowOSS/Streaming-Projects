@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Boa.Constrictor.Screenplay;
-using Boa.Constrictor.WebDriver;
 using CommunityContentSubmissionPage.Specs.Drivers;
-using CommunityContentSubmissionPage.Specs.Interactions;
 using CommunityContentSubmissionPage.Specs.Pages;
 using CommunityContentSubmissionPage.Specs.Support;
 using FluentAssertions;
-using OpenQA.Selenium;
+
 using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 
@@ -17,45 +14,44 @@ namespace CommunityContentSubmissionPage.Specs.Steps
     [Binding]
     public class SubmissionSteps
     {
-        private readonly Actor _actor;
         private readonly SubmissionDriver _submissionDriver;
         
-        public SubmissionSteps(SubmissionDriver submissionDriver, Actor actor)
+        public SubmissionSteps(SubmissionDriver submissionDriver)
         {
             _submissionDriver = submissionDriver;
-            _actor = actor;
+            
         }
 
         [Then(@"it is possible to enter a '(.*)' with label '(.*)'")]
         public void ThenItIsPossibleToEnterAWithLabel(string inputType, string expectedLabel)
         {
-            IWebLocator inputFieldLocator;
-            IWebLocator labelLocator;
+            //IWebLocator inputFieldLocator;
+            //IWebLocator labelLocator;
 
-            switch (inputType.ToUpper())
-            {
-                case "URL":
-                    inputFieldLocator = SubmissionPage.UrlInputField;
-                    labelLocator = SubmissionPage.UrlLabel;
-                    break;
-                case "TYPE":
-                    inputFieldLocator = SubmissionPage.TypeSelect;
-                    labelLocator = SubmissionPage.TypeLabel;
-                    break;
-                case "EMAIL":
-                    inputFieldLocator = SubmissionPage.EmailInputField;
-                    labelLocator = SubmissionPage.EmailLabel;
-                    break;
-                case "DESCRIPTION":
-                    inputFieldLocator = SubmissionPage.DescriptionInputField;
-                    labelLocator = SubmissionPage.DescriptionLabel;
-                    break;
-                default: 
-                    throw new NotImplementedException();
-            }
+            //switch (inputType.ToUpper())
+            //{
+            //    case "URL":
+            //        inputFieldLocator = SubmissionPage.UrlInputField;
+            //        labelLocator = SubmissionPage.UrlLabel;
+            //        break;
+            //    case "TYPE":
+            //        inputFieldLocator = SubmissionPage.TypeSelect;
+            //        labelLocator = SubmissionPage.TypeLabel;
+            //        break;
+            //    case "EMAIL":
+            //        inputFieldLocator = SubmissionPage.EmailInputField;
+            //        labelLocator = SubmissionPage.EmailLabel;
+            //        break;
+            //    case "DESCRIPTION":
+            //        inputFieldLocator = SubmissionPage.DescriptionInputField;
+            //        labelLocator = SubmissionPage.DescriptionLabel;
+            //        break;
+            //    default: 
+            //        throw new NotImplementedException();
+            //}
 
-            _actor.AttemptsTo(Wait.Until(Appearance.Of(inputFieldLocator), IsEqualTo.True()));
-            _actor.AskingFor(Text.Of(labelLocator)).Should().Be(expectedLabel);
+            //_actor.AttemptsTo(Wait.Until(Appearance.Of(inputFieldLocator), IsEqualTo.True()));
+            //_actor.AskingFor(Text.Of(labelLocator)).Should().Be(expectedLabel);
         }
 
         [Given(@"the filled out submission entry form")]
@@ -63,13 +59,13 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         {
             var rows = table.CreateSet<SubmissionEntryFormRowObject>();
             
-            _actor.AttemptsTo(FillOutSubmissionForm.With(rows));
+            //_actor.AttemptsTo(FillOutSubmissionForm.With(rows));
         }
 
         [When(@"the submission entry form is submitted")]
         public void WhenTheSubmissionEntryFormIsSubmitted()
         {
-            _actor.AttemptsTo(Click.On(SubmissionPage.SubmitButton));
+            //_actor.AttemptsTo(Click.On(SubmissionPage.SubmitButton));
         }
 
         [Then(@"there is one submission entry stored")]
@@ -88,13 +84,13 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         public void ThenTheSubmittingOfDataWasPossible()
         {
             
-            _actor.AsksFor(CurrentUrl.FromBrowser()).Should().EndWith("Success", "because the success page should be displayed");
+            //_actor.AsksFor(CurrentUrl.FromBrowser()).Should().EndWith("Success", "because the success page should be displayed");
         }
 
         [Then(@"the submitting of data was not possible")]
         public void ThenTheSubmittingOfDataWasNotPossible()
         {
-            _actor.AsksFor(CurrentUrl.FromBrowser()).Should().NotEndWith("Success", "the input form page should be displayed again");
+            //_actor.AsksFor(CurrentUrl.FromBrowser()).Should().NotEndWith("Success", "the input form page should be displayed again");
         }
 
 
@@ -110,9 +106,9 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         public void ThenYouCanChooseFromTheFollowingTypes(Table table)
         {
             var expectedTypenameEntries = table.CreateSet<TypenameEntry>();
-            var actualTypes = _actor.AsksFor(SelectOptionsAvailable.For(SubmissionPage.TypeSelect)).Select(i => new TypenameEntry(i));
+            //var actualTypes = _actor.AsksFor(SelectOptionsAvailable.For(SubmissionPage.TypeSelect)).Select(i => new TypenameEntry(i));
 
-            actualTypes.Should().BeEquivalentTo(expectedTypenameEntries);
+            //actualTypes.Should().BeEquivalentTo(expectedTypenameEntries);
 
         }
 
@@ -127,39 +123,39 @@ namespace CommunityContentSubmissionPage.Specs.Steps
                 new SubmissionEntryFormRowObject("Description", "something really cool")
             };
             
-            _actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));
+            //_actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));
         }
 
         [Given(@"the privacy policy is not accepted")]
         public void GivenThePrivacyPolicyIsNotAccepted()
         {
-            var privacyPolicyIsChecked = _actor.AskingFor(SelectedState.Of(SubmissionPage.PrivacyPolicy));
-            if (privacyPolicyIsChecked)
-            {
-                _actor.AttemptsTo(Click.On(SubmissionPage.PrivacyPolicy));
-            }
+            //var privacyPolicyIsChecked = _actor.AskingFor(SelectedState.Of(SubmissionPage.PrivacyPolicy));
+            //if (privacyPolicyIsChecked)
+            //{
+            //    _actor.AttemptsTo(Click.On(SubmissionPage.PrivacyPolicy));
+            //}
         }
 
         [Given(@"the privacy policy is accepted")]
         public void GivenThePrivacyPolicyIsAccepted()
         {
-            _actor.AttemptsTo(Click.On(SubmissionPage.PrivacyPolicy));
+            //_actor.AttemptsTo(Click.On(SubmissionPage.PrivacyPolicy));
         }
 
         [When(@"the form is reset")]
         public void WhenTheFormIsReset()
         {
-            _actor.AttemptsTo(Click.On(SubmissionPage.CancelButton));
+            //_actor.AttemptsTo(Click.On(SubmissionPage.CancelButton));
         }
 
         [Then(@"every input is set to its default values")]
         public void ThenEveryInputIsSetToItsDefaultValues()
         {
-            _actor.AsksFor(Text.Of(SubmissionPage.UrlInputField)).Should().BeEmpty();
-            _actor.AsksFor(SelectedOptionText.Of(SubmissionPage.TypeSelect)).Should().Be("Blog Posts");
-            _actor.AsksFor(Text.Of(SubmissionPage.EmailInputField)).Should().BeEmpty();
-            _actor.AsksFor(Text.Of(SubmissionPage.DescriptionInputField)).Should().BeEmpty();
-            _actor.AsksFor(SelectedState.Of(SubmissionPage.PrivacyPolicy)).Should().BeFalse();
+            //_actor.AsksFor(Text.Of(SubmissionPage.UrlInputField)).Should().BeEmpty();
+            //_actor.AsksFor(SelectedOptionText.Of(SubmissionPage.TypeSelect)).Should().Be("Blog Posts");
+            //_actor.AsksFor(Text.Of(SubmissionPage.EmailInputField)).Should().BeEmpty();
+            //_actor.AsksFor(Text.Of(SubmissionPage.DescriptionInputField)).Should().BeEmpty();
+            //_actor.AsksFor(SelectedState.Of(SubmissionPage.PrivacyPolicy)).Should().BeFalse();
         }
     }
 }
