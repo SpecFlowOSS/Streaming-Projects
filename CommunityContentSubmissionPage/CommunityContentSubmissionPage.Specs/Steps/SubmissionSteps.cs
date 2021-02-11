@@ -75,14 +75,14 @@ namespace CommunityContentSubmissionPage.Specs.Steps
             //_actor.AttemptsTo(Wait.Until(Appearance.Of(inputFieldLocator), IsEqualTo.True()));
             //_actor.AskingFor(Text.Of(labelLocator)).Should().Be(expectedLabel);
 
-            
+
         }
 
         [Given(@"the filled out submission entry form")]
         public void GivenTheFilledOutSubmissionEntryForm(Table table)
         {
             var rows = table.CreateSet<SubmissionEntryFormRowObject>();
-            
+
             //_actor.AttemptsTo(FillOutSubmissionForm.With(rows));
         }
 
@@ -107,7 +107,7 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [Then(@"the submitting of data was possible")]
         public void ThenTheSubmittingOfDataWasPossible()
         {
-            
+
             //_actor.AsksFor(CurrentUrl.FromBrowser()).Should().EndWith("Success", "because the success page should be displayed");
         }
 
@@ -127,12 +127,27 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         }
 
         [Then(@"you can choose from the following Types:")]
-        public void ThenYouCanChooseFromTheFollowingTypes(Table table)
+        public async Task ThenYouCanChooseFromTheFollowingTypes(Table table)
         {
             var expectedTypenameEntries = table.CreateSet<TypenameEntry>();
-            //var actualTypes = _actor.AsksFor(SelectOptionsAvailable.For(SubmissionPage.TypeSelect)).Select(i => new TypenameEntry(i));
 
-            //actualTypes.Should().BeEquivalentTo(expectedTypenameEntries);
+            var typeSelector = await _page.QuerySelectorAsync(SubmissionPage.TypeSelect);
+
+            if (typeSelector == null)
+            {
+                throw new Exception("Type selector not found");
+            }
+
+            var options = await typeSelector.QuerySelectorAllAsync("option");
+
+            var possibleOptions = new List<TypenameEntry>();
+            foreach (var option in options)
+            {
+                var text = await option.GetTextContentAsync();
+                possibleOptions.Add(new TypenameEntry(text));
+            }
+
+            possibleOptions.Should().BeEquivalentTo(expectedTypenameEntries);
 
         }
 
@@ -146,7 +161,7 @@ namespace CommunityContentSubmissionPage.Specs.Steps
                 new SubmissionEntryFormRowObject("Email", "someone@example.org"),
                 new SubmissionEntryFormRowObject("Description", "something really cool")
             };
-            
+
             //_actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));
         }
 
