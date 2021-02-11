@@ -15,8 +15,8 @@ namespace CommunityContentSubmissionPage.Specs.Pages
 
 
 
-        public static string PrivacyPolicy => "chkPrivacyPolicy";
-        public static string SubmitButton => "btn-primary";
-        public static string CancelButton => "btn-secondary";
+        public static string PrivacyPolicy => "#chkPrivacyPolicy";
+        public static string SubmitButton => ".btn-primary";
+        public static string CancelButton => ".btn-secondary";
     }
 }

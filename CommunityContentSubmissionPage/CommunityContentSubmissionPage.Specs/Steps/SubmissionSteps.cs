@@ -27,6 +27,30 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [Then(@"it is possible to enter a '(.*)' with label '(.*)'")]
         public async Task ThenItIsPossibleToEnterAWithLabel(string inputType, string expectedLabel)
         {
+            var (inputFieldLocator, labelLocator) = GetInputFieldLocator(inputType);
+
+            if (await _page.IsVisibleAsync(inputFieldLocator))
+            {
+                var element = await _page.QuerySelectorAsync(labelLocator);
+
+                if (element != null)
+                {
+                    var actualLabel = await element.GetTextContentAsync();
+                    actualLabel.Should().Be(expectedLabel);
+                }
+                else
+                {
+                    throw new Exception($"Element {labelLocator} wasn't found");
+                }
+            }
+            else
+            {
+                throw new Exception($"Element {inputFieldLocator} wasn't found");
+            }
+        }
+
+        private static (string inputFieldLocator, string labelLocator) GetInputFieldLocator(string inputType)
+        {
             string inputFieldLocator;
             string labelLocator;
 
@@ -52,30 +76,7 @@ namespace CommunityContentSubmissionPage.Specs.Steps
                     throw new NotImplementedException();
             }
 
-            if (await _page.IsVisibleAsync(inputFieldLocator))
-            {
-                var element = await _page.QuerySelectorAsync(labelLocator);
-
-                if (element != null)
-                {
-                    var actualLabel = await element.GetTextContentAsync();
-                    actualLabel.Should().Be(expectedLabel);
-                }
-                else
-                {
-                    throw new Exception($"Element {labelLocator} wasn't found");
-                }
-            }
-            else
-            {
-                throw new Exception($"Element {inputFieldLocator} wasn't found");
-            }
-
-
-            //_actor.AttemptsTo(Wait.Until(Appearance.Of(inputFieldLocator), IsEqualTo.True()));
-            //_actor.AskingFor(Text.Of(labelLocator)).Should().Be(expectedLabel);
-
-
+            return (inputFieldLocator, labelLocator);
         }
 
         [Given(@"the filled out submission entry form")]
@@ -83,13 +84,13 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         {
             var rows = table.CreateSet<SubmissionEntryFormRowObject>();
 
-            //_actor.AttemptsTo(FillOutSubmissionForm.With(rows));
+            ScenarioContext.StepIsPending();
         }
 
         [When(@"the submission entry form is submitted")]
-        public void WhenTheSubmissionEntryFormIsSubmitted()
+        public async Task WhenTheSubmissionEntryFormIsSubmitted()
         {
-            //_actor.AttemptsTo(Click.On(SubmissionPage.SubmitButton));
+            await _page.ClickAsync(SubmissionPage.SubmitButton);
         }
 
         [Then(@"there is one submission entry stored")]
@@ -107,14 +108,13 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         [Then(@"the submitting of data was possible")]
         public void ThenTheSubmittingOfDataWasPossible()
         {
-
-            //_actor.AsksFor(CurrentUrl.FromBrowser()).Should().EndWith("Success", "because the success page should be displayed");
+            _page.Url.Should().EndWith("Success", "because the success page should be displayed");
         }
 
         [Then(@"the submitting of data was not possible")]
         public void ThenTheSubmittingOfDataWasNotPossible()
         {
-            //_actor.AsksFor(CurrentUrl.FromBrowser()).Should().NotEndWith("Success", "the input form page should be displayed again");
+            _page.Url.Should().NotEndWith("Success", "the input form page should be displayed again");
         }
 
 
@@ -152,7 +152,7 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         }
 
         [Given(@"the submission entry form is filled")]
-        public void GivenTheSubmissionEntryFormIsFilled()
+        public async Task GivenTheSubmissionEntryFormIsFilled()
         {
             var submissionEntryFormRowObjects = new List<SubmissionEntryFormRowObject>
             {
@@ -162,39 +162,61 @@ namespace CommunityContentSubmissionPage.Specs.Steps
                 new SubmissionEntryFormRowObject("Description", "something really cool")
             };
 
-            //_actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));
+            foreach (var submissionEntryFormRowObject in submissionEntryFormRowObjects)
+            {
+                await FillEntryElement(submissionEntryFormRowObject.Label, submissionEntryFormRowObject.Value);
+            }
+        }
+
+        private async Task FillEntryElement(string label, string value)
+        {
+            var (inputFieldLocator, labelLocator) = GetInputFieldLocator(label);
+
+            await _page.TypeAsync(inputFieldLocator, value);
         }
 
         [Given(@"the privacy policy is not accepted")]
-        public void GivenThePrivacyPolicyIsNotAccepted()
+        public async Task GivenThePrivacyPolicyIsNotAcceptedAsync()
         {
-            //var privacyPolicyIsChecked = _actor.AskingFor(SelectedState.Of(SubmissionPage.PrivacyPolicy));
-            //if (privacyPolicyIsChecked)
-            //{
-            //    _actor.AttemptsTo(Click.On(SubmissionPage.PrivacyPolicy));
-            //}
+            if (await _page.IsCheckedAsync(SubmissionPage.PrivacyPolicy))
+            {
+                await _page.CheckAsync(SubmissionPage.PrivacyPolicy);
+            }
         }
 
         [Given(@"the privacy policy is accepted")]
-        public void GivenThePrivacyPolicyIsAccepted()
+        public async Task GivenThePrivacyPolicyIsAccepted()
         {
-            //_actor.AttemptsTo(Click.On(SubmissionPage.PrivacyPolicy));
+            await _page.CheckAsync(SubmissionPage.PrivacyPolicy);
         }
 
         [When(@"the form is reset")]
-        public void WhenTheFormIsReset()
+        public async Task WhenTheFormIsReset()
         {
-            //_actor.AttemptsTo(Click.On(SubmissionPage.CancelButton));
+            await _page.ClickAsync(SubmissionPage.CancelButton);
         }
 
         [Then(@"every input is set to its default values")]
-        public void ThenEveryInputIsSetToItsDefaultValues()
+        public async Task ThenEveryInputIsSetToItsDefaultValues()
         {
-            //_actor.AsksFor(Text.Of(SubmissionPage.UrlInputField)).Should().BeEmpty();
-            //_actor.AsksFor(SelectedOptionText.Of(SubmissionPage.TypeSelect)).Should().Be("Blog Posts");
-            //_actor.AsksFor(Text.Of(SubmissionPage.EmailInputField)).Should().BeEmpty();
-            //_actor.AsksFor(Text.Of(SubmissionPage.DescriptionInputField)).Should().BeEmpty();
-            //_actor.AsksFor(SelectedState.Of(SubmissionPage.PrivacyPolicy)).Should().BeFalse();
+            (await _page.GetTextContentAsync(SubmissionPage.UrlInputField)).Should().BeEmpty();
+
+            //var typeElement = await _page.QuerySelectorAsync(SubmissionPage.TypeSelect);
+            //var innerHtml = await typeElement.GetInnerHtmlAsync();
+            //var props = await typeElement.GetPropertiesAsync();
+
+            //foreach (var prop in props)
+            //{
+            //    var propProps = await prop.Value.GetPropertiesAsync();
+            //}
+
+            //(await _page.GetTextContentAsync(SubmissionPage.TypeSelect)).Should().Be("Blog Posts");
+            
+
+            (await _page.GetTextContentAsync(SubmissionPage.EmailInputField)).Should().BeEmpty();
+            (await _page.GetTextContentAsync(SubmissionPage.DescriptionInputField)).Should().BeEmpty();
+
+            (await _page.IsCheckedAsync(SubmissionPage.PrivacyPolicy)).Should().BeFalse();
         }
     }
 }
