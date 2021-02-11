@@ -80,11 +80,14 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         }
 
         [Given(@"the filled out submission entry form")]
-        public void GivenTheFilledOutSubmissionEntryForm(Table table)
+        public async Task GivenTheFilledOutSubmissionEntryForm(Table table)
         {
             var rows = table.CreateSet<SubmissionEntryFormRowObject>();
 
-            ScenarioContext.StepIsPending();
+            foreach (var row in rows)
+            {
+                await FillEntryElement(row.Label, row.Value);
+            }
         }
 
         [When(@"the submission entry form is submitted")]
