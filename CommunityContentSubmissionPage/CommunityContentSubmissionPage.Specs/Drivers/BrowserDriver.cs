@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System;
+using System.Threading;
+using FluentAssertions;
 
 namespace CommunityContentSubmissionPage.Specs.Drivers
 {
@@ -22,7 +24,7 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
 
         internal void GoToUrl(string url)
         {
-            _webDriverDriver.WebDriver.Url = url;
+            _webDriverDriver.WebDriver.Navigate().GoToUrl(url);
         }
     }
 }
