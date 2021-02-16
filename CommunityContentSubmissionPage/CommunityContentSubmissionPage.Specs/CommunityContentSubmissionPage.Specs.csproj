@@ -18,7 +18,7 @@
     <PackageReference Include="SpecRun.SpecFlow" Version="3.6.2" />
 
     
-    <!--<PackageReference Include="TestProject.OpenSDK.SpecFlowPlugin" Version="0.65.1" />-->
+    <PackageReference Include="TestProject.OpenSDK.SpecFlowPlugin" Version="0.65.1.294-rc" />
     
 
     
