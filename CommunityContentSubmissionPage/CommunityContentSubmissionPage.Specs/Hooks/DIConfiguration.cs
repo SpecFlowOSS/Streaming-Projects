@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using CommunityContentSubmissionPage.Business.Infrastructure;
+using CommunityContentSubmissionPage.Specs.Drivers;
 using Esprima.Ast;
 using PlaywrightSharp;
 using PlaywrightSharp.Chromium;
@@ -14,16 +15,18 @@ namespace CommunityContentSubmissionPage.Specs.Hooks
     public class DIConfiguration
     {
         private readonly ScenarioContext _scenarioContext;
+        private readonly DBNameProvider _dbNameProvider;
 
-        public DIConfiguration(ScenarioContext scenarioContext)
+        public DIConfiguration(ScenarioContext scenarioContext, DBNameProvider dbNameProvider)
         {
             _scenarioContext = scenarioContext;
+            _dbNameProvider = dbNameProvider;
         }
 
         [BeforeScenario(Order = 0)]
         public async Task RegisterDI()
         {
-            _scenarioContext.ScenarioContainer.RegisterTypeAs<DatabaseContext, IDatabaseContext>();
+            _scenarioContext.ScenarioContainer.RegisterInstanceAs<IDatabaseContext>(new DatabaseContext(_dbNameProvider.GetDBName()));
 
             var playwright = await Playwright.CreateAsync();
 

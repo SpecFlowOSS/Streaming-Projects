@@ -11,10 +11,12 @@ namespace CommunityContentSubmissionPage
 {
     public class KestrelHostBuilder
     {
-        public IHostBuilder CreateHostBuilder(string[] args, string hostname = null, string webRoot = null) =>
+        public IHostBuilder CreateHostBuilder(string[] args, string hostname = null, string webRoot = null, string scenarioInfoTitle = null) =>
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
+                    webBuilder.UseSetting("DBName", scenarioInfoTitle);
+
                     webBuilder.UseStartup<Startup>();
 
                     if (hostname is not null)

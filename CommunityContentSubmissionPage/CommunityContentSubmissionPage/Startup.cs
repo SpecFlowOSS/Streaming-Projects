@@ -7,6 +7,7 @@ using CommunityContentSubmissionPage.Business.Logic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,8 +20,13 @@ namespace CommunityContentSubmissionPage
         {
             Configuration = configuration;
 
-            var databaseContext = new DatabaseContext();
+            var databaseContext = new DatabaseContext(GetDatabaseName());
             databaseContext.Database.EnsureCreated();
+        }
+
+        private string GetDatabaseName()
+        {
+            return Configuration.GetValue<string>("DBName");
         }
 
         public IConfiguration Configuration { get; }
@@ -30,9 +36,8 @@ namespace CommunityContentSubmissionPage
         {
             services.AddControllers();
             services.AddControllersWithViews();
-            
 
-            services.AddScoped<IDatabaseContext, DatabaseContext>();
+            services.AddScoped<IDatabaseContext>((sp) => { return new DatabaseContext(GetDatabaseName()); });
             services.AddScoped<ISubmissionSaver, SubmissionSaver>();
         }
 

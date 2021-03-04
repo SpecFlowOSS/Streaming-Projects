@@ -2,15 +2,18 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
+using TechTalk.SpecFlow;
 
 namespace CommunityContentSubmissionPage.Specs.Drivers
 {
     public class WebServerDriver
     {
+        private readonly DBNameProvider _dbNameProvider;
         private IHost? _host;
 
-        public WebServerDriver()
+        public WebServerDriver(DBNameProvider dbNameProvider)
         {
+            _dbNameProvider = dbNameProvider;
             Hostname = $"http://localhost:{GeneratePort()}";
         }
 
@@ -28,7 +31,7 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
                 "CommunityContentSubmissionPage", "wwwroot");
 
             var hostBuilder = new KestrelHostBuilder();
-            var builder = hostBuilder.CreateHostBuilder(new string[] { }, Hostname, webRoot);
+            var builder = hostBuilder.CreateHostBuilder(new string[] { }, Hostname, webRoot, _dbNameProvider.GetDBName());
             _host = builder.Build();
             _host.StartAsync().ConfigureAwait(false);
         }

@@ -19,9 +19,16 @@ namespace CommunityContentSubmissionPage.Business.Infrastructure
 
     public class DatabaseContext : DbContext, IDatabaseContext
     {
+        private readonly string _databaseName;
+
+        public DatabaseContext(string databaseName)
+        {
+            _databaseName = databaseName;
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("CommunitySubmissions");
+            optionsBuilder.UseInMemoryDatabase(_databaseName ?? "CommunitySubmissions");
         }
 
         public DbSet<SubmissionEntry> SubmissionEntries { get; set; }
