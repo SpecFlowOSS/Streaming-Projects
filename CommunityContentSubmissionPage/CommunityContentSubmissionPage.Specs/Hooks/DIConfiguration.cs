@@ -16,6 +16,9 @@ namespace CommunityContentSubmissionPage.Specs.Hooks
     {
         private readonly ScenarioContext _scenarioContext;
         private readonly DBNameProvider _dbNameProvider;
+        
+        private static IPlaywright? _playwright;
+        private static IChromiumBrowser? _browser;
 
         public DIConfiguration(ScenarioContext scenarioContext, DBNameProvider dbNameProvider)
         {
@@ -23,24 +26,22 @@ namespace CommunityContentSubmissionPage.Specs.Hooks
             _dbNameProvider = dbNameProvider;
         }
 
+        [BeforeTestRun]
+        public static async Task BeforeTestRun()
+        {
+            _playwright = await Playwright.CreateAsync();
+            _browser = await _playwright.Chromium.LaunchAsync(headless: false);
+        }
+
         [BeforeScenario(Order = 0)]
         public async Task RegisterDI()
         {
             _scenarioContext.ScenarioContainer.RegisterInstanceAs<IDatabaseContext>(new DatabaseContext(_dbNameProvider.GetDBName()));
 
-            var playwright = await Playwright.CreateAsync();
-
-            
-
-            var browser = await playwright.Chromium.LaunchAsync(headless:false);
-            
-            IChromiumBrowserContext? chromiumBrowserContext = await browser.NewContextAsync(new BrowserContextOptions());
+            IChromiumBrowserContext? chromiumBrowserContext = await _browser.NewContextAsync(new BrowserContextOptions());
 
             var page = await chromiumBrowserContext.NewPageAsync();
 
-
-            _scenarioContext.ScenarioContainer.RegisterInstanceAs(playwright);
-            _scenarioContext.ScenarioContainer.RegisterInstanceAs(browser);
             _scenarioContext.ScenarioContainer.RegisterInstanceAs(chromiumBrowserContext);
             _scenarioContext.ScenarioContainer.RegisterInstanceAs(page);
         }
@@ -54,14 +55,17 @@ namespace CommunityContentSubmissionPage.Specs.Hooks
             var context = _scenarioContext.ScenarioContainer.Resolve<IChromiumBrowserContext>();
             await context.DisposeAsync();
 
-            var browser = _scenarioContext.ScenarioContainer.Resolve<IChromiumBrowser>();
-            await browser.DisposeAsync();
-
-            var playwright = _scenarioContext.ScenarioContainer.Resolve<IPlaywright>();
-            playwright.Dispose();
-
+            
             var databaseContext = _scenarioContext.ScenarioContainer.Resolve<IDatabaseContext>();
             databaseContext.Database.EnsureDeleted();
+        }
+
+        [AfterTestRun]
+        public static async Task AfterTestRun()
+        {
+            await _browser.DisposeAsync();
+
+            _playwright.Dispose();
         }
     }
 }
