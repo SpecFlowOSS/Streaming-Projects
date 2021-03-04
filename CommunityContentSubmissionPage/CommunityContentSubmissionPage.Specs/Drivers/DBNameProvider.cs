@@ -1,19 +1,20 @@
-﻿using TechTalk.SpecFlow;
+﻿using System;
+using TechTalk.SpecFlow;
 
 namespace CommunityContentSubmissionPage.Specs.Drivers
 {
     public class DBNameProvider
     {
-        private readonly ScenarioContext _scenarioContext;
+        private Guid _databaseGuid;
 
-        public DBNameProvider(ScenarioContext scenarioContext)
+        public DBNameProvider()
         {
-            _scenarioContext = scenarioContext;
+            _databaseGuid = Guid.NewGuid();
         }
 
         public string GetDBName()
         {
-            return _scenarioContext.ScenarioInfo.Title.Replace(" ", "");
+            return _databaseGuid.ToString("N");
         }
     }
 }
