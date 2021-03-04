@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <TestProfile xmlns="http://www.specflow.org/schemas/plus/TestProfile/1.5">
   <Settings projectName="CommunityContentSubmissionPage.Specs" />
-  <Execution stopAfterFailures="0" testThreadCount="2" retryCount="0" testSchedulingMode="Sequential" />
+  <Execution stopAfterFailures="0" testThreadCount="4" retryCount="0" testSchedulingMode="Sequential" />
   <Environment testThreadIsolation="SharedAppDomain" />
   
   <TestAssemblyPaths>
