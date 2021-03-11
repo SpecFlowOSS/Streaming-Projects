@@ -1,0 +1,26 @@
+﻿{
+  "bindingCulture": {
+    "language": "en-us"
+  },
+  "language": {
+    "feature": "en-us"
+  },
+  "currentTarget": "Edge",
+  "targets": [
+    {
+      "Firefox": {
+        "Browser": "Firefox"
+      }
+    },
+    {
+      "Chrome": {
+        "Browser": "Chrome"
+      }
+    },
+    {
+      "Edge": {
+        "Browser": "Edge" 
+      } 
+    }
+  ]
+}
