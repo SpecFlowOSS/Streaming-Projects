@@ -13,14 +13,16 @@ namespace CommunityContentSubmissionPage.Specs.Hooks
     {
         private readonly ScenarioContext _scenarioContext;
         private readonly DBNameProvider _dbNameProvider;
-        
+        private readonly TargetDriver _targetDriver;
+
         private static IPlaywright? _playwright;
         private static IBrowser? _browser;
 
-        public DIConfiguration(ScenarioContext scenarioContext, DBNameProvider dbNameProvider)
+        public DIConfiguration(ScenarioContext scenarioContext, DBNameProvider dbNameProvider, TargetDriver targetDriver)
         {
             _scenarioContext = scenarioContext;
             _dbNameProvider = dbNameProvider;
+            _targetDriver = targetDriver;
         }
 
         [BeforeTestRun]
@@ -53,9 +55,24 @@ namespace CommunityContentSubmissionPage.Specs.Hooks
         [BeforeScenario(Order = 0)]
         public async Task RegisterDI()
         {
+            var currentTarget = _targetDriver.GetCurrentTarget();
+            currentTarget.KeyValues.TryGetValue("Device", out string? device);
+
             _scenarioContext.ScenarioContainer.RegisterInstanceAs<IDatabaseContext>(new DatabaseContext(_dbNameProvider.GetDBName()));
 
-            IBrowserContext? browserContext = await _browser.NewContextAsync(new BrowserContextOptions());
+
+            BrowserContextOptions browserContextOptions;
+
+            if (device is null)
+            {
+                browserContextOptions = new BrowserContextOptions();
+            }
+            else
+            {
+                browserContextOptions = new BrowserContextOptions(_playwright.Devices[device]);
+            }
+
+            IBrowserContext? browserContext = await _browser.NewContextAsync(browserContextOptions);
 
             var page = await browserContext.NewPageAsync();
 

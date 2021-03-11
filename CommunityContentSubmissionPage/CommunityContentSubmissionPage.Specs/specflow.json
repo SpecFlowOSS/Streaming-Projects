@@ -5,7 +5,7 @@
   "language": {
     "feature": "en-us"
   },
-  "currentTarget": "Edge",
+  "currentTarget": "MobileChrome",
   "targets": [
     {
       "Firefox": {
@@ -19,8 +19,14 @@
     },
     {
       "Edge": {
-        "Browser": "Edge" 
-      } 
+        "Browser": "Edge"
+      }
+    },
+    {
+      "MobileChrome": {
+        "Browser": "Chrome",
+        "Device": "Pixel 2"
+      }
     }
   ]
 }
