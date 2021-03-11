@@ -77,6 +77,12 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
 
         private static string? GetCurrentTarget(JsonDocument doc)
         {
+            var specflowTarget = Environment.GetEnvironmentVariable("SPECFLOW_TARGET");
+            if (specflowTarget is not null)
+            {
+                return specflowTarget;
+            }
+            
             foreach (var jsonProperty in doc.RootElement.EnumerateObject())
             {
                 if (jsonProperty.NameEquals("currentTarget"))
