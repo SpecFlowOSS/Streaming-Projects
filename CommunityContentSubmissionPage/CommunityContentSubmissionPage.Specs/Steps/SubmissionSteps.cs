@@ -175,7 +175,16 @@ namespace CommunityContentSubmissionPage.Specs.Steps
         {
             var (inputFieldLocator, labelLocator) = GetInputFieldLocator(label);
 
-            await _page.TypeAsync(inputFieldLocator, value);
+            if (label == "Type")
+            {
+                await _page.SelectOptionAsync(inputFieldLocator, new SelectOption() {Label = value});
+            }
+            else
+            {
+                await _page.TypeAsync(inputFieldLocator, value);
+            }
+
+            
         }
 
         [Given(@"the privacy policy is not accepted")]
