@@ -1,6 +1,6 @@
 ﻿using System;
 using OpenQA.Selenium;
-using TestProject.OpenSDK.Drivers.Web;
+using OpenQA.Selenium.Chrome;
 
 
 namespace CommunityContentSubmissionPage.Specs.Drivers
