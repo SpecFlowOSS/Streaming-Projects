@@ -19,27 +19,32 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.7.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Privacy Policy", SourceFile="Features\\Privacy Policy.feature", SourceLine=0)]
-    public partial class PrivacyPolicyFeature
+    public partial class PrivacyPolicyFeature : object, Xunit.IClassFixture<PrivacyPolicyFeature.FixtureData>, System.IDisposable
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
+        
+        private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
 #line 1 "Privacy Policy.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
-        public virtual void FeatureSetup()
+        public PrivacyPolicyFeature(PrivacyPolicyFeature.FixtureData fixtureData, CommunityContentSubmissionPage_API_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        {
+            this._testOutputHelper = testOutputHelper;
+            this.TestInitialize();
+        }
+        
+        public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Privacy Policy", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
-        public virtual void FeatureTearDown()
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
@@ -49,7 +54,6 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -58,6 +62,7 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
         public virtual void ScenarioStart()
@@ -70,7 +75,14 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("User does not accept the privacy policy should be an error when submitting", SourceLine=2)]
+        void System.IDisposable.Dispose()
+        {
+            this.TestTearDown();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="User does not accept the privacy policy should be an error when submitting")]
+        [Xunit.TraitAttribute("FeatureTitle", "Privacy Policy")]
+        [Xunit.TraitAttribute("Description", "User does not accept the privacy policy should be an error when submitting")]
         public virtual void UserDoesNotAcceptThePrivacyPolicyShouldBeAnErrorWhenSubmitting()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -112,7 +124,9 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("User agrees to privacy policy data should be submitted", SourceLine=12)]
+        [Xunit.SkippableFactAttribute(DisplayName="User agrees to privacy policy data should be submitted")]
+        [Xunit.TraitAttribute("FeatureTitle", "Privacy Policy")]
+        [Xunit.TraitAttribute("Description", "User agrees to privacy policy data should be submitted")]
         public virtual void UserAgreesToPrivacyPolicyDataShouldBeSubmitted()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -152,6 +166,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             }
             this.ScenarioCleanup();
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.7.0.0")]
+        [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        public class FixtureData : System.IDisposable
+        {
+            
+            public FixtureData()
+            {
+                PrivacyPolicyFeature.FeatureSetup();
+            }
+            
+            void System.IDisposable.Dispose()
+            {
+                PrivacyPolicyFeature.FeatureTearDown();
+            }
         }
     }
 }

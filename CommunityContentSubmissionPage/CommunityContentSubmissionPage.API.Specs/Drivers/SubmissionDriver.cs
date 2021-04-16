@@ -1,32 +1,44 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using CommunityContentSubmissionPage.API.Specs.Steps;
-using CommunityContentSubmissionPage.Business.Infrastructure;
 using FluentAssertions;
+using RestSharp;
 
 namespace CommunityContentSubmissionPage.API.Specs.Drivers
 {
     public class SubmissionDriver
     {
-        private readonly IDatabaseContext _databaseContext;
+        private readonly RestClient _restClient;
 
-        public SubmissionDriver(IDatabaseContext databaseContext)
+        public SubmissionDriver(RestClient restClient)
         {
-            _databaseContext = databaseContext;
+            _restClient = restClient;
+        }
+
+        private List<Submission> GetAllSubmissionEntries()
+        {
+            var restRequest = new RestRequest("/api/submit", DataFormat.Json);
+            var response = _restClient.Get<List<Submission>>(restRequest);
+
+            response.IsSuccessful.Should().BeTrue();
+
+            return response.Data;
         }
 
         public void AssertOneSubmissionEntryExists()
         {
-            _databaseContext.SubmissionEntries.Count().Should().BeGreaterThan(0);
+            GetAllSubmissionEntries().Count().Should().BeGreaterThan(0);
         }
 
         public void AssertNumberOfEntriesStored(int expectedCountOfStoredEntries)
         {
-            _databaseContext.SubmissionEntries.Count().Should().Be(expectedCountOfStoredEntries);
+            GetAllSubmissionEntries().Count().Should().Be(expectedCountOfStoredEntries);
         }
 
         public void AssertSubmissionEntryData(ExpectedSubmissionContentEntry expectedSubmissionContentEntry)
         {
-            var actualEntry = _databaseContext.SubmissionEntries.Single();
+            var actualEntry = GetAllSubmissionEntries().Single();
 
             if (expectedSubmissionContentEntry.Url is not null)
                 actualEntry.Url.Should().Be(expectedSubmissionContentEntry.Url);

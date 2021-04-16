@@ -21,7 +21,8 @@ namespace CommunityContentSubmissionPage.Business.Infrastructure
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseInMemoryDatabase("CommunitySubmissions");
+            optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("CommunityContent_ConnectionString"));
+            //optionsBuilder.UseInMemoryDatabase("CommunitySubmissions");
         }
 
         public DbSet<SubmissionEntry> SubmissionEntries { get; set; }

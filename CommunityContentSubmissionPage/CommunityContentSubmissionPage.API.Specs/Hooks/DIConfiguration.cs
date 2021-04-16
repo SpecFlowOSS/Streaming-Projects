@@ -1,4 +1,12 @@
-﻿using CommunityContentSubmissionPage.Business.Infrastructure;
+﻿using System;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Threading;
+using Ductus.FluentDocker.Builders;
+using Ductus.FluentDocker.Services;
+using Microsoft.Extensions.Configuration;
+using RestSharp;
 using TechTalk.SpecFlow;
 
 namespace CommunityContentSubmissionPage.API.Specs.Hooks
@@ -13,17 +21,57 @@ namespace CommunityContentSubmissionPage.API.Specs.Hooks
             _scenarioContext = scenarioContext;
         }
 
-        [BeforeScenario(Order = 0)]
-        public void RegisterDI()
+        private static ICompositeService? _compositeService;
+
+        [BeforeTestRun]
+        public static void DockerComposeUp()
         {
-            _scenarioContext.ScenarioContainer.RegisterTypeAs<DatabaseContext, IDatabaseContext>();
+            var dockerComposeFileName = FindDockerComposeFile();
+
+            _compositeService = new Builder()
+                .UseContainer()
+                .UseCompose()
+                .FromFile(dockerComposeFileName)
+                .RemoveAllImages()
+                .ForceRecreate()
+                .RemoveOrphans()
+                .WaitForPort("db", "42069")
+                .WaitForHttp("webapi", "http://localhost:6969/api/AvailableTypes",
+                    continuation: (response, _) => response.Code != HttpStatusCode.OK ? 2000 : 0)
+                .Build()
+                .Start();
         }
 
-        [AfterScenario()]
-        public void Cleanup()
+        [AfterTestRun]
+        public static void DockerComposeDown()
         {
-            var databaseContext = _scenarioContext.ScenarioContainer.Resolve<IDatabaseContext>();
-            databaseContext.Database.EnsureDeleted();
+            _compositeService?.Stop();
+            _compositeService?.Dispose();
         }
+
+        private static string FindDockerComposeFile()
+        {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var root = Path.Combine(currentDirectory, "..", "..", "..", "..", "..");
+
+            return Directory.EnumerateFiles(root, "docker-compose.yml", SearchOption.AllDirectories).First();
+        }
+
+
+        private static IConfiguration LoadConfiguration()
+        {
+            return new ConfigurationBuilder().AddJsonFile("appsettings.json")
+                .Build();
+        }
+
+        [BeforeScenario()]
+        public void RegisterRestClient()
+        {
+            var config = LoadConfiguration();
+            var baseAddress = config["Product.Api:BaseAddress"];
+            _scenarioContext.ScenarioContainer.RegisterInstanceAs(new RestClient(baseAddress));
+        }
+
+
     }
 }

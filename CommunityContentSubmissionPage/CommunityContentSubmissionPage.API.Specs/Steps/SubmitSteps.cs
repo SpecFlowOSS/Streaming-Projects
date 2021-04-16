@@ -13,13 +13,13 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
     [Binding]
     public class SubmitSteps
     {
-        private readonly WebServerDriver _webServerDriver;
-        private readonly SubmissionRequest _submissionRequest = new SubmissionRequest();
+        private readonly RestClient _restClient;
+        private readonly Submission _submission = new Submission();
         private IRestResponse _submitFormResponse;
 
-        public SubmitSteps(WebServerDriver webServerDriver)
+        public SubmitSteps(RestClient restClient)
         {
-            _webServerDriver = webServerDriver;
+            _restClient = restClient;
         }
 
         [Given(@"the following submission entry")]
@@ -32,16 +32,16 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
                 switch (rowObject.Label.ToUpper())
                 {
                     case "URL":
-                        _submissionRequest.Url = rowObject.Value;
+                        _submission.Url = rowObject.Value;
                         break;
                     case "TYPE":
-                        _submissionRequest.Type = rowObject.Value;
+                        _submission.Type = rowObject.Value;
                         break;
                     case "EMAIL":
-                        _submissionRequest.Email = rowObject.Value;
+                        _submission.Email = rowObject.Value;
                         break;
                     case "DESCRIPTION":
-                        _submissionRequest.Description = rowObject.Value;
+                        _submission.Description = rowObject.Value;
                         break;
                     default:
                         throw new NotImplementedException();
@@ -52,32 +52,32 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
         [Given(@"the privacy policy is accepted")]
         public void GivenThePrivacyPolicyIsAccepted()
         {
-            _submissionRequest.AcceptPrivacyPolicy = true;
+            _submission.AcceptPrivacyPolicy = true;
         }
 
         [Given(@"the privacy policy is not accepted")]
         public void GivenThePrivacyPolicyIsNotAccepted()
         {
-            _submissionRequest.AcceptPrivacyPolicy = false;
+            _submission.AcceptPrivacyPolicy = false;
         }
 
 
         [Given(@"the submission entry is complete")]
         public void GivenTheSubmissionEntryIsComplete()
         {
-            _submissionRequest.Url = "https://www.example.org";
-            _submissionRequest.Type = "Blog Posts";
-            _submissionRequest.Email = "someone@example.org";
-            _submissionRequest.Description = "a description";
+            _submission.Url = "https://www.example.org";
+            _submission.Type = "Blog Posts";
+            _submission.Email = "someone@example.org";
+            _submission.Description = "a description";
         }
 
         [When(@"the submission entry is submitted")]
         public void WhenTheSubmissionEntryIsSubmitted()
         {
-            var restClient = new RestClient(_webServerDriver.Hostname);
-            var restRequest = new JsonRequest<SubmissionRequest, string>("api/Submit", _submissionRequest);
+            
+            var restRequest = new JsonRequest<Submission, string>("api/Submit", _submission);
 
-            _submitFormResponse = restClient.Post(restRequest);
+            _submitFormResponse = _restClient.Post(restRequest);
         }
 
         [Then(@"the submitting of data was possible")]

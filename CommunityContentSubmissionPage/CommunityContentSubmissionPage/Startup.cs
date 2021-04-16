@@ -34,6 +34,9 @@ namespace CommunityContentSubmissionPage
 
             services.AddScoped<IDatabaseContext, DatabaseContext>();
             services.AddScoped<ISubmissionSaver, SubmissionSaver>();
+
+            services.AddHealthChecks();
+            services.AddDbContext<DatabaseContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +54,7 @@ namespace CommunityContentSubmissionPage
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            
 
             app.UseRouting();
 
@@ -59,9 +63,7 @@ namespace CommunityContentSubmissionPage
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapDefaultControllerRoute();
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapHealthChecks("/health");
             });
         }
     }

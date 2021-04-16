@@ -1,6 +1,6 @@
 ﻿namespace CommunityContentSubmissionPage.API.Specs.Steps
 {
-    public class SubmissionRequest
+    public class Submission
     {
         public string Url { get; set; }
 

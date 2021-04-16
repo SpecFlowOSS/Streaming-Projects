@@ -12,11 +12,11 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
     [Binding]
     public class AvailableTypesAPISteps
     {
-        private readonly WebServerDriver _webServerDriver;
+        private readonly RestClient _restClient;
 
-        public AvailableTypesAPISteps(WebServerDriver webServerDriver)
+        public AvailableTypesAPISteps(RestClient restClient)
         {
-            _webServerDriver = webServerDriver;
+            _restClient = restClient;
         }
 
         [Then(@"you can choose from the following Types:")]
@@ -24,9 +24,9 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
         {
             var typenameEntries = table.CreateSet<TypenameEntry>();
 
-            var restClient = new RestClient(_webServerDriver.Hostname);
+            
             var restRequest = new RestRequest("api/AvailableTypes", DataFormat.Json);
-            var restResponse = restClient.Get<AvailableTypesResponse>(restRequest);
+            var restResponse = _restClient.Get<AvailableTypesResponse>(restRequest);
 
             restResponse.IsSuccessful.Should().BeTrue();
 

@@ -19,27 +19,32 @@ namespace CommunityContentSubmissionPage.Specs.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.7.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Submitting Submission", SourceFile="Features\\Submitting Submission.feature", SourceLine=0)]
-    public partial class SubmittingSubmissionFeature
+    public partial class SubmittingSubmissionFeature : object, Xunit.IClassFixture<SubmittingSubmissionFeature.FixtureData>, System.IDisposable
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
+        
+        private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
 #line 1 "Submitting Submission.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
-        public virtual void FeatureSetup()
+        public SubmittingSubmissionFeature(SubmittingSubmissionFeature.FixtureData fixtureData, CommunityContentSubmissionPage_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        {
+            this._testOutputHelper = testOutputHelper;
+            this.TestInitialize();
+        }
+        
+        public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Submitting Submission", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
-        public virtual void FeatureTearDown()
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
@@ -49,7 +54,6 @@ namespace CommunityContentSubmissionPage.Specs.Features
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -58,6 +62,7 @@ namespace CommunityContentSubmissionPage.Specs.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
         public virtual void ScenarioStart()
@@ -70,7 +75,14 @@ namespace CommunityContentSubmissionPage.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Input from submission page is saved", Description="\tAssumption: There are no entries in the database", SourceLine=2)]
+        void System.IDisposable.Dispose()
+        {
+            this.TestTearDown();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Input from submission page is saved")]
+        [Xunit.TraitAttribute("FeatureTitle", "Submitting Submission")]
+        [Xunit.TraitAttribute("Description", "Input from submission page is saved")]
         public virtual void InputFromSubmissionPageIsSaved()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -130,7 +142,9 @@ this.ScenarioInitialize(scenarioInfo);
             this.ScenarioCleanup();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Entered values from submission page is saved", SourceLine=18)]
+        [Xunit.SkippableFactAttribute(DisplayName="Entered values from submission page is saved")]
+        [Xunit.TraitAttribute("FeatureTitle", "Submitting Submission")]
+        [Xunit.TraitAttribute("Description", "Entered values from submission page is saved")]
         public virtual void EnteredValuesFromSubmissionPageIsSaved()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -198,6 +212,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             }
             this.ScenarioCleanup();
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.7.0.0")]
+        [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        public class FixtureData : System.IDisposable
+        {
+            
+            public FixtureData()
+            {
+                SubmittingSubmissionFeature.FeatureSetup();
+            }
+            
+            void System.IDisposable.Dispose()
+            {
+                SubmittingSubmissionFeature.FeatureTearDown();
+            }
         }
     }
 }

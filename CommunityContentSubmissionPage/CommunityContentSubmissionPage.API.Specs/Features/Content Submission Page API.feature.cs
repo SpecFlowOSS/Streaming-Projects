@@ -19,27 +19,32 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.7.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("Content Submission Page API", SourceFile="Features\\Content Submission Page API.feature", SourceLine=0)]
-    public partial class ContentSubmissionPageAPIFeature
+    public partial class ContentSubmissionPageAPIFeature : object, Xunit.IClassFixture<ContentSubmissionPageAPIFeature.FixtureData>, System.IDisposable
     {
         
-        private TechTalk.SpecFlow.ITestRunner testRunner;
+        private static TechTalk.SpecFlow.ITestRunner testRunner;
         
         private string[] _featureTags = ((string[])(null));
+        
+        private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
 #line 1 "Content Submission Page API.feature"
 #line hidden
         
-        [TechTalk.SpecRun.FeatureInitialize()]
-        public virtual void FeatureSetup()
+        public ContentSubmissionPageAPIFeature(ContentSubmissionPageAPIFeature.FixtureData fixtureData, CommunityContentSubmissionPage_API_Specs_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        {
+            this._testOutputHelper = testOutputHelper;
+            this.TestInitialize();
+        }
+        
+        public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features", "Content Submission Page API", null, ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
-        [TechTalk.SpecRun.FeatureCleanup()]
-        public virtual void FeatureTearDown()
+        public static void FeatureTearDown()
         {
             testRunner.OnFeatureEnd();
             testRunner = null;
@@ -49,7 +54,6 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
         {
         }
         
-        [TechTalk.SpecRun.ScenarioCleanup()]
         public virtual void TestTearDown()
         {
             testRunner.OnScenarioEnd();
@@ -58,6 +62,7 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
         public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
+            testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
         public virtual void ScenarioStart()
@@ -70,7 +75,14 @@ namespace CommunityContentSubmissionPage.API.Specs.Features
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Type should offer a list of unique entries", SourceLine=2)]
+        void System.IDisposable.Dispose()
+        {
+            this.TestTearDown();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Type should offer a list of unique entries")]
+        [Xunit.TraitAttribute("FeatureTitle", "Content Submission Page API")]
+        [Xunit.TraitAttribute("Description", "Type should offer a list of unique entries")]
         public virtual void TypeShouldOfferAListOfUniqueEntries()
         {
             string[] tagsOfScenario = ((string[])(null));
@@ -115,6 +127,22 @@ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             }
             this.ScenarioCleanup();
+        }
+        
+        [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.7.0.0")]
+        [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
+        public class FixtureData : System.IDisposable
+        {
+            
+            public FixtureData()
+            {
+                ContentSubmissionPageAPIFeature.FeatureSetup();
+            }
+            
+            void System.IDisposable.Dispose()
+            {
+                ContentSubmissionPageAPIFeature.FeatureTearDown();
+            }
         }
     }
 }

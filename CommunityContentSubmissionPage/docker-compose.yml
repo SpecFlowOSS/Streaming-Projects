@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  communitycontentsubmissionpage:
+    image: ${DOCKER_REGISTRY-}communitycontentsubmissionpage
+    build:
+      context: CommunityContentSubmissionPage/
+      dockerfile: Dockerfile
+    ports:
+      - "6969:443"
+    environment:
+      - CommunityContent_ConnectionString=Server=db;Database=Content;User=sa;Password=Password123%
+    depends_on:
+      - db
+    #entrypoint: ["/wait-for-it.sh", "db:1433", "-t", "120", "--", "dotnet", "CommunityContentSubmissionPage.dll"]
+    #entrypoint: ["/wait-for", "db:1433", "--", "echo", "test"]
+    entrypoint: ["ls", "/"]
+  db:
+    image: "mcr.microsoft.com/mssql/server:2019-latest"
+    ports: 
+      - "42069:1433"
+    environment:
+      SA_PASSWORD: Password123%
+      ACCEPT_EULA: "Y"
