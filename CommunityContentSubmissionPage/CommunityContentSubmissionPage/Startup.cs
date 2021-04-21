@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Polly;
 
 namespace CommunityContentSubmissionPage
 {
@@ -18,9 +19,6 @@ namespace CommunityContentSubmissionPage
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-
-            var databaseContext = new DatabaseContext();
-            databaseContext.Database.EnsureCreated();
         }
 
         public IConfiguration Configuration { get; }
@@ -37,6 +35,8 @@ namespace CommunityContentSubmissionPage
 
             services.AddHealthChecks();
             services.AddDbContext<DatabaseContext>();
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +65,16 @@ namespace CommunityContentSubmissionPage
                 endpoints.MapDefaultControllerRoute();
                 endpoints.MapHealthChecks("/health");
             });
+
+            var policy = Policy.Handle<Exception>().WaitAndRetry(10, i => TimeSpan.FromSeconds(10));
+
+            policy.Execute(() => EnsureDB(app));
+        }
+
+        private static void EnsureDB(IApplicationBuilder app)
+        {
+            var context = app.ApplicationServices.GetService<DatabaseContext>();
+            context.Database.EnsureCreated();
         }
     }
 }

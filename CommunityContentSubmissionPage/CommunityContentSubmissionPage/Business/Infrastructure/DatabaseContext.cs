@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 using CommunityContentSubmissionPage.Business.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 
 namespace CommunityContentSubmissionPage.Business.Infrastructure
 {
@@ -26,6 +29,6 @@ namespace CommunityContentSubmissionPage.Business.Infrastructure
         }
 
         public DbSet<SubmissionEntry> SubmissionEntries { get; set; }
-        
     }
+    
 }

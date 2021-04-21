@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using CommunityContentSubmissionPage.Business.Infrastructure;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace CommunityContentSubmissionPage
 {
@@ -13,7 +7,9 @@ namespace CommunityContentSubmissionPage
     {
         public static void Main(string[] args)
         {
-            new KestrelHostBuilder().CreateHostBuilder(args).Build().Run();
+            new KestrelHostBuilder().CreateHostBuilder(args)
+                .Build()                                 
+                .Run();
         }
     }
 }

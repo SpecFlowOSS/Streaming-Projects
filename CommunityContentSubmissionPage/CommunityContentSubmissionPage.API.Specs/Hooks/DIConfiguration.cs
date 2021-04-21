@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using Ductus.FluentDocker.Builders;
+using Ductus.FluentDocker.Common;
 using Ductus.FluentDocker.Services;
 using Microsoft.Extensions.Configuration;
+using Polly;
 using RestSharp;
 using TechTalk.SpecFlow;
 
@@ -35,11 +37,28 @@ namespace CommunityContentSubmissionPage.API.Specs.Hooks
                 .RemoveAllImages()
                 .ForceRecreate()
                 .RemoveOrphans()
-                .WaitForPort("db", "42069")
-                .WaitForHttp("webapi", "http://localhost:6969/api/AvailableTypes",
-                    continuation: (response, _) => response.Code != HttpStatusCode.OK ? 2000 : 0)
                 .Build()
                 .Start();
+
+            WaitForWebserver();
+        }
+
+        private static void WaitForWebserver()
+        {
+            var restclient = GetRestClient();
+
+            var policy = Policy.HandleResult<bool>(r => !r)
+                .WaitAndRetry(10, _ => TimeSpan.FromSeconds(10));
+
+            policy.Execute(() =>
+            {
+                var restRequest = new RestRequest("/api/AvailableTypes", DataFormat.Json);
+
+                var restResponse = restclient.Get(restRequest);
+
+                return restResponse.IsSuccessful;
+            });
+
         }
 
         [AfterTestRun]
@@ -67,11 +86,16 @@ namespace CommunityContentSubmissionPage.API.Specs.Hooks
         [BeforeScenario()]
         public void RegisterRestClient()
         {
-            var config = LoadConfiguration();
-            var baseAddress = config["Product.Api:BaseAddress"];
-            _scenarioContext.ScenarioContainer.RegisterInstanceAs(new RestClient(baseAddress));
+            var restClient = GetRestClient();
+            _scenarioContext.ScenarioContainer.RegisterInstanceAs(restClient);
         }
 
-
+        private static RestClient GetRestClient()
+        {
+            var config = LoadConfiguration();
+            var baseAddress = config["Product.Api:BaseAddress"];
+            var restClient = new RestClient(baseAddress);
+            return restClient;
+        }
     }
 }
