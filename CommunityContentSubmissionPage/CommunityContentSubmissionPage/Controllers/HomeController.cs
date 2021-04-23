@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommunityContentSubmissionPage.Business.Infrastructure;
 using CommunityContentSubmissionPage.Business.Logic;
-using CommunityContentSubmissionPage.Business.Model;
+using CommunityContentSubmissionPage.Database.Model;
 using Microsoft.AspNetCore.Mvc;
 using CommunityContentSubmissionPage.Models;
 

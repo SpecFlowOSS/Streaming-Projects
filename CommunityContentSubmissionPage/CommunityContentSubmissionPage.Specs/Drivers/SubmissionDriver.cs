@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using CommunityContentSubmissionPage.Business.Infrastructure;
+using CommunityContentSubmissionPage.Database;
 using CommunityContentSubmissionPage.Specs.Steps;
 using FluentAssertions;
 

@@ -15,4 +15,8 @@
     <PackageReference Include="Polly" Version="7.2.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CommunityContentSubmissionPage.Database\CommunityContentSubmissionPage.Database.csproj" />
+  </ItemGroup>
+
 </Project>

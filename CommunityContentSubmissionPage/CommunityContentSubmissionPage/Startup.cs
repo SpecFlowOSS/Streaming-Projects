@@ -1,16 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CommunityContentSubmissionPage.Business.Infrastructure;
 using CommunityContentSubmissionPage.Business.Logic;
+using CommunityContentSubmissionPage.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Polly;
+using System;
 
 namespace CommunityContentSubmissionPage
 {
@@ -28,15 +24,14 @@ namespace CommunityContentSubmissionPage
         {
             services.AddControllers();
             services.AddControllersWithViews();
-            
 
             services.AddScoped<IDatabaseContext, DatabaseContext>();
             services.AddScoped<ISubmissionSaver, SubmissionSaver>();
 
             services.AddHealthChecks();
             services.AddDbContext<DatabaseContext>();
-            
-            
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +49,7 @@ namespace CommunityContentSubmissionPage
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            
+
 
             app.UseRouting();
 
@@ -73,8 +68,8 @@ namespace CommunityContentSubmissionPage
 
         private static void EnsureDB(IApplicationBuilder app)
         {
-            var context = app.ApplicationServices.GetService<DatabaseContext>();
-            context.Database.EnsureCreated();
+            var databaseContext = new DatabaseContext();
+            databaseContext.Database.EnsureCreated();
         }
     }
 }

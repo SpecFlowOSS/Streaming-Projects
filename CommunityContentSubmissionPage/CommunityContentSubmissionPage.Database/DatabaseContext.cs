@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿#nullable enable
+using System;
 using System.Threading.Tasks;
-using CommunityContentSubmissionPage.Business.Model;
+using CommunityContentSubmissionPage.Database.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
-namespace CommunityContentSubmissionPage.Business.Infrastructure
+namespace CommunityContentSubmissionPage.Database
 {
     public interface IDatabaseContext
     {
@@ -22,9 +18,20 @@ namespace CommunityContentSubmissionPage.Business.Infrastructure
 
     public class DatabaseContext : DbContext, IDatabaseContext
     {
+        public string? ConnectionString { get; internal set; }
+
+
+        
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("CommunityContent_ConnectionString"));
+
+            if (ConnectionString is null)
+            {
+                ConnectionString = Environment.GetEnvironmentVariable("CommunityContent_ConnectionString");
+            }
+
+            optionsBuilder.UseSqlServer(ConnectionString);
             //optionsBuilder.UseInMemoryDatabase("CommunitySubmissions");
         }
 

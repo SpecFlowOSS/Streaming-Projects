@@ -3,9 +3,12 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using CommunityContentSubmissionPage.Database;
 using Ductus.FluentDocker.Builders;
 using Ductus.FluentDocker.Common;
 using Ductus.FluentDocker.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.Extensions.Configuration;
 using Polly;
 using RestSharp;
@@ -88,6 +91,21 @@ namespace CommunityContentSubmissionPage.API.Specs.Hooks
         {
             var restClient = GetRestClient();
             _scenarioContext.ScenarioContainer.RegisterInstanceAs(restClient);
+        }
+
+
+        [BeforeScenario()]
+        [AfterScenario()]
+        public void ResetDatabase()
+        {
+            var config = LoadConfiguration();
+            var connectionString = config.GetConnectionString("db");
+
+            var databaseContext = new DatabaseContext(){ConnectionString = connectionString};
+
+
+            databaseContext.RemoveRange(databaseContext.SubmissionEntries);
+            databaseContext.SaveChanges();
         }
 
         private static RestClient GetRestClient()

@@ -28,7 +28,7 @@ namespace CommunityContentSubmissionPage.Specs.Drivers
                 "CommunityContentSubmissionPage", "wwwroot");
 
             var hostBuilder = new KestrelHostBuilder();
-            var builder = hostBuilder.CreateHostBuilder(new string[] { }, Hostname, webRoot);
+            var builder = hostBuilder.CreateHostBuilder(new string[] { });
             _host = builder.Build();
             _host.StartAsync().ConfigureAwait(false);
         }

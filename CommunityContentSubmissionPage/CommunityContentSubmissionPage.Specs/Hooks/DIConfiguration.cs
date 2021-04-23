@@ -5,6 +5,7 @@ using Boa.Constrictor.Logging;
 using Boa.Constrictor.Screenplay;
 using Boa.Constrictor.WebDriver;
 using CommunityContentSubmissionPage.Business.Infrastructure;
+using CommunityContentSubmissionPage.Database;
 using OpenQA.Selenium.Chrome;
 using TechTalk.SpecFlow;
 

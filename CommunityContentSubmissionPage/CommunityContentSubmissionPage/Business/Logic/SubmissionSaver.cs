@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CommunityContentSubmissionPage.Business.Infrastructure;
-using CommunityContentSubmissionPage.Business.Model;
+using CommunityContentSubmissionPage.Database;
+using CommunityContentSubmissionPage.Database.Model;
 
 namespace CommunityContentSubmissionPage.Business.Logic
 {

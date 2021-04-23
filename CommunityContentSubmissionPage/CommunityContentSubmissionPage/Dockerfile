@@ -1,26 +1,32 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS base
 WORKDIR /app 
 
-COPY *.csproj ./
-RUN dotnet restore
 
-COPY . ./
-RUN dotnet publish -c Debug -o out
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0
+RUN dir
+WORKDIR /src
+COPY ["CommunityContentSubmissionPage/*.csproj", "CommunityContentSubmissionPage/"]
+COPY ["CommunityContentSubmissionPage.Database/CommunityContentSubmissionPage.Database.csproj", "CommunityContentSubmissionPage.Database/"]
+
+RUN dotnet restore "CommunityContentSubmissionPage/CommunityContentSubmissionPage.csproj"
+
+COPY . .
+
+WORKDIR "/src/CommunityContentSubmissionPage"
+RUN dotnet build -c Debug -o /app/build
 
 
-COPY ./wait-for-it.sh /wait-for-it.sh
-RUN chmod +x /wait-for-it.sh
+FROM build AS publish
+RUN dotnet publish -c Debug -o /app/publish
 
-COPY ./wait-for /wait-for
-RUN chmod +x /wait-for
 
+
+FROM base AS final
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=publish /app/publish .
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends netcat \
-    && rm -rf /var/lib/apt/lists/*
 
 ENTRYPOINT ["dotnet", "CommunityContentSubmissionPage.dll"]
+
+
