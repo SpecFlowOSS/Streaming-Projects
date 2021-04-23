@@ -26,12 +26,12 @@ namespace CommunityContentSubmissionPage.Test.Common
                 .Build()
                 .Start();
 
-            WaitForWebserver();
+            WaitForWebServer();
         }
 
-        private static void WaitForWebserver()
+        private static void WaitForWebServer()
         {
-            var restclient = RestClientProvider.GetRestClient();
+            var restClient = RestClientProvider.GetRestClient();
 
             var policy = Policy.HandleResult<bool>(r => !r)
                 .WaitAndRetry(10, _ => TimeSpan.FromSeconds(10));
@@ -40,7 +40,7 @@ namespace CommunityContentSubmissionPage.Test.Common
             {
                 var restRequest = new RestRequest("/api/AvailableTypes", DataFormat.Json);
 
-                var restResponse = restclient.Get(restRequest);
+                var restResponse = restClient.Get(restRequest);
 
                 return restResponse.IsSuccessful;
             });
