@@ -11,5 +11,7 @@
         public string Description { get; set; }
 
         public bool AcceptPrivacyPolicy { get; set; }
+
+        public string Name { get; set; }
     }
 }

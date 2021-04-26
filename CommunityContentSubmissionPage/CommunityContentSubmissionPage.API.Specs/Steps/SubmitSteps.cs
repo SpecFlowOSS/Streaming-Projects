@@ -69,6 +69,7 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
             _submission.Type = "Blog Posts";
             _submission.Email = "someone@example.org";
             _submission.Description = "a description";
+            _submission.Name = "Jane Doe";
         }
 
         [When(@"the submission entry is submitted")]
@@ -90,6 +91,27 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
         public void ThenTheSubmittingOfDataWasNotPossible()
         {
             _submitFormResponse.IsSuccessful.Should().BeFalse();
+        }
+
+        [Given(@"all necessary fields except the name are filled out")]
+        public void GivenAllNecessaryFieldsExceptTheNameAreFilledOut()
+        {
+            _submission.Url = "https://www.example.org";
+            _submission.Type = "Blog Posts";
+            _submission.Email = "someone@example.org";
+            _submission.Description = "a description";
+        }
+
+        [When(@"the name '(.*)' is provided")]
+        public void WhenTheNameIsProvided(string name)
+        {
+            _submission.Name = name;
+        }
+
+        [When(@"the name stays empty")]
+        public void WhenTheNameStaysEmpty()
+        {
+            _submission.Name = String.Empty;
         }
     }
 }

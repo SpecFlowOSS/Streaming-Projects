@@ -124,7 +124,8 @@ namespace CommunityContentSubmissionPage.Specs.Steps
                 new SubmissionEntryFormRowObject("Url", "https://example.org"),
                 new SubmissionEntryFormRowObject("Type", "Blog Posts"),
                 new SubmissionEntryFormRowObject("Email", "someone@example.org"),
-                new SubmissionEntryFormRowObject("Description", "something really cool")
+                new SubmissionEntryFormRowObject("Description", "something really cool"),
+                new SubmissionEntryFormRowObject("Name", "Jane Doe")
             };
             
             _actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));
@@ -160,6 +161,32 @@ namespace CommunityContentSubmissionPage.Specs.Steps
             _actor.AsksFor(Text.Of(SubmissionPage.EmailInputField)).Should().BeEmpty();
             _actor.AsksFor(Text.Of(SubmissionPage.DescriptionInputField)).Should().BeEmpty();
             _actor.AsksFor(SelectedState.Of(SubmissionPage.PrivacyPolicy)).Should().BeFalse();
+        }
+
+        [Given(@"all necessary fields except the name are filled out")]
+        public void GivenAllNecessaryFieldsExceptTheNameAreFilledOut()
+        {
+            var submissionEntryFormRowObjects = new List<SubmissionEntryFormRowObject>
+            {
+                new SubmissionEntryFormRowObject("Url", "https://example.org"),
+                new SubmissionEntryFormRowObject("Type", "Blog Posts"),
+                new SubmissionEntryFormRowObject("Email", "someone@example.org"),
+                new SubmissionEntryFormRowObject("Description", "something really cool")
+            };
+            
+            _actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));           
+        }
+
+        [When(@"the name '(.*)' is provided")]
+        public void WhenTheNameIsProvided(string name)
+        {
+            _actor.AttemptsTo(SendKeys.To(SubmissionPage.NameField, name));
+        }
+
+        [When(@"the name stays empty")]
+        public void WhenTheNameStaysEmpty()
+        {
+            _actor.AttemptsTo(SendKeys.To(SubmissionPage.NameField, string.Empty));
         }
     }
 }
