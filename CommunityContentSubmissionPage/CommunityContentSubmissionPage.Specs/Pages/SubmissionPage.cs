@@ -17,6 +17,6 @@ namespace CommunityContentSubmissionPage.Specs.Pages
         public static IWebLocator TypeLabel => L("Type Label", By.CssSelector("#type label"));
         public static IWebLocator DescriptionLabel => L("Description Label", By.CssSelector("#description label"));
         public static IWebLocator EmailLabel => L("Email Label", By.CssSelector("#email label"));
-        public static IWebLocator NameField { get; }
+        public static IWebLocator NameField => L("Name Input", By.CssSelector("#name input"));
     }
 }

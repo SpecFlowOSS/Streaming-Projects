@@ -39,7 +39,8 @@ namespace CommunityContentSubmissionPage.Controllers.API
                 Url = submissionModel.Url,
                 Type = submissionModel.Type,
                 Email = submissionModel.Email,
-                Description = submissionModel.Description
+                Description = submissionModel.Description,
+                Name = submissionModel.Name
             };
 
             await _submissionSaver.Save(submission);

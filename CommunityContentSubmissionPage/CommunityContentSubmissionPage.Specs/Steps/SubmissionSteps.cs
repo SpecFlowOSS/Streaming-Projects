@@ -174,7 +174,8 @@ namespace CommunityContentSubmissionPage.Specs.Steps
                 new SubmissionEntryFormRowObject("Description", "something really cool")
             };
             
-            _actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));           
+            _actor.AttemptsTo(FillOutSubmissionForm.With(submissionEntryFormRowObjects));
+            _actor.AttemptsTo(Click.On(SubmissionPage.PrivacyPolicy));
         }
 
         [When(@"the name '(.*)' is provided")]

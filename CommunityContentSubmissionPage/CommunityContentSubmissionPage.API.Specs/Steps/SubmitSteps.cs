@@ -43,6 +43,9 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
                     case "DESCRIPTION":
                         _submission.Description = rowObject.Value;
                         break;
+                    case "NAME":
+                        _submission.Name = rowObject.Value;
+                        break;
                     default:
                         throw new NotImplementedException();
                 }
@@ -100,6 +103,7 @@ namespace CommunityContentSubmissionPage.API.Specs.Steps
             _submission.Type = "Blog Posts";
             _submission.Email = "someone@example.org";
             _submission.Description = "a description";
+            _submission.AcceptPrivacyPolicy = true;
         }
 
         [When(@"the name '(.*)' is provided")]
