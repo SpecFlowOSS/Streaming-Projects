@@ -1,4 +1,5 @@
-﻿Feature: Name Validation
+﻿@CCSP-1
+Feature: Name Validation
 	
 Background: 
 	Given the submission page is open

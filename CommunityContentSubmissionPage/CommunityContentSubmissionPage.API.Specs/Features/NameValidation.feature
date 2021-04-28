@@ -1,4 +1,5 @@
-﻿Feature: Name Validation
+﻿@CCSP-1
+Feature: Name Validation
 				
 Scenario: User must provide a name to be able to submit the entry
     Given all necessary fields except the name are filled out
